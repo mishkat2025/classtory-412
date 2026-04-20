@@ -63,7 +63,7 @@ export default async function StudentGradesPage() {
     .eq('student_id', user.id)
 
   const classrooms = ((enrollmentData ?? [])
-    .map(e => (e as { classroom: ClassroomRow | null }).classroom)
+    .map(e => (e as unknown as { classroom: ClassroomRow | null }).classroom)
     .filter((c): c is ClassroomRow => c !== null))
 
   /* All graded submissions with assignment info */
