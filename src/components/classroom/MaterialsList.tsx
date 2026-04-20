@@ -13,9 +13,11 @@ import {
   Sheet,
   FolderOpen,
   Loader2,
+  Copy,
 } from 'lucide-react'
 import { nanoid } from 'nanoid'
 import { createClient } from '@/lib/supabase/client'
+import { CopyToClassroomModal } from './CopyToClassroomModal'
 import type { MaterialFull } from './types'
 import type { Profile } from '@/lib/types'
 
@@ -72,6 +74,7 @@ export function MaterialsList({
   const [materials, setMaterials] = useState<MaterialFull[]>(initialMaterials)
   const [uploading, setUploading] = useState(false)
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [copyingItem, setCopyingItem] = useState<MaterialFull | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const supabase = createClient()
 
@@ -176,9 +179,33 @@ export function MaterialsList({
     setMaterials(prev => prev.filter(m => m.id !== material.id))
   }
 
+  /* ── Copy to classroom ─────────────────────────────────── */
+  async function handleCopyMaterial(targetClassroomId: string) {
+    if (!copyingItem) return
+    const { error } = await supabase.from('materials').insert({
+      classroom_id: targetClassroomId,
+      title: copyingItem.title,
+      file_url: copyingItem.file_url,
+      file_type: copyingItem.file_type,
+      file_size: copyingItem.file_size,
+      uploaded_by: profile.id,
+    })
+    if (error) toast.error('Copy failed: ' + error.message)
+  }
+
   /* ── Render ─────────────────────────────────────────────── */
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      {copyingItem && (
+        <CopyToClassroomModal
+          contentType="material"
+          contentPreview={copyingItem.title}
+          currentClassroomId={classroom_id}
+          teacherId={profile.id}
+          onClose={() => setCopyingItem(null)}
+          onCopy={handleCopyMaterial}
+        />
+      )}
       {/* Upload button (teacher only) */}
       {isTeacher && (
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, alignItems: 'center' }}>
@@ -277,7 +304,7 @@ export function MaterialsList({
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: isTeacher ? '1fr 140px 100px 120px 80px' : '1fr 140px 100px 120px 52px',
+              gridTemplateColumns: isTeacher ? '1fr 140px 100px 120px 110px' : '1fr 140px 100px 120px 52px',
               padding: '0 20px',
               height: 40,
               backgroundColor: '#F8FAFC',
@@ -313,7 +340,7 @@ export function MaterialsList({
                 key={material.id}
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: isTeacher ? '1fr 140px 100px 120px 80px' : '1fr 140px 100px 120px 52px',
+                  gridTemplateColumns: isTeacher ? '1fr 140px 100px 120px 110px' : '1fr 140px 100px 120px 52px',
                   padding: '0 20px',
                   minHeight: 52,
                   borderBottom:
@@ -405,18 +432,27 @@ export function MaterialsList({
                     <Download size={15} />
                   </button>
                   {isTeacher && (
-                    <button
-                      onClick={() => handleDelete(material)}
-                      disabled={isDeleting}
-                      title="Delete"
-                      style={{ ...iconBtn, color: '#EF4444' }}
-                    >
-                      {isDeleting ? (
-                        <Loader2 size={15} className="animate-spin" />
-                      ) : (
-                        <Trash2 size={15} />
-                      )}
-                    </button>
+                    <>
+                      <button
+                        onClick={() => setCopyingItem(material)}
+                        title="Copy to classroom"
+                        style={{ ...iconBtn, color: '#3730A3', backgroundColor: '#EEF2FF', border: '1px solid #C7D2FE' }}
+                      >
+                        <Copy size={14} />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(material)}
+                        disabled={isDeleting}
+                        title="Delete"
+                        style={{ ...iconBtn, color: '#EF4444' }}
+                      >
+                        {isDeleting ? (
+                          <Loader2 size={15} className="animate-spin" />
+                        ) : (
+                          <Trash2 size={15} />
+                        )}
+                      </button>
+                    </>
                   )}
                 </div>
               </div>

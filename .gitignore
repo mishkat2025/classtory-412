@@ -23,6 +23,19 @@
 # misc
 .DS_Store
 *.pem
+Thumbs.db
+desktop.ini
+
+# editor
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
 # debug
 npm-debug.log*
@@ -39,9 +52,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# scripts / local config (sensitive or machine-specific)
 admin-panel.config.json
+scripts/admin-panel.js
 CLAUDE.md
 AGENTS.md
 .mcp.json
+
+# supabase local files
 supabase-rls-fix.sql
 supabase-schema.sql
+supabase/.temp/
+supabase/seed.sql

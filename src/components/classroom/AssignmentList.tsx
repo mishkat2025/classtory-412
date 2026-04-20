@@ -18,8 +18,13 @@ import {
   Loader2,
   BookmarkPlus,
   BookmarkCheck,
+  Pencil,
+  Trash2,
+  Copy,
+  Check,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
+import { CopyToClassroomModal } from './CopyToClassroomModal'
 import type { AssignmentWithMeta } from './types'
 import type { Profile } from '@/lib/types'
 
@@ -79,10 +84,20 @@ export function AssignmentList({
 }: AssignmentListProps) {
   const [assignments, setAssignments] = useState<AssignmentWithMeta[]>(initialAssignments)
   const [showForm, setShowForm] = useState(false)
-  // Track which assignments have been added to the gradebook
   const [inGradebook, setInGradebook] = useState<Set<string>>(new Set(gradeColumnAssignmentIds))
   const [addingToGradebook, setAddingToGradebook] = useState<string | null>(null)
   const supabase = createClient()
+
+  // Edit state
+  const [editingId, setEditingId] = useState<string | null>(null)
+  const [editForm, setEditForm] = useState({ title: '', description: '', due_date: '', max_points: 0 })
+  const [isSavingEdit, setIsSavingEdit] = useState(false)
+
+  // Delete state
+  const [deletingId, setDeletingId] = useState<string | null>(null)
+
+  // Copy modal state
+  const [copyingItem, setCopyingItem] = useState<AssignmentWithMeta | null>(null)
 
   const {
     register,
@@ -178,8 +193,66 @@ export function AssignmentList({
     )
   }
 
+  /* ── Edit assignment ────────────────────────────────────────── */
+  function startEdit(a: AssignmentWithMeta) {
+    const localDue = new Date(a.due_date)
+    const pad = (n: number) => String(n).padStart(2, '0')
+    const local = `${localDue.getFullYear()}-${pad(localDue.getMonth()+1)}-${pad(localDue.getDate())}T${pad(localDue.getHours())}:${pad(localDue.getMinutes())}`
+    setEditForm({ title: a.title, description: a.description, due_date: local, max_points: a.max_points })
+    setEditingId(a.id)
+  }
+
+  async function saveEdit(id: string) {
+    if (!editForm.title.trim() || !editForm.description.trim() || !editForm.due_date) return
+    setIsSavingEdit(true)
+    const dueISO = new Date(editForm.due_date).toISOString()
+    const { error } = await supabase
+      .from('assignments')
+      .update({ title: editForm.title.trim(), description: editForm.description.trim(), due_date: dueISO, max_points: editForm.max_points })
+      .eq('id', id)
+    setIsSavingEdit(false)
+    if (error) { toast.error('Failed to update assignment.'); return }
+    setAssignments(prev => prev.map(a => a.id === id ? { ...a, ...editForm, due_date: dueISO } : a))
+    setEditingId(null)
+    toast.success('Assignment updated.')
+  }
+
+  /* ── Delete assignment ────────────────────────────────────────── */
+  async function handleDeleteAssignment(a: AssignmentWithMeta) {
+    if (!window.confirm(`Delete "${a.title}"? This will also remove all submissions. This cannot be undone.`)) return
+    setDeletingId(a.id)
+    const { error } = await supabase.from('assignments').delete().eq('id', a.id)
+    setDeletingId(null)
+    if (error) { toast.error('Failed to delete assignment.'); return }
+    setAssignments(prev => prev.filter(x => x.id !== a.id))
+    toast.success('Assignment deleted.')
+  }
+
+  /* ── Copy assignment ───────────────────────────────────────────── */
+  async function handleCopyAssignment(targetClassroomId: string) {
+    if (!copyingItem) return
+    const { error } = await supabase.from('assignments').insert({
+      classroom_id: targetClassroomId,
+      title: copyingItem.title,
+      description: copyingItem.description,
+      due_date: copyingItem.due_date,
+      max_points: copyingItem.max_points,
+    })
+    if (error) toast.error('Copy failed: ' + error.message)
+  }
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      {copyingItem && (
+        <CopyToClassroomModal
+          contentType="assignment"
+          contentPreview={copyingItem.title}
+          currentClassroomId={classroom_id}
+          teacherId={profile.id}
+          onClose={() => setCopyingItem(null)}
+          onCopy={handleCopyAssignment}
+        />
+      )}
       {/* Header */}
       {isTeacher && (
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -372,7 +445,7 @@ export function AssignmentList({
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: isTeacher ? '1fr 160px 90px 120px 130px 40px' : '1fr 160px 90px 120px 40px',
+              gridTemplateColumns: isTeacher ? '1fr 160px 90px 120px 130px 120px' : '1fr 160px 90px 120px 40px',
               padding: '0 20px',
               height: 40,
               backgroundColor: '#F8FAFC',
@@ -382,7 +455,7 @@ export function AssignmentList({
             }}
           >
             {(isTeacher
-              ? ['Assignment', 'Due Date', 'Points', 'Submissions', 'Gradebook', '']
+              ? ['Assignment', 'Due Date', 'Points', 'Submissions', 'Gradebook', 'Actions']
               : ['Assignment', 'Due Date', 'Points', 'Status', '']
             ).map(
               (h, i) => (
@@ -410,138 +483,131 @@ export function AssignmentList({
             const statusKey = (sub?.status ?? 'pending') as keyof typeof submissionStatusConfig
             const statusCfg = submissionStatusConfig[statusKey] ?? submissionStatusConfig.pending
             const StatusIcon = statusCfg.Icon
+            const isEditing = editingId === assignment.id
+            const isDeleting = deletingId === assignment.id
 
             return (
-              <Link
-                key={assignment.id}
-                href={`/classroom/${classroom_id}/assignment/${assignment.id}`}
-                style={{ textDecoration: 'none', display: 'block' }}
-              >
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: isTeacher ? '1fr 160px 90px 120px 130px 40px' : '1fr 160px 90px 120px 40px',
-                    padding: '0 20px',
-                    height: 52,
-                    borderBottom:
-                      i < assignments.length - 1 ? '1px solid #F1F5F9' : 'none',
-                    alignItems: 'center',
-                    gap: 12,
-                    transition: 'background-color 120ms ease',
-                    cursor: 'pointer',
-                  }}
-                  onMouseEnter={e =>
-                    ((e.currentTarget as HTMLElement).style.backgroundColor = '#F8FAFC')
-                  }
-                  onMouseLeave={e =>
-                    ((e.currentTarget as HTMLElement).style.backgroundColor = 'transparent')
-                  }
-                >
-                  {/* Title */}
-                  <span
-                    style={{
-                      fontSize: 14,
-                      fontWeight: 500,
-                      color: '#0F172A',
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                    }}
-                  >
-                    {assignment.title}
-                  </span>
-
-                  {/* Due date */}
-                  <span
-                    style={{
-                      fontSize: 13,
-                      color: due.overdue ? '#EF4444' : due.urgent ? '#D97706' : '#64748B',
-                      fontWeight: due.urgent || due.overdue ? 600 : 400,
-                      textAlign: 'center',
-                    }}
-                  >
-                    {due.label}
-                  </span>
-
-                  {/* Points */}
-                  <span
-                    style={{
-                      fontSize: 13,
-                      color: '#475569',
-                      textAlign: 'center',
-                    }}
-                  >
-                    {assignment.max_points} pts
-                  </span>
-
-                  {/* Status / Submissions */}
-                  <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    {isTeacher ? (
-                      <span
-                        style={{
-                          fontSize: 13,
-                          fontWeight: 600,
-                          color:
-                            assignment.submission_count > 0 ? '#059669' : '#94A3B8',
-                        }}
-                      >
-                        {assignment.submission_count}
-                        <span style={{ fontWeight: 400, color: '#94A3B8' }}>
-                          /{totalStudents}
-                        </span>
-                      </span>
-                    ) : (
-                      <span
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: 4,
-                          fontSize: 11,
-                          fontWeight: 600,
-                          color: statusCfg.color,
-                          backgroundColor: statusCfg.bg,
-                          borderRadius: 9999,
-                          padding: '3px 10px',
-                        }}
-                      >
-                        <StatusIcon size={11} />
-                        {statusCfg.label}
-                      </span>
-                    )}
+              <div key={assignment.id} style={{ opacity: isDeleting ? 0.5 : 1, transition: 'opacity 150ms' }}>
+                {/* Edit panel */}
+                {isTeacher && isEditing && (
+                  <div style={{ padding: '16px 20px', borderBottom: '1px solid #F1F5F9', backgroundColor: '#FAFBFF' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 10 }}>
+                      <div>
+                        <label style={{ fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 4 }}>Title</label>
+                        <input value={editForm.title} onChange={e => setEditForm(f => ({ ...f, title: e.target.value }))} style={{ width: '100%', height: 34, border: '1px solid #C7D2FE', borderRadius: 7, padding: '0 10px', fontSize: 13, outline: 'none', boxSizing: 'border-box' }} />
+                      </div>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 80px', gap: 8 }}>
+                        <div>
+                          <label style={{ fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 4 }}>Due</label>
+                          <input type="datetime-local" value={editForm.due_date} onChange={e => setEditForm(f => ({ ...f, due_date: e.target.value }))} style={{ width: '100%', height: 34, border: '1px solid #C7D2FE', borderRadius: 7, padding: '0 8px', fontSize: 13, outline: 'none', boxSizing: 'border-box' }} />
+                        </div>
+                        <div>
+                          <label style={{ fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 4 }}>Pts</label>
+                          <input type="number" min={1} max={1000} value={editForm.max_points} onChange={e => setEditForm(f => ({ ...f, max_points: Number(e.target.value) }))} style={{ width: '100%', height: 34, border: '1px solid #C7D2FE', borderRadius: 7, padding: '0 8px', fontSize: 13, outline: 'none', boxSizing: 'border-box' }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <label style={{ fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 4 }}>Instructions</label>
+                      <textarea value={editForm.description} onChange={e => setEditForm(f => ({ ...f, description: e.target.value }))} rows={2} style={{ width: '100%', border: '1px solid #C7D2FE', borderRadius: 7, padding: '6px 10px', fontSize: 13, outline: 'none', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.5 }} />
+                    </div>
+                    <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
+                      <button onClick={() => saveEdit(assignment.id)} disabled={isSavingEdit} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, height: 32, padding: '0 12px', backgroundColor: '#4F46E5', color: '#FFFFFF', border: 'none', borderRadius: 7, fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
+                        {isSavingEdit ? <Loader2 size={12} className="animate-spin" /> : <Check size={12} />} Save
+                      </button>
+                      <button onClick={() => setEditingId(null)} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, height: 32, padding: '0 12px', backgroundColor: '#F1F5F9', color: '#0F172A', border: 'none', borderRadius: 7, fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
+                        <X size={12} /> Cancel
+                      </button>
+                    </div>
                   </div>
+                )}
 
-                  {/* Add to Gradebook (teacher only) */}
-                  {isTeacher && (() => {
-                    const added = inGradebook.has(assignment.id)
-                    const loading = addingToGradebook === assignment.id
-                    return (
-                      <div style={{ display: 'flex', justifyContent: 'center' }}
-                        onClick={e => { e.preventDefault(); e.stopPropagation(); addToGradebook(assignment) }}>
-                        <button
-                          disabled={added || loading}
-                          title={added ? 'Already in Grade Sheet' : 'Add as a grade column'}
-                          style={{
-                            display: 'inline-flex', alignItems: 'center', gap: 4,
-                            height: 28, padding: '0 10px', borderRadius: 7,
-                            fontSize: 11, fontWeight: 600, cursor: added ? 'default' : 'pointer',
-                            border: 'none',
-                            backgroundColor: added ? '#D1FAE5' : '#EEF2FF',
-                            color: added ? '#065F46' : '#4F46E5',
-                            transition: 'all 120ms ease',
-                            whiteSpace: 'nowrap',
-                          }}
-                        >
-                          {loading ? <Loader2 size={11} className="animate-spin" /> : added ? <BookmarkCheck size={11} /> : <BookmarkPlus size={11} />}
-                          {loading ? 'Adding…' : added ? 'In sheet' : 'Add to sheet'}
+                <Link
+                  href={`/classroom/${classroom_id}/assignment/${assignment.id}`}
+                  style={{ textDecoration: 'none', display: 'block' }}
+                >
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: isTeacher ? '1fr 160px 90px 120px 130px 120px' : '1fr 160px 90px 120px 40px',
+                      padding: '0 20px',
+                      height: 52,
+                      borderBottom: i < assignments.length - 1 ? '1px solid #F1F5F9' : 'none',
+                      alignItems: 'center',
+                      gap: 12,
+                      transition: 'background-color 120ms ease',
+                      cursor: 'pointer',
+                    }}
+                    onMouseEnter={e => ((e.currentTarget as HTMLElement).style.backgroundColor = '#F8FAFC')}
+                    onMouseLeave={e => ((e.currentTarget as HTMLElement).style.backgroundColor = 'transparent')}
+                  >
+                    {/* Title */}
+                    <span style={{ fontSize: 14, fontWeight: 500, color: '#0F172A', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {assignment.title}
+                    </span>
+
+                    {/* Due date */}
+                    <span style={{ fontSize: 13, color: due.overdue ? '#EF4444' : due.urgent ? '#D97706' : '#64748B', fontWeight: due.urgent || due.overdue ? 600 : 400, textAlign: 'center' }}>
+                      {due.label}
+                    </span>
+
+                    {/* Points */}
+                    <span style={{ fontSize: 13, color: '#475569', textAlign: 'center' }}>
+                      {assignment.max_points} pts
+                    </span>
+
+                    {/* Status / Submissions */}
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                      {isTeacher ? (
+                        <span style={{ fontSize: 13, fontWeight: 600, color: assignment.submission_count > 0 ? '#059669' : '#94A3B8' }}>
+                          {assignment.submission_count}<span style={{ fontWeight: 400, color: '#94A3B8' }}>/{totalStudents}</span>
+                        </span>
+                      ) : (
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 11, fontWeight: 600, color: statusCfg.color, backgroundColor: statusCfg.bg, borderRadius: 9999, padding: '3px 10px' }}>
+                          <StatusIcon size={11} />{statusCfg.label}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Add to Gradebook (teacher only) */}
+                    {isTeacher && (() => {
+                      const added = inGradebook.has(assignment.id)
+                      const gbLoading = addingToGradebook === assignment.id
+                      return (
+                        <div style={{ display: 'flex', justifyContent: 'center' }}
+                          onClick={e => { e.preventDefault(); e.stopPropagation(); addToGradebook(assignment) }}>
+                          <button
+                            disabled={added || gbLoading}
+                            title={added ? 'Already in Grade Sheet' : 'Add as a grade column'}
+                            style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', borderRadius: 7, fontSize: 11, fontWeight: 600, cursor: added ? 'default' : 'pointer', border: 'none', backgroundColor: added ? '#D1FAE5' : '#EEF2FF', color: added ? '#065F46' : '#4F46E5', transition: 'all 120ms ease', whiteSpace: 'nowrap' }}
+                          >
+                            {gbLoading ? <Loader2 size={11} className="animate-spin" /> : added ? <BookmarkCheck size={11} /> : <BookmarkPlus size={11} />}
+                            {gbLoading ? 'Adding…' : added ? 'In sheet' : 'Add to sheet'}
+                          </button>
+                        </div>
+                      )
+                    })()}
+
+                    {/* Teacher action buttons */}
+                    {isTeacher ? (
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}
+                        onClick={e => { e.preventDefault(); e.stopPropagation() }}>
+                        <button onClick={() => startEdit(assignment)} title="Edit" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: 7, border: '1px solid #E2E8F0', backgroundColor: '#FFFFFF', color: '#475569', cursor: 'pointer' }}>
+                          <Pencil size={12} />
+                        </button>
+                        <button onClick={() => setCopyingItem(assignment)} title="Copy to class" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: 7, border: '1px solid #C7D2FE', backgroundColor: '#EEF2FF', color: '#3730A3', cursor: 'pointer' }}>
+                          <Copy size={12} />
+                        </button>
+                        <button onClick={() => handleDeleteAssignment(assignment)} disabled={isDeleting} title="Delete" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: 7, border: '1px solid #FECACA', backgroundColor: '#FEE2E2', color: '#991B1B', cursor: 'pointer' }}>
+                          {isDeleting ? <Loader2 size={12} className="animate-spin" /> : <Trash2 size={12} />}
                         </button>
                       </div>
-                    )
-                  })()}
-
-                  {/* Chevron */}
-                  <ChevronRight size={16} color="#CBD5E1" style={{ justifySelf: 'center' }} />
-                </div>
-              </Link>
+                    ) : (
+                      <ChevronRight size={16} color="#CBD5E1" style={{ justifySelf: 'center' }} />
+                    )}
+                  </div>
+                </Link>
+              </div>
             )
           })}
         </div>

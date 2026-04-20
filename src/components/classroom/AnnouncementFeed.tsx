@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { toast } from 'sonner'
-import { Send, Megaphone } from 'lucide-react'
+import { Send, Megaphone, Pencil, Trash2, Copy, X, Check, Loader2 } from 'lucide-react'
+import { CopyToClassroomModal } from './CopyToClassroomModal'
 import { createClient } from '@/lib/supabase/client'
 import type { AnnouncementFull } from './types'
 import type { Profile } from '@/lib/types'
@@ -66,6 +67,18 @@ export function AnnouncementFeed({
   const [isPosting, setIsPosting] = useState(false)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const supabase = createClient()
+  const isTeacher = profile.role === 'teacher'
+
+  // Edit state
+  const [editingId, setEditingId] = useState<string | null>(null)
+  const [editDraft, setEditDraft] = useState('')
+  const [isSavingEdit, setIsSavingEdit] = useState(false)
+
+  // Delete state
+  const [deletingId, setDeletingId] = useState<string | null>(null)
+
+  // Copy modal state
+  const [copyingItem, setCopyingItem] = useState<AnnouncementFull | null>(null)
 
   /* ── Realtime subscription ──────────────────────────────── */
   useEffect(() => {
@@ -134,9 +147,60 @@ export function AnnouncementFeed({
     }
   }
 
+  /* ── Edit ───────────────────────────────────────────────── */
+  function startEdit(item: AnnouncementFull) {
+    setEditingId(item.id)
+    setEditDraft(item.content)
+  }
+
+  async function saveEdit(id: string) {
+    const content = editDraft.trim()
+    if (!content) return
+    setIsSavingEdit(true)
+    const { error } = await supabase
+      .from('announcements')
+      .update({ content })
+      .eq('id', id)
+    setIsSavingEdit(false)
+    if (error) { toast.error('Failed to update announcement.'); return }
+    setAnnouncements(prev => prev.map(a => a.id === id ? { ...a, content } : a))
+    setEditingId(null)
+    toast.success('Announcement updated.')
+  }
+
+  /* ── Delete ─────────────────────────────────────────────── */
+  async function handleDelete(item: AnnouncementFull) {
+    if (!window.confirm('Delete this announcement? This cannot be undone.')) return
+    setDeletingId(item.id)
+    const { error } = await supabase.from('announcements').delete().eq('id', item.id)
+    setDeletingId(null)
+    if (error) { toast.error('Failed to delete announcement.'); return }
+    setAnnouncements(prev => prev.filter(a => a.id !== item.id))
+    toast.success('Announcement deleted.')
+  }
+
+  /* ── Copy to classroom ──────────────────────────────────── */
+  async function handleCopyAnnouncement(targetClassroomId: string) {
+    if (!copyingItem) return
+    const { error } = await supabase
+      .from('announcements')
+      .insert({ classroom_id: targetClassroomId, author_id: profile.id, content: copyingItem.content })
+    if (error) toast.error('Copy failed: ' + error.message)
+  }
+
   /* ── Render ─────────────────────────────────────────────── */
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      {copyingItem && (
+        <CopyToClassroomModal
+          contentType="announcement"
+          contentPreview={copyingItem.content}
+          currentClassroomId={classroom_id}
+          teacherId={profile.id}
+          onClose={() => setCopyingItem(null)}
+          onCopy={handleCopyAnnouncement}
+        />
+      )}
       {/* Compose box */}
       <div
         style={{
@@ -324,19 +388,76 @@ export function AnnouncementFeed({
                 </div>
               </div>
 
-              {/* Content */}
-              <p
-                style={{
-                  fontSize: 14,
-                  color: '#475569',
-                  margin: 0,
-                  lineHeight: 1.7,
-                  whiteSpace: 'pre-wrap',
-                  wordBreak: 'break-word',
-                }}
-              >
-                {item.content}
-              </p>
+              {/* Content or edit textarea */}
+              {editingId === item.id ? (
+                <div>
+                  <textarea
+                    value={editDraft}
+                    onChange={e => setEditDraft(e.target.value)}
+                    rows={3}
+                    style={{
+                      width: '100%', border: '1px solid #4F46E5', borderRadius: 8,
+                      padding: '10px 12px', fontSize: 14, fontFamily: "'Inter', sans-serif",
+                      color: '#0F172A', resize: 'vertical', outline: 'none',
+                      boxShadow: '0 0 0 3px rgba(79,70,229,0.1)', boxSizing: 'border-box', lineHeight: 1.6,
+                    }}
+                  />
+                  <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+                    <button
+                      onClick={() => saveEdit(item.id)}
+                      disabled={isSavingEdit || !editDraft.trim()}
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: 5, height: 32, padding: '0 12px', backgroundColor: '#4F46E5', color: '#FFFFFF', border: 'none', borderRadius: 7, fontSize: 12, fontWeight: 600, cursor: 'pointer' }}
+                    >
+                      {isSavingEdit ? <Loader2 size={12} className="animate-spin" /> : <Check size={12} />}
+                      Save
+                    </button>
+                    <button
+                      onClick={() => setEditingId(null)}
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: 5, height: 32, padding: '0 12px', backgroundColor: '#F1F5F9', color: '#0F172A', border: 'none', borderRadius: 7, fontSize: 12, fontWeight: 600, cursor: 'pointer' }}
+                    >
+                      <X size={12} /> Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <p
+                  style={{
+                    fontSize: 14, color: '#475569', margin: 0,
+                    lineHeight: 1.7, whiteSpace: 'pre-wrap', wordBreak: 'break-word',
+                  }}
+                >
+                  {item.content}
+                </p>
+              )}
+
+              {/* Teacher actions */}
+              {isTeacher && editingId !== item.id && (
+                <div style={{ display: 'flex', gap: 6, marginTop: 10 }}>
+                  <button
+                    onClick={() => startEdit(item)}
+                    title="Edit"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', backgroundColor: '#F1F5F9', border: '1px solid #E2E8F0', borderRadius: 7, fontSize: 11, fontWeight: 600, color: '#475569', cursor: 'pointer' }}
+                  >
+                    <Pencil size={11} /> Edit
+                  </button>
+                  <button
+                    onClick={() => setCopyingItem(item)}
+                    title="Copy to another class"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', backgroundColor: '#EEF2FF', border: '1px solid #C7D2FE', borderRadius: 7, fontSize: 11, fontWeight: 600, color: '#3730A3', cursor: 'pointer' }}
+                  >
+                    <Copy size={11} /> Copy to class
+                  </button>
+                  <button
+                    onClick={() => handleDelete(item)}
+                    disabled={deletingId === item.id}
+                    title="Delete"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', backgroundColor: '#FEE2E2', border: '1px solid #FECACA', borderRadius: 7, fontSize: 11, fontWeight: 600, color: '#991B1B', cursor: 'pointer' }}
+                  >
+                    {deletingId === item.id ? <Loader2 size={11} className="animate-spin" /> : <Trash2 size={11} />}
+                    Delete
+                  </button>
+                </div>
+              )}
             </div>
           ))}
         </div>
