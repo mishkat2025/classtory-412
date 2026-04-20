@@ -19,7 +19,7 @@ const schema = z.object({
   title: z.string().min(3, 'Title must be at least 3 characters'),
   description: z.string().min(10, 'Description must be at least 10 characters'),
   category: z.string().min(1, 'Select a category'),
-  price: z.coerce.number().min(0, 'Price must be 0 or more'),
+  price: z.number().min(0, 'Price must be 0 or more'),
   tags: z.string().optional(),
 })
 
@@ -157,7 +157,7 @@ export function CreateCourseButton({ teacherId }: CreateCourseButtonProps) {
                 </div>
                 <div>
                   <label style={labelStyle}>Price (USD)</label>
-                  <input {...register('price')} type="number" min="0" step="0.01" placeholder="0 = Free" style={inputStyle(!!errors.price)} />
+                  <input {...register('price', { valueAsNumber: true })} type="number" min="0" step="0.01" placeholder="0 = Free" style={inputStyle(!!errors.price)} />
                   {errors.price && <span style={errStyle}>{errors.price.message}</span>}
                 </div>
               </div>
