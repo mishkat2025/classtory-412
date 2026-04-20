@@ -333,15 +333,15 @@ export default async function LandingPage() {
             </div>
 
             {([
-              { heading: 'Platform', links: ['Courses', 'Classrooms', 'For Teachers', 'Pricing'] },
-              { heading: 'Company',  links: ['About', 'Blog', 'Careers', 'Contact'] },
-              { heading: 'Legal',    links: ['Privacy Policy', 'Terms of Service', 'Cookie Policy'] },
+              { heading: 'Platform', links: [{ label: 'Courses', href: '/courses' }, { label: 'Classrooms', href: '/student' }, { label: 'For Teachers', href: '/for-teachers' }, { label: 'Pricing', href: '/pricing' }] },
+              { heading: 'Company',  links: [{ label: 'About', href: '/about' }, { label: 'Blog', href: '/blog' }, { label: 'Careers', href: '/careers' }, { label: 'Contact', href: '/contact' }] },
+              { heading: 'Legal',    links: [{ label: 'Privacy Policy', href: '/privacy' }, { label: 'Terms of Service', href: '/terms' }, { label: 'Cookie Policy', href: '/cookies' }] },
             ] as const).map(({ heading, links }) => (
               <div key={heading}>
                 <div style={{ fontSize: 11, fontWeight: 600, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 14 }}>{heading}</div>
                 {links.map(item => (
-                  <div key={item} style={{ marginBottom: 9 }}>
-                    <Link href="/" style={{ fontSize: 13, color: '#64748B', textDecoration: 'none' }}>{item}</Link>
+                  <div key={item.label} style={{ marginBottom: 9 }}>
+                    <Link href={item.href} style={{ fontSize: 13, color: '#64748B', textDecoration: 'none' }}>{item.label}</Link>
                   </div>
                 ))}
               </div>

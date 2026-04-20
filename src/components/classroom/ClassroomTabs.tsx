@@ -34,6 +34,7 @@ interface ClassroomTabsProps {
   assignments: AssignmentWithMeta[]
   materials: MaterialFull[]
   enrollments: StudentEnrollment[]
+  gradeColumnAssignmentIds: Set<string>
 }
 
 const TABS = [
@@ -53,6 +54,7 @@ export function ClassroomTabs({
   assignments,
   materials,
   enrollments,
+  gradeColumnAssignmentIds,
 }: ClassroomTabsProps) {
   const [activeTab, setActiveTab] = useState<TabId>('announcements')
   const [codeCopied, setCodeCopied] = useState(false)
@@ -339,6 +341,7 @@ export function ClassroomTabs({
             isTeacher={isTeacher}
             profile={profile}
             totalStudents={totalStudents}
+            gradeColumnAssignmentIds={gradeColumnAssignmentIds}
           />
         )}
 

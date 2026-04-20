@@ -158,6 +158,19 @@ export default async function ClassroomPage({
 
   const materials = (materialData ?? []) as MaterialFull[]
 
+  /* Grade columns — to know which assignments are already in the grade sheet */
+  const { data: gradeColData } = await supabase
+    .from('grade_columns')
+    .select('source_assignment_id')
+    .eq('classroom_id', id)
+    .not('source_assignment_id', 'is', null)
+
+  const gradeColumnAssignmentIds = new Set<string>(
+    (gradeColData ?? [])
+      .map(r => r.source_assignment_id as string | null)
+      .filter((v): v is string => v !== null)
+  )
+
   /* Announcements (initial load — realtime takes over in the client) */
   const { data: announcementData } = await supabase
     .from('announcements')
@@ -178,6 +191,7 @@ export default async function ClassroomPage({
       assignments={assignments}
       materials={materials}
       enrollments={enrollments}
+      gradeColumnAssignmentIds={gradeColumnAssignmentIds}
     />
   )
 }

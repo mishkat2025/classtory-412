@@ -16,6 +16,8 @@ import {
   Star,
   AlertCircle,
   Loader2,
+  BookmarkPlus,
+  BookmarkCheck,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import type { AssignmentWithMeta } from './types'
@@ -27,6 +29,7 @@ interface AssignmentListProps {
   isTeacher: boolean
   profile: Profile
   totalStudents: number
+  gradeColumnAssignmentIds: Set<string>
 }
 
 const createSchema = z.object({
@@ -72,9 +75,13 @@ export function AssignmentList({
   isTeacher,
   profile,
   totalStudents,
+  gradeColumnAssignmentIds,
 }: AssignmentListProps) {
   const [assignments, setAssignments] = useState<AssignmentWithMeta[]>(initialAssignments)
   const [showForm, setShowForm] = useState(false)
+  // Track which assignments have been added to the gradebook
+  const [inGradebook, setInGradebook] = useState<Set<string>>(new Set(gradeColumnAssignmentIds))
+  const [addingToGradebook, setAddingToGradebook] = useState<string | null>(null)
   const supabase = createClient()
 
   const {
@@ -115,6 +122,60 @@ export function AssignmentList({
     ))
     reset()
     setShowForm(false)
+  }
+
+  async function addToGradebook(assignment: AssignmentWithMeta) {
+    if (inGradebook.has(assignment.id)) return
+    setAddingToGradebook(assignment.id)
+
+    // Use the existing sort_order = current count of grade_columns for this classroom
+    const { data: existing } = await supabase
+      .from('grade_columns')
+      .select('id')
+      .eq('classroom_id', classroom_id)
+    const sortOrder = (existing ?? []).length
+
+    const { data: newCol, error } = await supabase
+      .from('grade_columns')
+      .insert({
+        classroom_id,
+        title: assignment.title,
+        max_raw: assignment.max_points,
+        max_converted: null,
+        sort_order: sortOrder,
+        source_assignment_id: assignment.id,
+      })
+      .select('id')
+      .single()
+
+    if (error || !newCol) {
+      setAddingToGradebook(null)
+      toast.error('Failed to add to gradebook: ' + (error?.message ?? 'unknown error'))
+      return
+    }
+
+    // Import existing graded submissions into grade_values
+    const { data: gradedSubmissions } = await supabase
+      .from('submissions')
+      .select('student_id, grade')
+      .eq('assignment_id', assignment.id)
+      .not('grade', 'is', null)
+
+    if (gradedSubmissions && gradedSubmissions.length > 0) {
+      const gradeValueRows = gradedSubmissions.map(s => ({
+        column_id: newCol.id,
+        student_id: s.student_id as string,
+        raw_score: s.grade as number,
+      }))
+      await supabase.from('grade_values').insert(gradeValueRows)
+    }
+
+    setAddingToGradebook(null)
+    setInGradebook(prev => new Set([...prev, assignment.id]))
+    const imported = gradedSubmissions?.length ?? 0
+    toast.success(
+      `"${assignment.title}" added to Grade Sheet.${imported > 0 ? ` Imported ${imported} grade${imported !== 1 ? 's' : ''}.` : ''}`
+    )
   }
 
   return (
@@ -311,7 +372,7 @@ export function AssignmentList({
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: '1fr 160px 90px 120px 40px',
+              gridTemplateColumns: isTeacher ? '1fr 160px 90px 120px 130px 40px' : '1fr 160px 90px 120px 40px',
               padding: '0 20px',
               height: 40,
               backgroundColor: '#F8FAFC',
@@ -320,7 +381,10 @@ export function AssignmentList({
               gap: 12,
             }}
           >
-            {['Assignment', 'Due Date', 'Points', isTeacher ? 'Submissions' : 'Status', ''].map(
+            {(isTeacher
+              ? ['Assignment', 'Due Date', 'Points', 'Submissions', 'Gradebook', '']
+              : ['Assignment', 'Due Date', 'Points', 'Status', '']
+            ).map(
               (h, i) => (
                 <span
                   key={i}
@@ -356,7 +420,7 @@ export function AssignmentList({
                 <div
                   style={{
                     display: 'grid',
-                    gridTemplateColumns: '1fr 160px 90px 120px 40px',
+                    gridTemplateColumns: isTeacher ? '1fr 160px 90px 120px 130px 40px' : '1fr 160px 90px 120px 40px',
                     padding: '0 20px',
                     height: 52,
                     borderBottom:
@@ -445,6 +509,34 @@ export function AssignmentList({
                       </span>
                     )}
                   </div>
+
+                  {/* Add to Gradebook (teacher only) */}
+                  {isTeacher && (() => {
+                    const added = inGradebook.has(assignment.id)
+                    const loading = addingToGradebook === assignment.id
+                    return (
+                      <div style={{ display: 'flex', justifyContent: 'center' }}
+                        onClick={e => { e.preventDefault(); e.stopPropagation(); addToGradebook(assignment) }}>
+                        <button
+                          disabled={added || loading}
+                          title={added ? 'Already in Grade Sheet' : 'Add as a grade column'}
+                          style={{
+                            display: 'inline-flex', alignItems: 'center', gap: 4,
+                            height: 28, padding: '0 10px', borderRadius: 7,
+                            fontSize: 11, fontWeight: 600, cursor: added ? 'default' : 'pointer',
+                            border: 'none',
+                            backgroundColor: added ? '#D1FAE5' : '#EEF2FF',
+                            color: added ? '#065F46' : '#4F46E5',
+                            transition: 'all 120ms ease',
+                            whiteSpace: 'nowrap',
+                          }}
+                        >
+                          {loading ? <Loader2 size={11} className="animate-spin" /> : added ? <BookmarkCheck size={11} /> : <BookmarkPlus size={11} />}
+                          {loading ? 'Adding…' : added ? 'In sheet' : 'Add to sheet'}
+                        </button>
+                      </div>
+                    )
+                  })()}
 
                   {/* Chevron */}
                   <ChevronRight size={16} color="#CBD5E1" style={{ justifySelf: 'center' }} />

@@ -3,7 +3,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
-import { Gradebook } from '@/components/classroom/Gradebook'
+import { GradesView } from '@/components/classroom/GradesView'
+import type { GradeColumn, GradeValueRow } from '@/components/classroom/CustomGradebook'
 import type { Profile } from '@/lib/types'
 
 export const metadata: Metadata = { title: 'Gradebook — Classtory' }
@@ -84,7 +85,28 @@ export default async function GradesPage({ params }: { params: Promise<{ id: str
     return { student_id: s.id, student_name: s.full_name, student_email: s.email, grades: gradesByAssignment }
   })
 
-  /* Student view — filter to own row */
+  /* Custom grade columns and values */
+  const { data: gradeColumnsRaw } = await supabase
+    .from('grade_columns')
+    .select('*')
+    .eq('classroom_id', classroomId)
+    .order('sort_order')
+  const gradeColumns = (gradeColumnsRaw ?? []) as GradeColumn[]
+
+  const { data: gradeValuesRaw } = gradeColumns.length > 0
+    ? await supabase
+        .from('grade_values')
+        .select('column_id, student_id, raw_score')
+        .in('column_id', gradeColumns.map(c => c.id))
+    : { data: [] }
+  const gradeValues = (gradeValuesRaw ?? []) as GradeValueRow[]
+
+  /* For students, only return their own grade values */
+  const filteredGradeValues = isTeacher
+    ? gradeValues
+    : gradeValues.filter(v => v.student_id === user.id)
+
+  /* Student view — filter to own row for assignment grades */
   const filteredRows = isTeacher
     ? studentRows
     : studentRows.filter(r => r.student_id === user.id)
@@ -106,11 +128,15 @@ export default async function GradesPage({ params }: { params: Promise<{ id: str
         <p style={{ fontSize: 14, color: '#64748B', margin: 0 }}>{classroom.name}</p>
       </div>
 
-      <Gradebook
+      <GradesView
+        classroomId={classroomId}
         classroomName={classroom.name}
-        assignments={assignmentList}
-        students={filteredRows}
         isTeacher={isTeacher}
+        assignments={assignmentList}
+        studentRows={filteredRows}
+        students={isTeacher ? students : students.filter(s => s.id === user.id)}
+        initialColumns={gradeColumns}
+        initialValues={filteredGradeValues}
       />
     </div>
   )
