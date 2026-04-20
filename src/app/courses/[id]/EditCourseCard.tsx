@@ -20,7 +20,7 @@ const schema = z.object({
   title: z.string().min(3, 'Title must be at least 3 characters'),
   description: z.string().min(10, 'Description must be at least 10 characters'),
   category: z.string().min(1, 'Select a category'),
-  price: z.coerce.number().min(0, 'Price must be 0 or more'),
+  price: z.number().min(0, 'Price must be 0 or more'),
   tags: z.string().default(''),
 })
 type FormValues = z.infer<typeof schema>
@@ -202,7 +202,7 @@ export function EditCourseCard({ course, linkedClassroomId }: Props) {
                 </div>
                 <div>
                   <label style={lbl}>Price ($)</label>
-                  <input {...register('price')} type="number" min={0} step={0.01} style={inp(!!errors.price)} />
+                  <input {...register('price', { valueAsNumber: true })} type="number" min={0} step={0.01} style={inp(!!errors.price)} />
                   {errors.price && <span style={err}>{errors.price.message}</span>}
                 </div>
               </div>
