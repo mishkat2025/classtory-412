@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { BookOpen, Star, Users, Clock, Tag, ArrowLeft, Award } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { EnrollButton } from './EnrollButton'
+import { EditCourseCard } from './EditCourseCard'
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params
@@ -27,8 +28,11 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ i
 
   if (error || !course) notFound()
 
+  const isInstructor = !!user && user.id === course.instructor_id
+  const linkedClassroomId = (course as Record<string, unknown>).linked_classroom_id as string | null ?? null
+
   let isEnrolled = false
-  if (user) {
+  if (user && !isInstructor) {
     const { data: enrollment } = await supabase
       .from('course_enrollments')
       .select('id')
@@ -36,6 +40,19 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ i
       .eq('student_id', user.id)
       .maybeSingle()
     isEnrolled = !!enrollment
+
+    // Auto-sync: if student is enrolled in course but not the linked classroom, enroll them
+    if (isEnrolled && linkedClassroomId) {
+      const { data: clsEnrollment } = await supabase
+        .from('enrollments')
+        .select('id')
+        .eq('classroom_id', linkedClassroomId)
+        .eq('student_id', user.id)
+        .maybeSingle()
+      if (!clsEnrollment) {
+        await supabase.from('enrollments').insert({ classroom_id: linkedClassroomId, student_id: user.id })
+      }
+    }
   }
 
   const instructor = course.instructor as { id: string; full_name: string; avatar_url: string | null } | null
@@ -144,8 +161,19 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ i
             </div>
           </div>
 
-          {/* Enroll card */}
+          {/* Enroll / Manage card */}
           <div style={{ position: 'sticky', top: 88 }}>
+            {isInstructor ? (
+              <EditCourseCard course={{
+                id: course.id,
+                title: course.title,
+                description: course.description,
+                category: course.category,
+                price: course.price,
+                tags: course.tags ?? [],
+                student_count: course.student_count ?? 0,
+              }} linkedClassroomId={linkedClassroomId} />
+            ) : (
             <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '24px', boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}>
               <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 30, fontWeight: 800, color: course.price === 0 ? '#10B981' : '#0F172A', margin: '0 0 20px 0' }}>
                 {course.price === 0 ? 'Free' : `$${course.price}`}
@@ -157,6 +185,26 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ i
                 isAuthenticated={!!user}
                 isEnrolled={isEnrolled}
               />
+
+              {/* Course Room button — shown once enrolled */}
+              {isEnrolled && linkedClassroomId && (
+                <Link
+                  href={`/classroom/${linkedClassroomId}`}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, height: 44, marginTop: 10, backgroundColor: '#1E1B4B', color: '#FFFFFF', borderRadius: 10, textDecoration: 'none', fontSize: 14, fontWeight: 600 }}
+                >
+                  Go to Course Room →
+                </Link>
+              )}
+
+              {/* Course Room button — shown once enrolled */}
+              {isEnrolled && linkedClassroomId && (
+                <Link
+                  href={`/classroom/${linkedClassroomId}`}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, height: 44, marginTop: 10, backgroundColor: '#1E1B4B', color: '#FFFFFF', borderRadius: 10, textDecoration: 'none', fontSize: 14, fontWeight: 600 }}
+                >
+                  Go to Course Room →
+                </Link>
+              )}
 
               <div style={{ marginTop: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {[
@@ -171,6 +219,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ i
                 ))}
               </div>
             </div>
+            )}
           </div>
         </div>
       </div>

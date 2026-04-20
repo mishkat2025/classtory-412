@@ -15,6 +15,7 @@ import {
   ChevronRight,
   BarChart3,
   Store,
+  Settings,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import type { Profile } from '@/lib/types'
@@ -49,6 +50,12 @@ const studentNav: NavSection[] = [
       { label: 'Marketplace', href: '/courses', icon: Store },
     ],
   },
+  {
+    title: 'Account',
+    items: [
+      { label: 'Settings', href: '/settings', icon: Settings },
+    ],
+  },
 ]
 
 const teacherNav: NavSection[] = [
@@ -62,6 +69,12 @@ const teacherNav: NavSection[] = [
     items: [
       { label: 'Classrooms', href: '/teacher', icon: GraduationCap },
       { label: 'Courses', href: '/courses', icon: BookOpen },
+    ],
+  },
+  {
+    title: 'Account',
+    items: [
+      { label: 'Settings', href: '/settings', icon: Settings },
     ],
   },
 ]
@@ -83,6 +96,7 @@ const adminNav: NavSection[] = [
     title: 'System',
     items: [
       { label: 'Platform', href: '/admin', icon: Shield },
+      { label: 'Settings', href: '/settings', icon: Settings },
     ],
   },
 ]

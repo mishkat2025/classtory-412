@@ -1,12 +1,22 @@
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import {
-  BookOpen, Users, ClipboardList, Plus, GraduationCap, CheckCircle2, Clock,
+  BookOpen, Users, ClipboardList, Plus, GraduationCap, CheckCircle2, Clock, Store,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { StatCard } from '@/components/dashboard/StatCard'
 import { CreateClassroomButton } from './CreateClassroomButton'
+import { CreateCourseButton } from './CreateCourseButton'
 import type { Profile } from '@/lib/types'
+
+interface CourseRow {
+  id: string
+  title: string
+  category: string
+  price: number
+  student_count: number
+  created_at: string
+}
 
 interface ClassroomRow {
   id: string
@@ -42,6 +52,14 @@ export default async function TeacherDashboard() {
     .select('*')
     .eq('teacher_id', user.id)
     .order('created_at', { ascending: false })
+
+  /* My courses */
+  const { data: rawCourses } = await supabase
+    .from('courses')
+    .select('id, title, category, price, student_count, created_at')
+    .eq('instructor_id', user.id)
+    .order('created_at', { ascending: false })
+  const myCourses: CourseRow[] = (rawCourses ?? []) as CourseRow[]
 
   const classrooms = rawClassrooms ?? []
 
@@ -103,16 +121,55 @@ export default async function TeacherDashboard() {
             {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
         </div>
-        <CreateClassroomButton teacherId={user.id} />
+        <div style={{ display: 'flex', gap: 10 }}>
+          <CreateCourseButton teacherId={user.id} />
+          <CreateClassroomButton teacherId={user.id} />
+        </div>
       </div>
 
       {/* Stats */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 32 }}>
         <StatCard icon={GraduationCap} label="My Classrooms" value={classrooms.length} iconBg="#EEF2FF" iconColor="#4F46E5" />
+        <StatCard icon={Store} label="My Courses" value={myCourses.length} iconBg="#F0FDF4" iconColor="#059669" />
         <StatCard icon={Users} label="Total Students" value={totalStudents} iconBg="#D1FAE5" iconColor="#059669" />
         <StatCard icon={ClipboardList} label="Assignments" value={totalAssignments} iconBg="#FEF3C7" iconColor="#D97706" />
         <StatCard icon={Clock} label="Pending Grading" value={pendingSubmissions.length} iconBg="#FEE2E2" iconColor="#DC2626" />
       </div>
+
+      {/* My Courses */}
+      {myCourses.length > 0 && (
+        <section style={{ marginBottom: 32 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+            <h2 style={sectionHeading}>My Courses</h2>
+            <Link href="/courses" style={{ fontSize: 13, color: '#4F46E5', fontWeight: 500, textDecoration: 'none' }}>Browse marketplace →</Link>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 14 }}>
+            {myCourses.map(course => (
+              <Link key={course.id} href={`/courses/${course.id}`} style={{ textDecoration: 'none' }}>
+                <div className="card-hover" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '16px 20px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', height: '100%' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+                    <div style={{ width: 38, height: 38, borderRadius: 9, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <BookOpen size={18} color="#4F46E5" />
+                    </div>
+                    <div style={{ minWidth: 0 }}>
+                      <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 700, color: '#0F172A', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{course.title}</p>
+                      <p style={{ fontSize: 12, color: '#64748B', margin: 0 }}>{course.category}</p>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: 12, fontWeight: 600, color: '#059669', backgroundColor: '#D1FAE5', borderRadius: 9999, padding: '2px 10px' }}>
+                      {course.student_count ?? 0} enrolled
+                    </span>
+                    <span style={{ fontSize: 13, fontWeight: 700, color: course.price === 0 ? '#10B981' : '#0F172A' }}>
+                      {course.price === 0 ? 'Free' : `$${course.price}`}
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: 24, alignItems: 'start' }}>
         {/* Classrooms */}

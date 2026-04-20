@@ -35,9 +35,8 @@ export function EnrollButton({ courseId, courseName, isAuthenticated, isEnrolled
       student_id: user.id,
     })
 
-    setLoading(false)
-
     if (error) {
+      setLoading(false)
       if (error.code === '23505') {
         setEnrolled(true)
         toast.info('You are already enrolled in this course.')
@@ -47,6 +46,25 @@ export function EnrollButton({ courseId, courseName, isAuthenticated, isEnrolled
       return
     }
 
+    // Also enroll in the linked classroom if one exists
+    const { data: courseData } = await supabase
+      .from('courses')
+      .select('linked_classroom_id')
+      .eq('id', courseId)
+      .single()
+
+    if (courseData?.linked_classroom_id) {
+      const { error: enrollErr } = await supabase.from('enrollments').insert({
+        classroom_id: courseData.linked_classroom_id,
+        student_id: user.id,
+      })
+      // Ignore duplicate (already enrolled) errors
+      if (enrollErr && enrollErr.code !== '23505') {
+        console.error('Classroom enrollment error:', enrollErr)
+      }
+    }
+
+    setLoading(false)
     setEnrolled(true)
     toast.success(`Enrolled in ${courseName}!`)
   }

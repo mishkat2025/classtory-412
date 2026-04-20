@@ -11,6 +11,12 @@ import type { CourseCardCourse } from '@/components/courses/CourseCard'
 export default async function LandingPage() {
   const supabase = await createClient()
 
+  const { data: { user } } = await supabase.auth.getUser()
+  const { data: profile } = user
+    ? await supabase.from('profiles').select('role').eq('id', user.id).single()
+    : { data: null }
+  const dashboardHref = profile?.role === 'teacher' ? '/teacher' : profile?.role === 'admin' ? '/admin' : '/student'
+
   const [
     { data: featuredCourses },
     { count: totalStudents },
@@ -48,15 +54,26 @@ export default async function LandingPage() {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <Link href="/auth/login" style={{ fontSize: 14, fontWeight: 500, color: '#475569', textDecoration: 'none', padding: '8px 16px' }}>
-              Log in
-            </Link>
-            <Link
-              href="/auth/signup"
-              style={{ fontSize: 14, fontWeight: 600, color: '#FFFFFF', backgroundColor: '#4F46E5', borderRadius: 8, padding: '8px 18px', textDecoration: 'none' }}
-            >
-              Get started
-            </Link>
+            {user ? (
+              <Link
+                href={dashboardHref}
+                style={{ fontSize: 14, fontWeight: 600, color: '#FFFFFF', backgroundColor: '#4F46E5', borderRadius: 8, padding: '8px 18px', textDecoration: 'none' }}
+              >
+                Go to Dashboard
+              </Link>
+            ) : (
+              <>
+                <Link href="/auth/login" style={{ fontSize: 14, fontWeight: 500, color: '#475569', textDecoration: 'none', padding: '8px 16px' }}>
+                  Log in
+                </Link>
+                <Link
+                  href="/auth/signup"
+                  style={{ fontSize: 14, fontWeight: 600, color: '#FFFFFF', backgroundColor: '#4F46E5', borderRadius: 8, padding: '8px 18px', textDecoration: 'none' }}
+                >
+                  Get started
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </nav>
