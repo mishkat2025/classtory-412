@@ -39,5 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
 admin-panel.config.json
+CLAUDE.md
+AGENTS.md
+.mcp.json
+supabase-rls-fix.sql
+supabase-schema.sql
