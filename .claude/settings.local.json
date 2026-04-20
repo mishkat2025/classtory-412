@@ -2,7 +2,21 @@
   "permissions": {
     "allow": [
       "Bash(dir \"E:\\\\New folder\\\\classtory\")",
-      "Bash(npx skills *)"
+      "Bash(npx skills *)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(claude mcp *)",
+      "mcp__supabase__list_tables",
+      "Bash(node -e \"try { require\\('@hookform/resolvers/zod'\\); console.log\\('ok'\\) } catch\\(e\\) { console.log\\('ERROR:', e.message\\) }\")",
+      "Bash(node -e ' *)",
+      "Bash(node -e \"const p = require\\('e:/New folder/classtory/node_modules/@supabase/ssr/package.json'\\); console.log\\('ssr version:', p.version\\)\")",
+      "Bash(node -e \"require\\('./src/app/courses/[id]/EnrollButton.tsx'\\)\")",
+      "Bash(npx next *)",
+      "mcp__supabase__execute_sql",
+      "mcp__supabase__apply_migration"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "supabase"
+  ]
 }
