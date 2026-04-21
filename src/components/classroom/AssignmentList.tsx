@@ -532,13 +532,13 @@ export function AssignmentList({
                       gridTemplateColumns: isTeacher ? '1fr 160px 90px 120px 130px 120px' : '1fr 160px 90px 120px 40px',
                       padding: '0 20px',
                       height: 52,
-                      borderBottom: i < assignments.length - 1 ? '1px solid #F1F5F9' : 'none',
+                      borderBottom: i < assignments.length - 1 ? '1px solid var(--color-border)' : 'none',
                       alignItems: 'center',
                       gap: 12,
                       transition: 'background-color 120ms ease',
                       cursor: 'pointer',
                     }}
-                    onMouseEnter={e => ((e.currentTarget as HTMLElement).style.backgroundColor = '#F8FAFC')}
+                    onMouseEnter={e => ((e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface-2)')}
                     onMouseLeave={e => ((e.currentTarget as HTMLElement).style.backgroundColor = 'transparent')}
                   >
                     {/* Title */}

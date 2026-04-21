@@ -309,10 +309,10 @@ export function ClassroomTabs({
                     marginBottom: -1,
                   }}
                   onMouseEnter={e => {
-                    if (!active) (e.currentTarget as HTMLElement).style.color = '#0F172A'
+                    if (!active) (e.currentTarget as HTMLElement).style.color = 'var(--color-text-primary)'
                   }}
                   onMouseLeave={e => {
-                    if (!active) (e.currentTarget as HTMLElement).style.color = '#475569'
+                    if (!active) (e.currentTarget as HTMLElement).style.color = 'var(--color-text-secondary)'
                   }}
                 >
                   <Icon size={15} />

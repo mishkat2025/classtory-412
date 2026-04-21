@@ -142,11 +142,11 @@ export function StudentList({ enrollments, isTeacher, teacherId }: StudentListPr
                   gap: 14,
                   padding: '14px 20px',
                   borderBottom:
-                    i < students.length - 1 ? '1px solid #F1F5F9' : 'none',
+                    i < students.length - 1 ? '1px solid var(--color-border)' : 'none',
                   transition: 'background-color 120ms ease',
                 }}
                 onMouseEnter={e =>
-                  ((e.currentTarget as HTMLElement).style.backgroundColor = '#F8FAFC')
+                  ((e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface-2)')
                 }
                 onMouseLeave={e =>
                   ((e.currentTarget as HTMLElement).style.backgroundColor = 'transparent')

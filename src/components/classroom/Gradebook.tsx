@@ -154,8 +154,8 @@ export function Gradebook({ classroomName, assignments, students, isTeacher }: G
             cursor: 'pointer',
             transition: 'background-color 120ms ease',
           }}
-          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#F1F5F9' }}
-          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#FFFFFF' }}
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface-2)' }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface)' }}
         >
           <Download size={14} />
           Export CSV
@@ -193,7 +193,7 @@ export function Gradebook({ classroomName, assignments, students, isTeacher }: G
                 <tr
                   key={student.student_id}
                   style={{ borderBottom: si < students.length - 1 ? '1px solid #F1F5F9' : 'none' }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#F8FAFC' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface-2)' }}
                   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent' }}
                 >
                   {/* Student name - sticky */}

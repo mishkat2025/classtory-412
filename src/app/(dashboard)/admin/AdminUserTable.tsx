@@ -61,12 +61,12 @@ export function AdminUserTable({ initialUsers }: AdminUserTableProps) {
                 gridTemplateColumns: '1fr 180px 160px 140px',
                 padding: '0 20px',
                 height: 56,
-                borderBottom: i < users.length - 1 ? '1px solid #F1F5F9' : 'none',
+                borderBottom: i < users.length - 1 ? '1px solid var(--color-border)' : 'none',
                 alignItems: 'center',
                 gap: 12,
                 transition: 'background-color 120ms ease',
               }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#F8FAFC' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface-2)' }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent' }}
             >
               {/* Name */}

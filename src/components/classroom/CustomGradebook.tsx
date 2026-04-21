@@ -355,8 +355,8 @@ export function CustomGradebook({
                 const pctColor = (p: number) => p >= 80 ? '#059669' : p >= 60 ? '#D97706' : '#DC2626'
 
                 return (
-                  <tr key={student.id} style={{ borderBottom: si < students.length - 1 ? '1px solid #F1F5F9' : 'none' }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#F8FAFC' }}
+                  <tr key={student.id} style={{ borderBottom: si < students.length - 1 ? '1px solid var(--color-border)' : 'none' }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface-2)' }}
                     onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent' }}>
                     {/* Student */}
                     <td style={{ padding: '12px 16px', position: 'sticky', left: 0, backgroundColor: 'inherit', zIndex: 1 }}>

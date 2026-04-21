@@ -344,14 +344,14 @@ export function MaterialsList({
                   padding: '0 20px',
                   minHeight: 52,
                   borderBottom:
-                    i < materials.length - 1 ? '1px solid #F1F5F9' : 'none',
+                    i < materials.length - 1 ? '1px solid var(--color-border)' : 'none',
                   alignItems: 'center',
                   gap: 12,
                   opacity: isDeleting ? 0.5 : 1,
                   transition: 'background-color 120ms ease, opacity 150ms ease',
                 }}
                 onMouseEnter={e =>
-                  ((e.currentTarget as HTMLElement).style.backgroundColor = '#F8FAFC')
+                  ((e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface-2)')
                 }
                 onMouseLeave={e =>
                   ((e.currentTarget as HTMLElement).style.backgroundColor = 'transparent')

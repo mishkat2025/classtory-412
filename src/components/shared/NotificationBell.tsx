@@ -99,7 +99,7 @@ export function NotificationBell({ userId }: NotificationBellProps) {
           color: '#475569',
           transition: 'background-color 120ms ease',
         }}
-        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#F1F5F9' }}
+        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface-2)' }}
         onMouseLeave={e => { if (!open) (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent' }}
         aria-label="Notifications"
       >
@@ -182,13 +182,13 @@ export function NotificationBell({ userId }: NotificationBellProps) {
                     alignItems: 'flex-start',
                     gap: 12,
                     padding: '12px 16px',
-                    borderBottom: i < notifications.length - 1 ? '1px solid #F1F5F9' : 'none',
-                    backgroundColor: notif.is_read ? 'transparent' : '#F8F9FF',
+                    borderBottom: i < notifications.length - 1 ? '1px solid var(--color-border)' : 'none',
+                    backgroundColor: notif.is_read ? 'transparent' : 'var(--color-primary-light)',
                     cursor: 'pointer',
                     transition: 'background-color 120ms ease',
                   }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#F8FAFC' }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = notif.is_read ? 'transparent' : '#F8F9FF' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface-2)' }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = notif.is_read ? 'transparent' : 'var(--color-primary-light)' }}
                 >
                   {!notif.is_read && (
                     <div style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#4F46E5', flexShrink: 0, marginTop: 5 }} />
