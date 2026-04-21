@@ -39,7 +39,7 @@ export default async function LandingPage() {
     <div style={{ backgroundColor: 'var(--color-bg)', minHeight: '100vh', fontFamily: "'Inter', sans-serif" }}>
 
       {/* ── NAVBAR ─────────────────────────────────────────────── */}
-      <nav style={{ backgroundColor: 'var(--color-surface)', borderBottom: '1px solid #E2E8F0', position: 'sticky', top: 0, zIndex: 50 }}>
+      <nav style={{ backgroundColor: 'var(--color-surface)', borderBottom: '1px solid var(--color-border)', position: 'sticky', top: 0, zIndex: 50 }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 64 }}>
           <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
             <div style={{ width: 36, height: 36, backgroundColor: '#4F46E5', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -49,8 +49,8 @@ export default async function LandingPage() {
           </Link>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
-            <Link href="/courses" style={{ fontSize: 14, fontWeight: 500, color: '#475569', textDecoration: 'none' }}>Courses</Link>
-            <Link href="/auth/signup" style={{ fontSize: 14, fontWeight: 500, color: '#475569', textDecoration: 'none' }}>For Teachers</Link>
+            <Link href="/courses" style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-text-secondary)', textDecoration: 'none' }}>Courses</Link>
+            <Link href="/auth/signup" style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-text-secondary)', textDecoration: 'none' }}>For Teachers</Link>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -63,7 +63,7 @@ export default async function LandingPage() {
               </Link>
             ) : (
               <>
-                <Link href="/auth/login" style={{ fontSize: 14, fontWeight: 500, color: '#475569', textDecoration: 'none', padding: '8px 16px' }}>
+                <Link href="/auth/login" style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-text-secondary)', textDecoration: 'none', padding: '8px 16px' }}>
                   Log in
                 </Link>
                 <Link
@@ -79,8 +79,7 @@ export default async function LandingPage() {
       </nav>
 
       {/* ── HERO ───────────────────────────────────────────────── */}
-      <section style={{
-        background: 'linear-gradient(135deg, #EEF2FF 0%, #F8F9FC 55%, #F0F9FF 100%)',
+      <section className="hero-section" style={{
         padding: '88px 24px 100px',
         textAlign: 'center',
         position: 'relative',
@@ -90,9 +89,9 @@ export default async function LandingPage() {
         <div style={{ position: 'absolute', bottom: -50, left: -50, width: 280, height: 280, borderRadius: '50%', background: 'radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
         <div style={{ maxWidth: 760, margin: '0 auto', position: 'relative' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, backgroundColor: '#EEF2FF', border: '1px solid #C7D2FE', borderRadius: 9999, padding: '4px 14px', marginBottom: 28 }}>
+          <div className="hero-badge">
             <Zap size={13} color="#4F46E5" />
-            <span style={{ fontSize: 13, fontWeight: 600, color: '#3730A3' }}>The all-in-one education platform</span>
+            <span className="hero-badge-text">The all-in-one education platform</span>
           </div>
 
           <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 54, fontWeight: 800, color: 'var(--color-text-primary)', lineHeight: 1.1, marginBottom: 24, letterSpacing: '-0.02em' }}>
@@ -101,7 +100,7 @@ export default async function LandingPage() {
             <br />in One Place
           </h1>
 
-          <p style={{ fontSize: 18, color: '#475569', lineHeight: 1.75, maxWidth: 540, margin: '0 auto 44px' }}>
+          <p style={{ fontSize: 18, color: 'var(--color-text-secondary)', lineHeight: 1.75, maxWidth: 540, margin: '0 auto 44px' }}>
             Classtory unifies a rich course marketplace with private classroom tools — everything students and teachers need, beautifully in one place.
           </p>
 
@@ -123,13 +122,13 @@ export default async function LandingPage() {
       </section>
 
       {/* ── STATS STRIP ────────────────────────────────────────── */}
-      <section style={{ backgroundColor: 'var(--color-surface)', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid #E2E8F0' }}>
+      <section style={{ backgroundColor: 'var(--color-surface)', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '36px 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 32, textAlign: 'center' }}>
           {([
-            { label: 'Active Students',  value: totalStudents  ? `${totalStudents.toLocaleString()}+`  : '1,000+', Icon: Users,         bg: '#EEF2FF', ic: '#4F46E5' },
-            { label: 'Courses Available', value: totalCourses  ? `${totalCourses.toLocaleString()}+`   : '200+',   Icon: BookOpen,      bg: '#D1FAE5', ic: '#10B981' },
-            { label: 'Expert Teachers',  value: totalTeachers  ? `${totalTeachers.toLocaleString()}+`  : '50+',    Icon: GraduationCap, bg: '#FEF3C7', ic: '#F59E0B' },
-            { label: 'Success Rate',     value: '94%',                                                              Icon: Award,         bg: '#DBEAFE', ic: '#3B82F6' },
+            { label: 'Active Students',  value: totalStudents  ? `${totalStudents.toLocaleString()}+`  : '1,000+', Icon: Users,         bg: 'var(--color-primary-light)', ic: '#4F46E5' },
+            { label: 'Courses Available', value: totalCourses  ? `${totalCourses.toLocaleString()}+`   : '200+',   Icon: BookOpen,      bg: 'var(--color-success-light)', ic: '#10B981' },
+            { label: 'Expert Teachers',  value: totalTeachers  ? `${totalTeachers.toLocaleString()}+`  : '50+',    Icon: GraduationCap, bg: 'var(--color-warning-light)', ic: '#F59E0B' },
+            { label: 'Success Rate',     value: '94%',                                                              Icon: Award,         bg: 'var(--color-info-light)',    ic: '#3B82F6' },
           ] as const).map(({ label, value, Icon, bg, ic }) => (
             <div key={label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
               <div style={{ width: 48, height: 48, borderRadius: 12, backgroundColor: bg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -157,19 +156,19 @@ export default async function LandingPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24 }}>
             {([
               {
-                Icon: Layers, bg: '#EEF2FF', ic: '#4F46E5',
+                Icon: Layers, bg: 'var(--color-primary-light)', ic: '#4F46E5',
                 title: 'Course Marketplace',
                 desc:  'Browse hundreds of expertly crafted courses. Enroll with one click and learn at your own pace.',
                 bullets: ['Search & filter by category', 'Instructor ratings & reviews', 'Certificate on completion'],
               },
               {
-                Icon: Users, bg: '#D1FAE5', ic: '#10B981',
+                Icon: Users, bg: 'var(--color-success-light)', ic: '#10B981',
                 title: 'Private Classrooms',
                 desc:  'Teachers create secure classrooms with a unique code. Students join instantly and access all resources.',
                 bullets: ['Join via 6-character code', 'Real-time announcements', 'Attendance tracking'],
               },
               {
-                Icon: BarChart3, bg: '#FEF3C7', ic: '#F59E0B',
+                Icon: BarChart3, bg: 'var(--color-warning-light)', ic: '#F59E0B',
                 title: 'Smart Gradebook',
                 desc:  'Assignments, submissions, grades, and feedback — all in one place. Export tabulation sheets instantly.',
                 bullets: ['Assignment deadlines', 'File & text submissions', 'CSV grade export'],
@@ -187,7 +186,7 @@ export default async function LandingPage() {
                 <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', lineHeight: 1.7, marginBottom: 20 }}>{desc}</p>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {bullets.map(b => (
-                    <li key={b} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#475569' }}>
+                    <li key={b} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--color-text-secondary)' }}>
                       <CheckCircle2 size={14} color="#10B981" />
                       {b}
                     </li>
@@ -200,7 +199,7 @@ export default async function LandingPage() {
       </section>
 
       {/* ── FEATURED COURSES ───────────────────────────────────── */}
-      <section style={{ backgroundColor: 'var(--color-surface)', padding: '80px 24px', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid #E2E8F0' }}>
+      <section style={{ backgroundColor: 'var(--color-surface)', padding: '80px 24px', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 40, flexWrap: 'wrap', gap: 12 }}>
             <div>
@@ -329,7 +328,7 @@ export default async function LandingPage() {
                 </div>
                 <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 18, color: '#FFFFFF' }}>Classtory</span>
               </div>
-              <p style={{ fontSize: 13, color: '#475569', lineHeight: 1.7 }}>The premium education platform for learners and teachers everywhere.</p>
+              <p style={{ fontSize: 13, color: '#94A3B8', lineHeight: 1.7 }}>The premium education platform for learners and teachers everywhere.</p>
             </div>
 
             {([
@@ -338,10 +337,10 @@ export default async function LandingPage() {
               { heading: 'Legal',    links: [{ label: 'Privacy Policy', href: '/privacy' }, { label: 'Terms of Service', href: '/terms' }, { label: 'Cookie Policy', href: '/cookies' }] },
             ] as const).map(({ heading, links }) => (
               <div key={heading}>
-                <div style={{ fontSize: 11, fontWeight: 600, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 14 }}>{heading}</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 14 }}>{heading}</div>
                 {links.map(item => (
                   <div key={item.label} style={{ marginBottom: 9 }}>
-                    <Link href={item.href} style={{ fontSize: 13, color: 'var(--color-text-secondary)', textDecoration: 'none' }}>{item.label}</Link>
+                    <Link href={item.href} style={{ fontSize: 13, color: '#94A3B8', textDecoration: 'none' }}>{item.label}</Link>
                   </div>
                 ))}
               </div>
@@ -349,8 +348,8 @@ export default async function LandingPage() {
           </div>
 
           <div style={{ borderTop: '1px solid #1E293B', paddingTop: 24, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-            <p style={{ fontSize: 13, color: '#475569' }}>© 2026 Classtory. All rights reserved.</p>
-            <p style={{ fontSize: 13, color: '#475569' }}>Built with Next.js &amp; Supabase</p>
+            <p style={{ fontSize: 13, color: '#94A3B8' }}>© 2026 Classtory. All rights reserved.</p>
+            <p style={{ fontSize: 13, color: '#94A3B8' }}>Built with Next.js &amp; Supabase</p>
           </div>
         </div>
       </footer>
