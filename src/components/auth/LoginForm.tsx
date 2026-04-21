@@ -88,7 +88,7 @@ export function LoginForm() {
           }}
           onBlur={e => {
             if (!errors.email) {
-              e.currentTarget.style.borderColor = '#E2E8F0'
+              e.currentTarget.style.borderColor = 'var(--color-border)'
               e.currentTarget.style.boxShadow = 'none'
             }
           }}
@@ -128,7 +128,7 @@ export function LoginForm() {
             }}
             onBlur={e => {
               if (!errors.password) {
-                e.currentTarget.style.borderColor = '#E2E8F0'
+                e.currentTarget.style.borderColor = 'var(--color-border)'
                 e.currentTarget.style.boxShadow = 'none'
               }
             }}
@@ -189,7 +189,7 @@ export function LoginForm() {
       </button>
 
       {/* Sign up link */}
-      <p style={{ textAlign: 'center', fontSize: 14, color: '#475569', margin: 0 }}>
+      <p style={{ textAlign: 'center', fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
         Don&apos;t have an account?{' '}
         <Link
           href="/auth/signup"

@@ -120,7 +120,7 @@ export function GradeSubmissions({ submissions, maxPoints, assignmentId }: Grade
                     <FileText size={13} color="#64748B" />
                     <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Response</span>
                   </div>
-                  <p style={{ fontSize: 14, color: '#475569', lineHeight: 1.7, margin: 0, whiteSpace: 'pre-wrap' }}>{sub.text_content}</p>
+                  <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', lineHeight: 1.7, margin: 0, whiteSpace: 'pre-wrap' }}>{sub.text_content}</p>
                 </div>
               )}
               {sub.file_url && (
@@ -157,7 +157,7 @@ export function GradeSubmissions({ submissions, maxPoints, assignmentId }: Grade
                       textAlign: 'center',
                     }}
                     onFocus={e => { e.currentTarget.style.borderColor = '#4F46E5'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(79,70,229,0.1)' }}
-                    onBlur={e => { e.currentTarget.style.borderColor = '#E2E8F0'; e.currentTarget.style.boxShadow = 'none' }}
+                    onBlur={e => { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none' }}
                   />
                   {pct !== null && (
                     <p style={{ fontSize: 11, color: pct >= 80 ? '#059669' : pct >= 60 ? '#D97706' : '#DC2626', fontWeight: 600, margin: '3px 0 0 0', textAlign: 'center' }}>{pct}%</p>
@@ -184,7 +184,7 @@ export function GradeSubmissions({ submissions, maxPoints, assignmentId }: Grade
                       lineHeight: 1.5,
                     }}
                     onFocus={e => { e.currentTarget.style.borderColor = '#4F46E5'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(79,70,229,0.1)' }}
-                    onBlur={e => { e.currentTarget.style.borderColor = '#E2E8F0'; e.currentTarget.style.boxShadow = 'none' }}
+                    onBlur={e => { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none' }}
                   />
                 </div>
                 <div style={{ paddingTop: 20 }}>

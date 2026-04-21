@@ -37,7 +37,7 @@ export default function PrivacyPage() {
           ].map(({ title, body }, i, arr) => (
             <div key={title} style={{ marginBottom: i < arr.length - 1 ? 32 : 0 }}>
               <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 10px' }}>{title}</h2>
-              <p style={{ fontSize: 14, color: '#475569', lineHeight: 1.8, margin: 0 }}>{body}</p>
+              <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', lineHeight: 1.8, margin: 0 }}>{body}</p>
               {i < arr.length - 1 && <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', marginTop: 32 }} />}
             </div>
           ))}

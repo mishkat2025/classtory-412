@@ -71,7 +71,7 @@ export function RecommendationCard({
               left: 10,
               fontSize: 11,
               fontWeight: 600,
-              color: '#3730A3',
+              color: 'var(--color-primary-on-tint)',
               backgroundColor: 'rgba(238,242,255,0.92)',
               borderRadius: 9999,
               padding: '2px 10px',

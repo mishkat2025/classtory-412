@@ -32,23 +32,23 @@ function formatDue(iso: string): { label: string; color: string; bg: string; urg
   const diffMs = due.getTime() - now.getTime()
   const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24))
 
-  if (diffDays < 0) return { label: 'Overdue', color: '#991B1B', bg: 'var(--color-danger-light)', urgent: true }
-  if (diffDays === 0) return { label: 'Due today', color: '#92400E', bg: 'var(--color-warning-light)', urgent: true }
-  if (diffDays === 1) return { label: 'Due tomorrow', color: '#92400E', bg: 'var(--color-warning-light)', urgent: true }
-  if (diffDays <= 7) return { label: `${diffDays}d left`, color: '#92400E', bg: 'var(--color-warning-light)', urgent: false }
+  if (diffDays < 0) return { label: 'Overdue', color: 'var(--color-danger-on-tint)', bg: 'var(--color-danger-light)', urgent: true }
+  if (diffDays === 0) return { label: 'Due today', color: 'var(--color-warning-on-tint)', bg: 'var(--color-warning-light)', urgent: true }
+  if (diffDays === 1) return { label: 'Due tomorrow', color: 'var(--color-warning-on-tint)', bg: 'var(--color-warning-light)', urgent: true }
+  if (diffDays <= 7) return { label: `${diffDays}d left`, color: 'var(--color-warning-on-tint)', bg: 'var(--color-warning-light)', urgent: false }
   return {
     label: due.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-    color: '#475569',
+    color: 'var(--color-text-secondary)',
     bg: 'var(--color-surface-2)',
     urgent: false,
   }
 }
 
 const STATUS_META = {
-  pending:   { label: 'Pending',   bg: 'var(--color-warning-light)', color: '#92400E', border: '#F59E0B' },
-  submitted: { label: 'Submitted', bg: '#DBEAFE', color: '#1E40AF', border: '#3B82F6' },
-  graded:    { label: 'Graded',    bg: 'var(--color-success-light)', color: '#065F46', border: '#10B981' },
-  overdue:   { label: 'Overdue',   bg: 'var(--color-danger-light)', color: '#991B1B', border: '#EF4444' },
+  pending:   { label: 'Pending',   bg: 'var(--color-warning-light)', color: 'var(--color-warning-on-tint)', border: '#F59E0B' },
+  submitted: { label: 'Submitted', bg: '#DBEAFE', color: 'var(--color-info-on-tint)', border: '#3B82F6' },
+  graded:    { label: 'Graded',    bg: 'var(--color-success-light)', color: 'var(--color-success-on-tint)', border: '#10B981' },
+  overdue:   { label: 'Overdue',   bg: 'var(--color-danger-light)', color: 'var(--color-danger-on-tint)', border: '#EF4444' },
 }
 
 export default async function StudentAssignmentsPage() {
@@ -132,11 +132,11 @@ export default async function StudentAssignmentsPage() {
       {/* ── Summary bar ── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 12, marginBottom: 32 }}>
         {[
-          { label: 'Total',     value: totalCount,   bg: 'var(--color-primary-light)', color: '#3730A3' },
-          { label: 'Pending',   value: pending.length,  bg: 'var(--color-warning-light)', color: '#92400E' },
-          { label: 'Overdue',   value: overdue.length,  bg: 'var(--color-danger-light)', color: '#991B1B' },
-          { label: 'Submitted', value: submitted.length, bg: '#DBEAFE', color: '#1E40AF' },
-          { label: 'Graded',    value: graded.length,   bg: 'var(--color-success-light)', color: '#065F46' },
+          { label: 'Total',     value: totalCount,   bg: 'var(--color-primary-light)', color: 'var(--color-primary-on-tint)' },
+          { label: 'Pending',   value: pending.length,  bg: 'var(--color-warning-light)', color: 'var(--color-warning-on-tint)' },
+          { label: 'Overdue',   value: overdue.length,  bg: 'var(--color-danger-light)', color: 'var(--color-danger-on-tint)' },
+          { label: 'Submitted', value: submitted.length, bg: '#DBEAFE', color: 'var(--color-info-on-tint)' },
+          { label: 'Graded',    value: graded.length,   bg: 'var(--color-success-light)', color: 'var(--color-success-on-tint)' },
         ].map(({ label, value, bg, color }) => (
           <div key={label} style={{ backgroundColor: bg, borderRadius: 10, padding: '12px 16px' }}>
             <div style={{ fontSize: 24, fontWeight: 700, color, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{value}</div>
@@ -217,7 +217,7 @@ export default async function StudentAssignmentsPage() {
           {pendingCount === 0 && doneCount > 0 && (
             <div style={{ textAlign: 'center', padding: '20px 0' }}>
               <CheckCircle2 size={28} color="#10B981" style={{ display: 'block', margin: '0 auto 8px' }} />
-              <p style={{ fontSize: 14, fontWeight: 600, color: '#065F46', margin: 0 }}>You&apos;re all caught up!</p>
+              <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--color-success-on-tint)', margin: 0 }}>You&apos;re all caught up!</p>
               <p style={{ fontSize: 13, color: 'var(--color-text-muted)', margin: '4px 0 0' }}>No pending or overdue assignments.</p>
             </div>
           )}

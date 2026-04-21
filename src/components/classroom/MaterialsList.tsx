@@ -436,7 +436,7 @@ export function MaterialsList({
                       <button
                         onClick={() => setCopyingItem(material)}
                         title="Copy to classroom"
-                        style={{ ...iconBtn, color: '#3730A3', backgroundColor: 'var(--color-primary-light)', border: '1px solid #C7D2FE' }}
+                        style={{ ...iconBtn, color: 'var(--color-primary-on-tint)', backgroundColor: 'var(--color-primary-light)', border: '1px solid #C7D2FE' }}
                       >
                         <Copy size={14} />
                       </button>

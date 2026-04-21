@@ -145,8 +145,8 @@ export default async function StudentGradesPage() {
       {/* ── Overall summary ── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 12, marginBottom: 32 }}>
         {[
-          { label: 'Classrooms',      value: classrooms.length,          bg: 'var(--color-primary-light)', color: '#3730A3' },
-          { label: 'Graded Work',     value: allGrades.length,            bg: 'var(--color-success-light)', color: '#065F46' },
+          { label: 'Classrooms',      value: classrooms.length,          bg: 'var(--color-primary-light)', color: 'var(--color-primary-on-tint)' },
+          { label: 'Graded Work',     value: allGrades.length,            bg: 'var(--color-success-light)', color: 'var(--color-success-on-tint)' },
           { label: 'Overall Average', value: overallAvg != null ? `${overallAvg}%` : '—', bg: overallAvg == null ? 'var(--color-surface-2)' : gradeBg(overallAvg), color: overallAvg == null ? '#64748B' : gradeColor(overallAvg) },
         ].map(({ label, value, bg, color }) => (
           <div key={label} style={{ backgroundColor: bg, borderRadius: 10, padding: '12px 16px' }}>

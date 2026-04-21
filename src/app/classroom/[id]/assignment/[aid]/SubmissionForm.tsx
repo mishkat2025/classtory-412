@@ -68,7 +68,7 @@ export function SubmissionForm({ assignmentId, classroomId, studentId, isOverdue
       {isOverdue && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, backgroundColor: 'var(--color-warning-light)', border: '1px solid #FDE68A', borderRadius: 8, padding: '10px 14px', marginBottom: 16 }}>
           <AlertCircle size={15} color="#D97706" />
-          <p style={{ fontSize: 13, color: '#92400E', margin: 0, fontWeight: 500 }}>
+          <p style={{ fontSize: 13, color: 'var(--color-warning-on-tint)', margin: 0, fontWeight: 500 }}>
             This assignment is past due. Your submission will be marked late.
           </p>
         </div>
@@ -128,7 +128,7 @@ export function SubmissionForm({ assignmentId, classroomId, studentId, isOverdue
               marginBottom: 16,
             }}
             onFocus={e => { e.currentTarget.style.borderColor = '#4F46E5'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(79,70,229,0.1)' }}
-            onBlur={e => { e.currentTarget.style.borderColor = '#E2E8F0'; e.currentTarget.style.boxShadow = 'none' }}
+            onBlur={e => { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none' }}
           />
         ) : (
           <div style={{ marginBottom: 16 }}>

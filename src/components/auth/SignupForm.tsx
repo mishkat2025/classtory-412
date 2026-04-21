@@ -217,7 +217,7 @@ export function SignupForm() {
       </button>
 
       {/* Sign in link */}
-      <p style={{ textAlign: 'center', fontSize: 14, color: '#475569', margin: 0 }}>
+      <p style={{ textAlign: 'center', fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
         Already have an account?{' '}
         <Link
           href="/auth/login"
@@ -273,7 +273,7 @@ function focusHandler(hasError: boolean) {
 function blurHandler(hasError: boolean) {
   return (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => {
     if (!hasError) {
-      e.currentTarget.style.borderColor = '#E2E8F0'
+      e.currentTarget.style.borderColor = 'var(--color-border)'
       e.currentTarget.style.boxShadow = 'none'
     }
   }

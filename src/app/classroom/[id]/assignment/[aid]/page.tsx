@@ -141,7 +141,7 @@ export default async function AssignmentPage({
             <FileText size={14} color="#4F46E5" />
             <span style={{ fontSize: 12, fontWeight: 600, color: '#4F46E5', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Instructions</span>
           </div>
-          <p style={{ fontSize: 14, color: '#475569', lineHeight: 1.75, margin: 0, whiteSpace: 'pre-wrap' }}>
+          <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', lineHeight: 1.75, margin: 0, whiteSpace: 'pre-wrap' }}>
             {assignment.description}
           </p>
         </div>
@@ -179,7 +179,7 @@ export default async function AssignmentPage({
               {mySubmission.feedback && (
                 <div>
                   <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Feedback</p>
-                  <p style={{ fontSize: 14, color: '#475569', lineHeight: 1.7, margin: 0, whiteSpace: 'pre-wrap' }}>{mySubmission.feedback}</p>
+                  <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', lineHeight: 1.7, margin: 0, whiteSpace: 'pre-wrap' }}>{mySubmission.feedback}</p>
                 </div>
               )}
             </div>
@@ -199,7 +199,7 @@ export default async function AssignmentPage({
               </div>
               {mySubmission.text_content && (
                 <div style={{ backgroundColor: 'var(--color-bg)', borderRadius: 8, padding: '12px 16px', border: '1px solid var(--color-border)' }}>
-                  <p style={{ fontSize: 14, color: '#475569', margin: 0, lineHeight: 1.7, whiteSpace: 'pre-wrap' }}>{mySubmission.text_content}</p>
+                  <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.7, whiteSpace: 'pre-wrap' }}>{mySubmission.text_content}</p>
                 </div>
               )}
               <p style={{ fontSize: 12, color: 'var(--color-text-muted)', margin: '12px 0 0 0' }}>Waiting for your teacher to grade this submission.</p>

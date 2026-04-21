@@ -682,7 +682,7 @@ const countBadge: React.CSSProperties = {
   justifyContent: 'center',
   fontSize: 12,
   fontWeight: 600,
-  color: '#3730A3',
+  color: 'var(--color-primary-on-tint)',
   backgroundColor: 'var(--color-primary-light)',
   borderRadius: 9999,
   padding: '1px 9px',

@@ -96,7 +96,7 @@ export function NotificationBell({ userId }: NotificationBellProps) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: '#475569',
+          color: 'var(--color-text-secondary)',
           transition: 'background-color 120ms ease',
         }}
         onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface-2)' }}

@@ -114,7 +114,7 @@ export function EditCourseCard({ course, linkedClassroomId }: Props) {
       {/* Instructor management card */}
       <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: 24, boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}>
         {/* Badge */}
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 600, color: '#3730A3', backgroundColor: 'var(--color-primary-light)', borderRadius: 9999, padding: '3px 12px', marginBottom: 16 }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 600, color: 'var(--color-primary-on-tint)', backgroundColor: 'var(--color-primary-light)', borderRadius: 9999, padding: '3px 12px', marginBottom: 16 }}>
           Your Course
         </div>
 
@@ -212,7 +212,7 @@ export function EditCourseCard({ course, linkedClassroomId }: Props) {
               </div>
 
               <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>
-                <button type="button" onClick={() => setOpen(false)} style={{ flex: 1, height: 40, backgroundColor: 'var(--color-surface-2)', color: '#475569', border: 'none', borderRadius: 8, fontSize: 14, fontWeight: 500, cursor: 'pointer' }}>
+                <button type="button" onClick={() => setOpen(false)} style={{ flex: 1, height: 40, backgroundColor: 'var(--color-surface-2)', color: 'var(--color-text-secondary)', border: 'none', borderRadius: 8, fontSize: 14, fontWeight: 500, cursor: 'pointer' }}>
                   Cancel
                 </button>
                 <button type="submit" disabled={isSubmitting} style={{ flex: 2, height: 40, backgroundColor: isSubmitting ? '#A5B4FC' : '#4F46E5', color: '#FFFFFF', border: 'none', borderRadius: 8, fontSize: 14, fontWeight: 600, cursor: isSubmitting ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>

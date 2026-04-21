@@ -150,7 +150,7 @@ export default function LoginPage() {
               <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 22, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 6px 0', letterSpacing: '-0.01em' }}>
                 Welcome back
               </h2>
-              <p style={{ fontSize: 14, color: '#475569', margin: 0 }}>Sign in to your Classtory account</p>
+              <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>Sign in to your Classtory account</p>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} noValidate style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -165,7 +165,7 @@ export default function LoginPage() {
                   autoComplete="email"
                   style={inputStyle(!!errors.email)}
                   onFocus={e => { if (!errors.email) { e.currentTarget.style.borderColor = '#4F46E5'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(79,70,229,0.1)' } }}
-                  onBlur={e => { if (!errors.email) { e.currentTarget.style.borderColor = '#E2E8F0'; e.currentTarget.style.boxShadow = 'none' } }}
+                  onBlur={e => { if (!errors.email) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none' } }}
                 />
                 {errors.email && <span style={errorStyle}>{errors.email.message}</span>}
               </div>
@@ -186,7 +186,7 @@ export default function LoginPage() {
                     autoComplete="current-password"
                     style={{ ...inputStyle(!!errors.password), paddingRight: 40, width: '100%' }}
                     onFocus={e => { if (!errors.password) { e.currentTarget.style.borderColor = '#4F46E5'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(79,70,229,0.1)' } }}
-                    onBlur={e => { if (!errors.password) { e.currentTarget.style.borderColor = '#E2E8F0'; e.currentTarget.style.boxShadow = 'none' } }}
+                    onBlur={e => { if (!errors.password) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none' } }}
                   />
                   <button
                     type="button"
@@ -229,7 +229,7 @@ export default function LoginPage() {
               </button>
 
               {/* Sign up link */}
-              <p style={{ textAlign: 'center', fontSize: 14, color: '#475569', margin: 0 }}>
+              <p style={{ textAlign: 'center', fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
                 Don&apos;t have an account?{' '}
                 <Link href="/auth/signup" style={{ color: '#4F46E5', fontWeight: 500, textDecoration: 'none' }}>
                   Create one

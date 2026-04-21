@@ -59,7 +59,7 @@ export default async function CoursesPage({
             <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 18, color: 'var(--color-text-primary)' }}>Classtory</span>
           </Link>
           <div style={{ display: 'flex', gap: 12 }}>
-            <Link href="/auth/login" style={{ fontSize: 14, fontWeight: 500, color: '#475569', textDecoration: 'none', padding: '8px 14px' }}>Log in</Link>
+            <Link href="/auth/login" style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-text-secondary)', textDecoration: 'none', padding: '8px 14px' }}>Log in</Link>
             <Link href="/auth/signup" style={{ fontSize: 14, fontWeight: 600, color: '#FFFFFF', backgroundColor: '#4F46E5', borderRadius: 8, padding: '8px 16px', textDecoration: 'none' }}>Get started</Link>
           </div>
         </div>

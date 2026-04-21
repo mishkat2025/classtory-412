@@ -47,10 +47,10 @@ export default function AboutPage() {
 
         <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 16, padding: '36px 32px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
           <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 22, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 16px' }}>Our Mission</h2>
-          <p style={{ fontSize: 15, color: '#475569', lineHeight: 1.8, margin: '0 0 16px' }}>
+          <p style={{ fontSize: 15, color: 'var(--color-text-secondary)', lineHeight: 1.8, margin: '0 0 16px' }}>
             Classtory was founded with a simple belief: great education should be accessible to everyone. We combine a public course marketplace with private classroom tools so that teachers can reach students both inside and outside the traditional classroom.
           </p>
-          <p style={{ fontSize: 15, color: '#475569', lineHeight: 1.8, margin: 0 }}>
+          <p style={{ fontSize: 15, color: 'var(--color-text-secondary)', lineHeight: 1.8, margin: 0 }}>
             More content coming soon as we continue to grow our story.
           </p>
         </div>

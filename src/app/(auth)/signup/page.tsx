@@ -167,7 +167,7 @@ export default function SignupPage() {
               >
                 Create your account
               </h2>
-              <p style={{ fontSize: 14, color: '#475569', margin: 0 }}>
+              <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
                 Free to join — no credit card required
               </p>
             </div>

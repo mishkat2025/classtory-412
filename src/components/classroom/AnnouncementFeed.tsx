@@ -240,7 +240,7 @@ export function AnnouncementFeed({
                 e.currentTarget.style.boxShadow = '0 0 0 3px rgba(79,70,229,0.1)'
               }}
               onBlur={e => {
-                e.currentTarget.style.borderColor = '#E2E8F0'
+                e.currentTarget.style.borderColor = 'var(--color-border)'
                 e.currentTarget.style.boxShadow = 'none'
               }}
             />
@@ -372,7 +372,7 @@ export function AnnouncementFeed({
                         style={{
                           fontSize: 11,
                           fontWeight: 600,
-                          color: '#3730A3',
+                          color: 'var(--color-primary-on-tint)',
                           backgroundColor: 'var(--color-primary-light)',
                           borderRadius: 9999,
                           padding: '1px 8px',
@@ -422,7 +422,7 @@ export function AnnouncementFeed({
               ) : (
                 <p
                   style={{
-                    fontSize: 14, color: '#475569', margin: 0,
+                    fontSize: 14, color: 'var(--color-text-secondary)', margin: 0,
                     lineHeight: 1.7, whiteSpace: 'pre-wrap', wordBreak: 'break-word',
                   }}
                 >
@@ -436,14 +436,14 @@ export function AnnouncementFeed({
                   <button
                     onClick={() => startEdit(item)}
                     title="Edit"
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', backgroundColor: 'var(--color-surface-2)', border: '1px solid var(--color-border)', borderRadius: 7, fontSize: 11, fontWeight: 600, color: '#475569', cursor: 'pointer' }}
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', backgroundColor: 'var(--color-surface-2)', border: '1px solid var(--color-border)', borderRadius: 7, fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', cursor: 'pointer' }}
                   >
                     <Pencil size={11} /> Edit
                   </button>
                   <button
                     onClick={() => setCopyingItem(item)}
                     title="Copy to another class"
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', backgroundColor: 'var(--color-primary-light)', border: '1px solid #C7D2FE', borderRadius: 7, fontSize: 11, fontWeight: 600, color: '#3730A3', cursor: 'pointer' }}
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', backgroundColor: 'var(--color-primary-light)', border: '1px solid #C7D2FE', borderRadius: 7, fontSize: 11, fontWeight: 600, color: 'var(--color-primary-on-tint)', cursor: 'pointer' }}
                   >
                     <Copy size={11} /> Copy to class
                   </button>
@@ -451,7 +451,7 @@ export function AnnouncementFeed({
                     onClick={() => handleDelete(item)}
                     disabled={deletingId === item.id}
                     title="Delete"
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', backgroundColor: 'var(--color-danger-light)', border: '1px solid #FECACA', borderRadius: 7, fontSize: 11, fontWeight: 600, color: '#991B1B', cursor: 'pointer' }}
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', backgroundColor: 'var(--color-danger-light)', border: '1px solid #FECACA', borderRadius: 7, fontSize: 11, fontWeight: 600, color: 'var(--color-danger-on-tint)', cursor: 'pointer' }}
                   >
                     {deletingId === item.id ? <Loader2 size={11} className="animate-spin" /> : <Trash2 size={11} />}
                     Delete

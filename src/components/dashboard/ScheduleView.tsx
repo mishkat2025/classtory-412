@@ -132,7 +132,7 @@ export function ScheduleView({ items }: ScheduleViewProps) {
                       {TYPE_LABELS[item.type]}
                     </span>
                     {isUrgent && (
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 3, fontSize: 11, fontWeight: 500, color: '#991B1B', backgroundColor: 'var(--color-danger-light)', borderRadius: 9999, padding: '2px 8px', flexShrink: 0 }}>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 3, fontSize: 11, fontWeight: 500, color: 'var(--color-danger-on-tint)', backgroundColor: 'var(--color-danger-light)', borderRadius: 9999, padding: '2px 8px', flexShrink: 0 }}>
                         <AlertCircle size={11} />
                         {daysUntil === 0 ? 'Today' : daysUntil === 1 ? 'Tomorrow' : `${daysUntil}d`}
                       </span>

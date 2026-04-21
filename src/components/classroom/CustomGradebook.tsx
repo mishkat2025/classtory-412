@@ -99,7 +99,7 @@ function ColForm({
         </p>
       )}
       <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
-        <button type="button" onClick={onCancel} style={{ ...btn, backgroundColor: 'var(--color-surface)', color: '#475569', border: '1px solid var(--color-border)' }}>Cancel</button>
+        <button type="button" onClick={onCancel} style={{ ...btn, backgroundColor: 'var(--color-surface)', color: 'var(--color-text-secondary)', border: '1px solid var(--color-border)' }}>Cancel</button>
         <button type="submit" disabled={saving} style={{ ...btn, backgroundColor: '#4F46E5', color: '#FFFFFF', border: 'none', opacity: saving ? 0.7 : 1, gap: 5 }}>
           {saving && <Loader2 size={12} className="animate-spin" />} Save
         </button>
@@ -387,7 +387,7 @@ export function CustomGradebook({
                                   placeholder="—"
                                   style={{ width: 56, height: 30, border: '1px solid var(--color-border)', borderRadius: 6, padding: '0 6px', fontSize: 13, textAlign: 'center', fontFamily: "'Inter', sans-serif", outline: 'none', color: 'var(--color-text-primary)' }}
                                   onFocus={e => { e.currentTarget.style.borderColor = '#4F46E5'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(79,70,229,0.1)' }}
-                                  onBlurCapture={e => { e.currentTarget.style.borderColor = '#E2E8F0'; e.currentTarget.style.boxShadow = 'none' }}
+                                  onBlurCapture={e => { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none' }}
                                 />
                                 <button onClick={() => saveCell(col, student.id)} disabled={!!isSaving} title="Save" style={{ width: 26, height: 26, borderRadius: 6, backgroundColor: 'var(--color-primary-light)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                                   {isSaving ? <Loader2 size={11} color="#4F46E5" className="animate-spin" /> : <Save size={11} color="#4F46E5" />}

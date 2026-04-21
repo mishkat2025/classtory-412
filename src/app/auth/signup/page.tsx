@@ -161,7 +161,7 @@ export default function SignupPage() {
               <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 22, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 6px 0', letterSpacing: '-0.01em' }}>
                 Create your account
               </h2>
-              <p style={{ fontSize: 14, color: '#475569', margin: 0 }}>Free to join — no credit card required</p>
+              <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>Free to join — no credit card required</p>
             </div>
 
             <form onSubmit={handleFormSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
@@ -277,7 +277,7 @@ export default function SignupPage() {
               </button>
 
               {/* Sign in link */}
-              <p style={{ textAlign: 'center', fontSize: 14, color: '#475569', margin: 0 }}>
+              <p style={{ textAlign: 'center', fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
                 Already have an account?{' '}
                 <Link href="/auth/login" style={{ color: '#4F46E5', fontWeight: 500, textDecoration: 'none' }}>
                   Sign in

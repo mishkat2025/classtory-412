@@ -68,10 +68,10 @@ function formatDue(iso: string): { label: string; overdue: boolean; urgent: bool
 }
 
 const submissionStatusConfig = {
-  graded:    { label: 'Graded',    bg: 'var(--color-success-light)', color: '#065F46', Icon: Star },
-  submitted: { label: 'Submitted', bg: '#DBEAFE', color: '#1E40AF', Icon: CheckCircle2 },
-  late:      { label: 'Late',      bg: 'var(--color-danger-light)', color: '#991B1B', Icon: AlertCircle },
-  pending:   { label: 'Pending',   bg: 'var(--color-warning-light)', color: '#92400E', Icon: Clock },
+  graded:    { label: 'Graded',    bg: 'var(--color-success-light)', color: 'var(--color-success-on-tint)', Icon: Star },
+  submitted: { label: 'Submitted', bg: '#DBEAFE', color: 'var(--color-info-on-tint)', Icon: CheckCircle2 },
+  late:      { label: 'Late',      bg: 'var(--color-danger-light)', color: 'var(--color-danger-on-tint)', Icon: AlertCircle },
+  pending:   { label: 'Pending',   bg: 'var(--color-warning-light)', color: 'var(--color-warning-on-tint)', Icon: Clock },
 } as const
 
 export function AssignmentList({
@@ -552,7 +552,7 @@ export function AssignmentList({
                     </span>
 
                     {/* Points */}
-                    <span style={{ fontSize: 13, color: '#475569', textAlign: 'center' }}>
+                    <span style={{ fontSize: 13, color: 'var(--color-text-secondary)', textAlign: 'center' }}>
                       {assignment.max_points} pts
                     </span>
 
@@ -592,13 +592,13 @@ export function AssignmentList({
                     {isTeacher ? (
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}
                         onClick={e => { e.preventDefault(); e.stopPropagation() }}>
-                        <button onClick={() => startEdit(assignment)} title="Edit" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: 7, border: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface)', color: '#475569', cursor: 'pointer' }}>
+                        <button onClick={() => startEdit(assignment)} title="Edit" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: 7, border: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface)', color: 'var(--color-text-secondary)', cursor: 'pointer' }}>
                           <Pencil size={12} />
                         </button>
-                        <button onClick={() => setCopyingItem(assignment)} title="Copy to class" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: 7, border: '1px solid #C7D2FE', backgroundColor: 'var(--color-primary-light)', color: '#3730A3', cursor: 'pointer' }}>
+                        <button onClick={() => setCopyingItem(assignment)} title="Copy to class" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: 7, border: '1px solid #C7D2FE', backgroundColor: 'var(--color-primary-light)', color: 'var(--color-primary-on-tint)', cursor: 'pointer' }}>
                           <Copy size={12} />
                         </button>
-                        <button onClick={() => handleDeleteAssignment(assignment)} disabled={isDeleting} title="Delete" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: 7, border: '1px solid #FECACA', backgroundColor: 'var(--color-danger-light)', color: '#991B1B', cursor: 'pointer' }}>
+                        <button onClick={() => handleDeleteAssignment(assignment)} disabled={isDeleting} title="Delete" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: 7, border: '1px solid #FECACA', backgroundColor: 'var(--color-danger-light)', color: 'var(--color-danger-on-tint)', cursor: 'pointer' }}>
                           {isDeleting ? <Loader2 size={12} className="animate-spin" /> : <Trash2 size={12} />}
                         </button>
                       </div>
@@ -662,7 +662,7 @@ function focusStyle(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>)
 function blurStyle(hasError: boolean) {
   return (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (!hasError) {
-      e.currentTarget.style.borderColor = '#E2E8F0'
+      e.currentTarget.style.borderColor = 'var(--color-border)'
       e.currentTarget.style.boxShadow = 'none'
     }
   }

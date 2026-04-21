@@ -101,7 +101,7 @@ export function FileUpload({ bucket, path, onUpload, accept, maxSizeMB = 50 }: F
         {uploading ? (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
             <Loader2 size={28} color="#4F46E5" style={{ animation: 'spin 1s linear infinite' }} />
-            <p style={{ fontSize: 14, color: '#475569', margin: 0 }}>Uploading {selectedFile?.name}…</p>
+            <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>Uploading {selectedFile?.name}…</p>
             <div style={{ width: '100%', maxWidth: 200, height: 4, backgroundColor: '#E2E8F0', borderRadius: 999 }}>
               <div style={{ width: `${progress}%`, height: '100%', backgroundColor: '#4F46E5', borderRadius: 999, transition: 'width 300ms ease' }} />
             </div>

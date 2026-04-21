@@ -200,7 +200,7 @@ export function StudentList({ enrollments, isTeacher, teacherId }: StudentListPr
                         style={{
                           fontSize: 11,
                           fontWeight: 600,
-                          color: '#3730A3',
+                          color: 'var(--color-primary-on-tint)',
                           backgroundColor: 'var(--color-primary-light)',
                           borderRadius: 9999,
                           padding: '1px 8px',

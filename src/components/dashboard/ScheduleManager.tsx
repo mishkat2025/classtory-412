@@ -272,7 +272,7 @@ export function ScheduleManager({ teacherId, classrooms }: ScheduleManagerProps)
                         </span>
                       </td>
                       <td style={{ padding: '12px 16px' }}>
-                        <span style={{ fontSize: 13, color: '#475569' }}>
+                        <span style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>
                           {(item.classroom as { name: string } | null)?.name ?? <span style={{ color: 'var(--color-text-muted)' }}>—</span>}
                         </span>
                       </td>
@@ -389,7 +389,7 @@ export function ScheduleManager({ teacherId, classrooms }: ScheduleManagerProps)
 
               {/* Actions */}
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, paddingTop: 4 }}>
-                <button type="button" onClick={() => setModalOpen(false)} style={{ height: 38, padding: '0 16px', backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', color: '#475569', borderRadius: 8, fontSize: 14, fontWeight: 500, cursor: 'pointer' }}>
+                <button type="button" onClick={() => setModalOpen(false)} style={{ height: 38, padding: '0 16px', backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', color: 'var(--color-text-secondary)', borderRadius: 8, fontSize: 14, fontWeight: 500, cursor: 'pointer' }}>
                   Cancel
                 </button>
                 <button type="submit" disabled={isSubmitting} style={{ height: 38, padding: '0 18px', backgroundColor: '#4F46E5', border: 'none', color: '#FFFFFF', borderRadius: 8, fontSize: 14, fontWeight: 500, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 7 }}>

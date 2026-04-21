@@ -75,7 +75,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ i
             <Link href="/student" style={{ fontSize: 14, fontWeight: 500, color: '#4F46E5', textDecoration: 'none' }}>Dashboard →</Link>
           ) : (
             <div style={{ display: 'flex', gap: 12 }}>
-              <Link href="/auth/login" style={{ fontSize: 14, fontWeight: 500, color: '#475569', textDecoration: 'none', padding: '8px 14px' }}>Log in</Link>
+              <Link href="/auth/login" style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-text-secondary)', textDecoration: 'none', padding: '8px 14px' }}>Log in</Link>
               <Link href="/auth/signup" style={{ fontSize: 14, fontWeight: 600, color: '#FFFFFF', backgroundColor: '#4F46E5', borderRadius: 8, padding: '8px 16px', textDecoration: 'none' }}>Get started</Link>
             </div>
           )}
@@ -105,7 +105,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ i
             </div>
 
             {/* Category + title */}
-            <div style={{ display: 'inline-block', fontSize: 11, fontWeight: 600, color: '#3730A3', backgroundColor: 'var(--color-primary-light)', borderRadius: 9999, padding: '3px 12px', marginBottom: 12 }}>
+            <div style={{ display: 'inline-block', fontSize: 11, fontWeight: 600, color: 'var(--color-primary-on-tint)', backgroundColor: 'var(--color-primary-light)', borderRadius: 9999, padding: '3px 12px', marginBottom: 12 }}>
               {course.category}
             </div>
             <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 28, fontWeight: 800, color: 'var(--color-text-primary)', margin: '0 0 16px 0', letterSpacing: '-0.02em', lineHeight: 1.2 }}>
@@ -146,13 +146,13 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ i
             {/* Description */}
             <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '24px 28px' }}>
               <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 12px 0' }}>About this course</h2>
-              <p style={{ fontSize: 14, color: '#475569', lineHeight: 1.75, margin: '0 0 16px 0', whiteSpace: 'pre-wrap' }}>{course.description}</p>
+              <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', lineHeight: 1.75, margin: '0 0 16px 0', whiteSpace: 'pre-wrap' }}>{course.description}</p>
 
               {course.tags && course.tags.length > 0 && (
                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 16 }}>
                   <Tag size={14} color="#94A3B8" style={{ flexShrink: 0, marginTop: 2 }} />
                   {(course.tags as string[]).map(tag => (
-                    <span key={tag} style={{ fontSize: 12, fontWeight: 500, color: '#475569', backgroundColor: 'var(--color-surface-2)', borderRadius: 9999, padding: '2px 10px' }}>
+                    <span key={tag} style={{ fontSize: 12, fontWeight: 500, color: 'var(--color-text-secondary)', backgroundColor: 'var(--color-surface-2)', borderRadius: 9999, padding: '2px 10px' }}>
                       {tag}
                     </span>
                   ))}

@@ -57,7 +57,7 @@ export function CourseCard({ course }: { course: CourseCardCourse }) {
               padding: '3px 10px',
               fontSize: 11,
               fontWeight: 600,
-              color: '#3730A3',
+              color: 'var(--color-primary-on-tint)',
             }}
           >
             {course.category}

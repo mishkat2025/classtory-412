@@ -11,9 +11,9 @@ interface AdminUserTableProps {
 }
 
 const roleBadge: Record<UserRole, { bg: string; color: string }> = {
-  student: { bg: '#DBEAFE', color: '#1E40AF' },
-  teacher: { bg: 'var(--color-success-light)', color: '#065F46' },
-  admin:   { bg: 'var(--color-primary-light)', color: '#3730A3' },
+  student: { bg: '#DBEAFE', color: 'var(--color-info-on-tint)' },
+  teacher: { bg: 'var(--color-success-light)', color: 'var(--color-success-on-tint)' },
+  admin:   { bg: 'var(--color-primary-light)', color: 'var(--color-primary-on-tint)' },
 }
 
 export function AdminUserTable({ initialUsers }: AdminUserTableProps) {

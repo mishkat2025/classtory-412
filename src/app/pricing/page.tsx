@@ -56,7 +56,7 @@ export default function PricingPage() {
               <div style={{ padding: '24px 28px' }}>
                 <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px' }}>
                   {plan.features.map(f => (
-                    <li key={f} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10, fontSize: 13, color: '#475569' }}>
+                    <li key={f} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10, fontSize: 13, color: 'var(--color-text-secondary)' }}>
                       <span style={{ width: 18, height: 18, borderRadius: '50%', backgroundColor: plan.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 10, color: plan.color, fontWeight: 700 }}>✓</span>
                       {f}
                     </li>
