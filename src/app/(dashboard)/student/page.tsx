@@ -13,7 +13,8 @@ import { StatCard } from '@/components/dashboard/StatCard'
 import { ClassroomCard } from '@/components/dashboard/ClassroomCard'
 import { AssignmentItem } from '@/components/dashboard/AssignmentItem'
 import { RecommendationCard } from '@/components/dashboard/RecommendationCard'
-import type { Profile } from '@/lib/types'
+import { ScheduleView } from '@/components/dashboard/ScheduleView'
+import type { Profile, ScheduleItem } from '@/lib/types'
 
 /* ─── Local types for joined Supabase queries ─────────────────── */
 
@@ -109,6 +110,19 @@ export default async function StudentDashboard() {
 
   const enrollments = (enrollmentData ?? []) as EnrollmentRow[]
   const classroomIds = enrollments.map(e => e.classroom_id)
+
+  /* Upcoming schedule items */
+  let scheduleItems: ScheduleItem[] = []
+  if (classroomIds.length > 0) {
+    const { data: scheduleData } = await supabase
+      .from('schedule_items')
+      .select('*, classroom:classrooms(name)')
+      .in('classroom_id', classroomIds)
+      .gte('event_date', new Date().toISOString())
+      .order('event_date', { ascending: true })
+      .limit(20)
+    scheduleItems = (scheduleData ?? []) as ScheduleItem[]
+  }
 
   /* Upcoming assignments (due in the future, ordered by urgency) */
   let upcomingAssignments: AssignmentRow[] = []
@@ -311,6 +325,9 @@ export default async function StudentDashboard() {
           iconColor="#2563EB"
         />
       </div>
+
+      {/* ── Upcoming Schedule ───────────────────────────────────── */}
+      <ScheduleView items={scheduleItems} />
 
       {/* ── My Classrooms ──────────────────────────────────────── */}
       <section style={{ marginBottom: 32 }}>

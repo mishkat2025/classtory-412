@@ -7,6 +7,7 @@ import { createClient } from '@/lib/supabase/server'
 import { StatCard } from '@/components/dashboard/StatCard'
 import { CreateClassroomButton } from './CreateClassroomButton'
 import { CreateCourseButton } from './CreateCourseButton'
+import { ScheduleManager } from '@/components/dashboard/ScheduleManager'
 import type { Profile } from '@/lib/types'
 
 interface CourseRow {
@@ -263,6 +264,14 @@ export default async function TeacherDashboard() {
             )}
           </div>
         </section>
+      </div>
+
+      {/* ── Schedule ─────────────────────────────────────────────── */}
+      <div style={{ marginTop: 32 }}>
+        <ScheduleManager
+          teacherId={user.id}
+          classrooms={classroomsWithCount.map(c => ({ id: c.id, name: c.name }))}
+        />
       </div>
     </div>
   )

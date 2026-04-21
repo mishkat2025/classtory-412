@@ -114,3 +114,17 @@ export interface Grade {
   feedback?: string
   submitted: boolean
 }
+
+export type ScheduleItemType = 'exam' | 'assignment' | 'class' | 'custom'
+
+export interface ScheduleItem {
+  id: string
+  classroom_id: string | null
+  teacher_id: string
+  title: string
+  description: string
+  event_date: string
+  type: ScheduleItemType
+  created_at: string
+  classroom?: { name: string } | null
+}
