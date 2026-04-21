@@ -6,17 +6,11 @@ import {
   GraduationCap, Layers, BarChart3,
 } from 'lucide-react'
 import { CourseCard } from '@/components/courses/CourseCard'
-import { ThemeToggle } from '@/components/shared/ThemeToggle'
+import { PublicNavbar } from '@/components/layout/PublicNavbar'
 import type { CourseCardCourse } from '@/components/courses/CourseCard'
 
 export default async function LandingPage() {
   const supabase = await createClient()
-
-  const { data: { user } } = await supabase.auth.getUser()
-  const { data: profile } = user
-    ? await supabase.from('profiles').select('role').eq('id', user.id).single()
-    : { data: null }
-  const dashboardHref = profile?.role === 'teacher' ? '/teacher' : profile?.role === 'admin' ? '/admin' : '/student'
 
   const [
     { data: featuredCourses },
@@ -40,45 +34,10 @@ export default async function LandingPage() {
     <div style={{ backgroundColor: 'var(--color-bg)', minHeight: '100vh', fontFamily: "'Inter', sans-serif" }}>
 
       {/* ── NAVBAR ─────────────────────────────────────────────── */}
-      <nav style={{ backgroundColor: 'var(--color-surface)', borderBottom: '1px solid var(--color-border)', position: 'sticky', top: 0, zIndex: 50 }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 64 }}>
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-            <div style={{ width: 36, height: 36, backgroundColor: '#4F46E5', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <BookOpen size={20} color="white" />
-            </div>
-            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 20, color: 'var(--color-text-primary)' }}>Classtory</span>
-          </Link>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
-            <Link href="/courses" style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-text-secondary)', textDecoration: 'none' }}>Courses</Link>
-            <Link href="/auth/signup" style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-text-secondary)', textDecoration: 'none' }}>For Teachers</Link>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <ThemeToggle variant="navbar" />
-            {user ? (
-              <Link
-                href={dashboardHref}
-                style={{ fontSize: 14, fontWeight: 600, color: '#FFFFFF', backgroundColor: '#4F46E5', borderRadius: 8, padding: '8px 18px', textDecoration: 'none' }}
-              >
-                Go to Dashboard
-              </Link>
-            ) : (
-              <>
-                <Link href="/auth/login" style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-text-secondary)', textDecoration: 'none', padding: '8px 16px' }}>
-                  Log in
-                </Link>
-                <Link
-                  href="/auth/signup"
-                  style={{ fontSize: 14, fontWeight: 600, color: '#FFFFFF', backgroundColor: '#4F46E5', borderRadius: 8, padding: '8px 18px', textDecoration: 'none' }}
-                >
-                  Get started
-                </Link>
-              </>
-            )}
-          </div>
-        </div>
-      </nav>
+      <PublicNavbar links={[
+        { href: '/courses', label: 'Courses' },
+        { href: '/for-teachers', label: 'For Teachers' },
+      ]} />
 
       {/* ── HERO ───────────────────────────────────────────────── */}
       <section className="hero-section" style={{

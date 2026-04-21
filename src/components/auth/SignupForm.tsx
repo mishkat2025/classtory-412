@@ -58,17 +58,16 @@ export function SignupForm() {
       return
     }
 
-    const { error: profileError } = await supabase.from('profiles').insert({
+    const { error: profileError } = await supabase.from('profiles').upsert({
       id: user.id,
       full_name: values.full_name,
       email: values.email,
       role: values.role as UserRole,
-    })
+    }, { onConflict: 'id' })
 
     if (profileError) {
-      // Profile insert failed — log for debugging but don't block the user.
-      // The profile will be created lazily on first dashboard load via upsert.
-      console.error('[SignupForm] Profile insert failed:', profileError.message)
+      // Profile upsert failed — log for debugging but don't block the user.
+      console.error('[SignupForm] Profile upsert failed:', profileError.message)
     }
 
     toast.success('Account created! Welcome to Classtory.')

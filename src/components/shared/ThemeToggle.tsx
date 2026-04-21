@@ -25,13 +25,16 @@ export function ThemeToggle({ compact = false, variant = 'sidebar', style }: The
 
   function toggle() {
     const html = document.documentElement
+    const ONE_YEAR = 60 * 60 * 24 * 365
     if (html.classList.contains('dark')) {
       html.classList.remove('dark')
       localStorage.setItem('theme', 'light')
+      document.cookie = `theme=light; path=/; max-age=${ONE_YEAR}; SameSite=Lax`
       setIsDark(false)
     } else {
       html.classList.add('dark')
       localStorage.setItem('theme', 'dark')
+      document.cookie = `theme=dark; path=/; max-age=${ONE_YEAR}; SameSite=Lax`
       setIsDark(true)
     }
   }

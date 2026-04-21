@@ -70,16 +70,17 @@ export default function SignupPage() {
         return
       }
 
-      const { error: profileError } = await supabase.from('profiles').insert({
+      const { error: profileError } = await supabase.from('profiles').upsert({
         id: user.id,
         full_name: values.full_name,
         email: values.email,
         role: values.role as UserRole,
-      })
+      }, { onConflict: 'id' })
 
       if (profileError) {
-        toast.error('Account created but profile setup failed. Please contact support.')
-        return
+        // Profile upsert failed — log for debugging but don't block the user.
+        // The DB trigger or dashboard lazy-upsert will handle it.
+        console.error('[Signup] Profile upsert failed:', profileError.message)
       }
 
       toast.success('Account created! Welcome to Classtory.')
