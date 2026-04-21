@@ -1,36 +1,150 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+﻿# Classtory
 
-## Getting Started
+A premium education platform that combines a public course marketplace (Udemy-style) with a private classroom system (Google Classroom-style).
 
-First, run the development server:
+## Tech Stack
 
-```bash
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router, TypeScript) |
+| Database | Supabase (PostgreSQL + Auth + Storage + RLS) |
+| Styling | Tailwind CSS v4 + shadcn/ui |
+| Icons | lucide-react |
+| Forms | react-hook-form + zod |
+| Toasts | sonner |
+| State | Zustand |
+
+---
+
+## Prerequisites
+
+- Node.js 20+
+- A Supabase project (https://supabase.com, free tier works)
+
+---
+
+## 1. Clone and Install
+
+git clone <your-repo-url>
+cd classtory
+npm install
+
+---
+
+## 2. Environment Variables
+
+Create a .env.local file in the project root:
+
+NEXT_PUBLIC_SUPABASE_URL=https://<your-project-ref>.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<your-anon-key>
+
+Find both values at: Supabase Dashboard > Settings > API
+
+---
+
+## 3. Database Setup
+
+Run these SQL files in order inside Supabase Dashboard > SQL Editor:
+
+Step 1 - Schema
+Paste and run supabase-schema.sql
+This creates all tables, indexes, RLS policies, and the handle_new_user trigger.
+
+Step 2 - RLS Fix
+Paste and run supabase-rls-fix.sql
+This replaces the default policies with recursion-safe SECURITY DEFINER helper functions.
+
+NOTE: If you have existing data, do NOT run supabase-schema.sql again - it drops all tables first.
+Only run supabase-rls-fix.sql to update policies on an existing database.
+
+---
+
+## 4. Run the Development Server
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 5. Supabase Storage Buckets
 
-## Learn More
+Create these buckets in Supabase Dashboard > Storage:
 
-To learn more about Next.js, take a look at the following resources:
+  avatars          (public)   - User profile pictures
+  materials        (private)  - Classroom file uploads
+  course-thumbnails (public)  - Course cover images
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 6. Admin Panel
 
-## Deploy on Vercel
+A standalone Node.js admin panel runs separately from the Next.js app.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+npm run admin
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Opens http://localhost:9999 automatically.
+
+First run: Enter your Supabase service role key when prompted.
+Find it at: Supabase Dashboard > Settings > API > service_role secret
+
+The key is saved to admin-panel.config.json (gitignored - never commit it).
+
+---
+
+## 7. User Roles
+
+  student  - Browse courses, join classrooms via code, submit assignments, view own grades
+  teacher  - Create classrooms and courses, manage assignments, grade submissions, take attendance
+  admin    - Everything above plus user management via the admin panel
+
+To make yourself an admin: open the Admin Panel, find your account in the Users table, change role to admin.
+
+---
+
+## 8. Key Pages
+
+  /                         Landing page
+  /courses                  Course marketplace
+  /courses/[id]             Course detail and enroll
+  /auth/login               Login
+  /auth/signup              Sign up (choose role)
+  /student                  Student dashboard
+  /teacher                  Teacher dashboard
+  /admin                    Admin dashboard
+  /classroom/[id]           Classroom - Announcements, Assignments, Materials, Students
+  /classroom/[id]/grades    Gradebook
+  /classroom/[id]/attendance  Attendance sheet
+
+---
+
+## 9. Deploy to Vercel
+
+npm i -g vercel
+vercel
+
+Add these environment variables in Vercel Dashboard > Project > Settings > Environment Variables:
+  NEXT_PUBLIC_SUPABASE_URL
+  NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+---
+
+## 10. Project Structure
+
+src/
+  app/               Next.js App Router pages
+    (auth)/          Login and signup routes
+    (dashboard)/     Role-based dashboards (student, teacher, admin)
+    classroom/[id]/  Classroom pages
+    courses/         Marketplace pages
+  components/
+    auth/            Login and signup forms
+    classroom/       Tabs, gradebook, attendance, announcements
+    dashboard/       Stat cards, classroom cards
+    layout/          Sidebar, navbar
+    shared/          File upload, notifications, role guard
+  lib/
+    supabase/        Browser and server Supabase clients
+    types.ts         Shared TypeScript interfaces
+    utils/           Class code generator, CSV export, date formatting
+  proxy.ts           Route protection (Next.js 16 middleware replacement)
