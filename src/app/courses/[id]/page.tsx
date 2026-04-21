@@ -167,27 +167,8 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ i
                 courseName={course.title}
                 isAuthenticated={!!user}
                 isEnrolled={isEnrolled}
+                linkedClassroomId={linkedClassroomId}
               />
-
-              {/* Course Room button — shown once enrolled */}
-              {isEnrolled && linkedClassroomId && (
-                <Link
-                  href={`/classroom/${linkedClassroomId}`}
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, height: 44, marginTop: 10, backgroundColor: '#1E1B4B', color: '#FFFFFF', borderRadius: 10, textDecoration: 'none', fontSize: 14, fontWeight: 600 }}
-                >
-                  Go to Course Room →
-                </Link>
-              )}
-
-              {/* Course Room button — shown once enrolled */}
-              {isEnrolled && linkedClassroomId && (
-                <Link
-                  href={`/classroom/${linkedClassroomId}`}
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, height: 44, marginTop: 10, backgroundColor: '#1E1B4B', color: '#FFFFFF', borderRadius: 10, textDecoration: 'none', fontSize: 14, fontWeight: 600 }}
-                >
-                  Go to Course Room →
-                </Link>
-              )}
 
               <div style={{ marginTop: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {[
