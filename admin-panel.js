@@ -175,6 +175,31 @@ const HTML = `<!DOCTYPE html>
         </table>
       </div>
     </div>
+
+    <!-- Courses table -->
+    <div class="card">
+      <div class="card-header">
+        <h3>All Courses</h3>
+        <span id="course-count" style="font-size:12px;color:#94A3B8"></span>
+      </div>
+      <div id="courses-loading"><div id="loading">Loading courses...</div></div>
+      <div id="courses-table" style="display:none">
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Instructor</th>
+              <th>Price</th>
+              <th>Students</th>
+              <th>Created</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="courses-tbody"></tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -244,6 +269,7 @@ function clearKey() {
 async function loadAll() {
   loadUsers()
   loadClassrooms()
+  loadCourses()
   loadStats()
 }
 
@@ -316,6 +342,39 @@ async function loadClassrooms() {
 
   document.getElementById('classrooms-loading').style.display = 'none'
   document.getElementById('classrooms-table').style.display = 'block'
+}
+
+async function loadCourses() {
+  document.getElementById('courses-loading').style.display = 'block'
+  document.getElementById('courses-table').style.display = 'none'
+  const { data } = await supabase('courses?select=*,instructor:profiles(full_name,email)&order=created_at.desc')
+  const courses = Array.isArray(data) ? data : []
+  document.getElementById('course-count').textContent = courses.length + ' courses'
+
+  const tbody = document.getElementById('courses-tbody')
+  tbody.innerHTML = courses.map(c => \`
+    <tr>
+      <td style="font-weight:500">\${c.title}</td>
+      <td style="color:#64748B">\${c.category || '—'}</td>
+      <td>\${c.instructor?.full_name || '—'}</td>
+      <td>\${c.price === 0 ? '<span style="color:#059669;font-weight:600">Free</span>' : '$' + Number(c.price).toFixed(2)}</td>
+      <td style="color:#64748B">\${c.student_count ?? 0}</td>
+      <td style="color:#94A3B8;font-size:12px">\${new Date(c.created_at).toLocaleDateString()}</td>
+      <td>
+        <button class="btn btn-sm btn-danger" onclick="deleteCourse('\${c.id}', '\${c.title.replace(/'/g,'&apos;')}')">Delete</button>
+      </td>
+    </tr>
+  \`).join('')
+
+  document.getElementById('courses-loading').style.display = 'none'
+  document.getElementById('courses-table').style.display = 'block'
+}
+
+async function deleteCourse(id, title) {
+  if (!confirm('Delete course "' + title + '"? This cannot be undone.')) return
+  const { ok } = await supabase(\`courses?id=eq.\${id}\`, { method: 'DELETE', prefer: 'return=minimal' })
+  if (ok) { showToast('Course deleted', '#059669'); loadCourses(); loadStats() }
+  else showToast('Failed to delete course', '#EF4444')
 }
 
 async function changeRole(userId, newRole) {

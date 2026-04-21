@@ -100,15 +100,15 @@ export default async function AssignmentPage({
       {/* Back */}
       <Link
         href={`/classroom/${classroomId}`}
-        style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: '#64748B', textDecoration: 'none', fontWeight: 500, marginBottom: 24 }}
+        style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--color-text-secondary)', textDecoration: 'none', fontWeight: 500, marginBottom: 24 }}
       >
         <ArrowLeft size={14} />
         Back to {classroom.name}
       </Link>
 
       {/* Header */}
-      <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '24px 28px', marginBottom: 20, boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
-        <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: '#0F172A', margin: '0 0 16px 0', letterSpacing: '-0.02em' }}>
+      <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '24px 28px', marginBottom: 20, boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+        <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: 'var(--color-text-primary)', margin: '0 0 16px 0', letterSpacing: '-0.02em' }}>
           {assignment.title}
         </h1>
 
@@ -121,7 +121,7 @@ export default async function AssignmentPage({
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <Award size={14} color="#64748B" />
-            <span style={{ fontSize: 13, color: '#64748B' }}>{assignment.max_points} points</span>
+            <span style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>{assignment.max_points} points</span>
           </div>
           <span style={{
             fontSize: 12,
@@ -136,12 +136,12 @@ export default async function AssignmentPage({
         </div>
 
         {/* Description */}
-        <div style={{ backgroundColor: '#F8F9FC', borderRadius: 10, padding: '16px 20px', border: '1px solid #E2E8F0' }}>
+        <div style={{ backgroundColor: 'var(--color-bg)', borderRadius: 10, padding: '16px 20px', border: '1px solid var(--color-border)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
             <FileText size={14} color="#4F46E5" />
             <span style={{ fontSize: 12, fontWeight: 600, color: '#4F46E5', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Instructions</span>
           </div>
-          <p style={{ fontSize: 14, color: '#475569', lineHeight: 1.75, margin: 0, whiteSpace: 'pre-wrap' }}>
+          <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', lineHeight: 1.75, margin: 0, whiteSpace: 'pre-wrap' }}>
             {assignment.description}
           </p>
         </div>
@@ -161,13 +161,13 @@ export default async function AssignmentPage({
         <div>
           {mySubmission?.status === 'graded' ? (
             /* Graded — show result */
-            <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '24px 28px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+            <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '24px 28px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
                 <CheckCircle2 size={20} color="#10B981" />
-                <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: '#0F172A', margin: 0 }}>Your Grade</h2>
+                <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)', margin: 0 }}>Your Grade</h2>
               </div>
               <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', marginBottom: mySubmission.feedback ? 16 : 0 }}>
-                <div style={{ backgroundColor: '#D1FAE5', borderRadius: 10, padding: '12px 20px', textAlign: 'center' }}>
+                <div style={{ backgroundColor: 'var(--color-success-light)', borderRadius: 10, padding: '12px 20px', textAlign: 'center' }}>
                   <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 28, fontWeight: 800, color: '#059669', margin: '0 0 2px 0' }}>
                     {mySubmission.grade}/{assignment.max_points}
                   </p>
@@ -178,31 +178,31 @@ export default async function AssignmentPage({
               </div>
               {mySubmission.feedback && (
                 <div>
-                  <p style={{ fontSize: 12, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Feedback</p>
-                  <p style={{ fontSize: 14, color: '#475569', lineHeight: 1.7, margin: 0, whiteSpace: 'pre-wrap' }}>{mySubmission.feedback}</p>
+                  <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Feedback</p>
+                  <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', lineHeight: 1.7, margin: 0, whiteSpace: 'pre-wrap' }}>{mySubmission.feedback}</p>
                 </div>
               )}
             </div>
           ) : mySubmission ? (
             /* Submitted — show confirmation */
-            <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '24px 28px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+            <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '24px 28px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-                <div style={{ width: 40, height: 40, borderRadius: 10, backgroundColor: '#D1FAE5', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: 40, height: 40, borderRadius: 10, backgroundColor: 'var(--color-success-light)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <CheckCircle2 size={20} color="#059669" />
                 </div>
                 <div>
-                  <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: '#0F172A', margin: '0 0 2px 0' }}>Submitted</h2>
-                  <p style={{ fontSize: 12, color: '#64748B', margin: 0 }}>
+                  <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 2px 0' }}>Submitted</h2>
+                  <p style={{ fontSize: 12, color: 'var(--color-text-secondary)', margin: 0 }}>
                     {new Date(mySubmission.submitted_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}
                   </p>
                 </div>
               </div>
               {mySubmission.text_content && (
-                <div style={{ backgroundColor: '#F8F9FC', borderRadius: 8, padding: '12px 16px', border: '1px solid #E2E8F0' }}>
-                  <p style={{ fontSize: 14, color: '#475569', margin: 0, lineHeight: 1.7, whiteSpace: 'pre-wrap' }}>{mySubmission.text_content}</p>
+                <div style={{ backgroundColor: 'var(--color-bg)', borderRadius: 8, padding: '12px 16px', border: '1px solid var(--color-border)' }}>
+                  <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.7, whiteSpace: 'pre-wrap' }}>{mySubmission.text_content}</p>
                 </div>
               )}
-              <p style={{ fontSize: 12, color: '#94A3B8', margin: '12px 0 0 0' }}>Waiting for your teacher to grade this submission.</p>
+              <p style={{ fontSize: 12, color: 'var(--color-text-muted)', margin: '12px 0 0 0' }}>Waiting for your teacher to grade this submission.</p>
             </div>
           ) : (
             /* Not submitted */

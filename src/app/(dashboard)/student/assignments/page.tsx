@@ -32,23 +32,23 @@ function formatDue(iso: string): { label: string; color: string; bg: string; urg
   const diffMs = due.getTime() - now.getTime()
   const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24))
 
-  if (diffDays < 0) return { label: 'Overdue', color: '#991B1B', bg: '#FEE2E2', urgent: true }
-  if (diffDays === 0) return { label: 'Due today', color: '#92400E', bg: '#FEF3C7', urgent: true }
-  if (diffDays === 1) return { label: 'Due tomorrow', color: '#92400E', bg: '#FEF3C7', urgent: true }
-  if (diffDays <= 7) return { label: `${diffDays}d left`, color: '#92400E', bg: '#FEF3C7', urgent: false }
+  if (diffDays < 0) return { label: 'Overdue', color: 'var(--color-danger-on-tint)', bg: 'var(--color-danger-light)', urgent: true }
+  if (diffDays === 0) return { label: 'Due today', color: 'var(--color-warning-on-tint)', bg: 'var(--color-warning-light)', urgent: true }
+  if (diffDays === 1) return { label: 'Due tomorrow', color: 'var(--color-warning-on-tint)', bg: 'var(--color-warning-light)', urgent: true }
+  if (diffDays <= 7) return { label: `${diffDays}d left`, color: 'var(--color-warning-on-tint)', bg: 'var(--color-warning-light)', urgent: false }
   return {
     label: due.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-    color: '#475569',
-    bg: '#F1F5F9',
+    color: 'var(--color-text-secondary)',
+    bg: 'var(--color-surface-2)',
     urgent: false,
   }
 }
 
 const STATUS_META = {
-  pending:   { label: 'Pending',   bg: '#FEF3C7', color: '#92400E', border: '#F59E0B' },
-  submitted: { label: 'Submitted', bg: '#DBEAFE', color: '#1E40AF', border: '#3B82F6' },
-  graded:    { label: 'Graded',    bg: '#D1FAE5', color: '#065F46', border: '#10B981' },
-  overdue:   { label: 'Overdue',   bg: '#FEE2E2', color: '#991B1B', border: '#EF4444' },
+  pending:   { label: 'Pending',   bg: 'var(--color-warning-light)', color: 'var(--color-warning-on-tint)', border: '#F59E0B' },
+  submitted: { label: 'Submitted', bg: '#DBEAFE', color: 'var(--color-info-on-tint)', border: '#3B82F6' },
+  graded:    { label: 'Graded',    bg: 'var(--color-success-light)', color: 'var(--color-success-on-tint)', border: '#10B981' },
+  overdue:   { label: 'Overdue',   bg: 'var(--color-danger-light)', color: 'var(--color-danger-on-tint)', border: '#EF4444' },
 }
 
 export default async function StudentAssignmentsPage() {
@@ -56,7 +56,13 @@ export default async function StudentAssignmentsPage() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/auth/login')
 
-  const { data: profileData } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+  let { data: profileData } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+  if (!profileData) {
+    const meta = user.user_metadata as { full_name?: string; role?: string } | undefined
+    await supabase.from('profiles').upsert({ id: user.id, full_name: meta?.full_name ?? user.email ?? 'New User', email: user.email ?? '', role: (meta?.role ?? 'student') as import('@/lib/types').UserRole })
+    const { data: retried } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+    profileData = retried
+  }
   if (!profileData) redirect('/auth/login')
   const profile = profileData as Profile
   if (profile.role !== 'student') redirect(`/${profile.role}`)
@@ -117,14 +123,14 @@ export default async function StudentAssignmentsPage() {
       {/* ── Header ── */}
       <div style={{ marginBottom: 28 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
-          <div style={{ width: 36, height: 36, borderRadius: 10, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: 36, height: 36, borderRadius: 10, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <ClipboardList size={18} color="#4F46E5" />
           </div>
-          <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: '#0F172A', margin: 0, letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: 'var(--color-text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
             My Assignments
           </h1>
         </div>
-        <p style={{ fontSize: 14, color: '#64748B', margin: '0 0 0 46px' }}>
+        <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '0 0 0 46px' }}>
           All assignments across your enrolled classrooms
         </p>
       </div>
@@ -132,11 +138,11 @@ export default async function StudentAssignmentsPage() {
       {/* ── Summary bar ── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 12, marginBottom: 32 }}>
         {[
-          { label: 'Total',     value: totalCount,   bg: '#EEF2FF', color: '#3730A3' },
-          { label: 'Pending',   value: pending.length,  bg: '#FEF3C7', color: '#92400E' },
-          { label: 'Overdue',   value: overdue.length,  bg: '#FEE2E2', color: '#991B1B' },
-          { label: 'Submitted', value: submitted.length, bg: '#DBEAFE', color: '#1E40AF' },
-          { label: 'Graded',    value: graded.length,   bg: '#D1FAE5', color: '#065F46' },
+          { label: 'Total',     value: totalCount,   bg: 'var(--color-primary-light)', color: 'var(--color-primary-on-tint)' },
+          { label: 'Pending',   value: pending.length,  bg: 'var(--color-warning-light)', color: 'var(--color-warning-on-tint)' },
+          { label: 'Overdue',   value: overdue.length,  bg: 'var(--color-danger-light)', color: 'var(--color-danger-on-tint)' },
+          { label: 'Submitted', value: submitted.length, bg: '#DBEAFE', color: 'var(--color-info-on-tint)' },
+          { label: 'Graded',    value: graded.length,   bg: 'var(--color-success-light)', color: 'var(--color-success-on-tint)' },
         ].map(({ label, value, bg, color }) => (
           <div key={label} style={{ backgroundColor: bg, borderRadius: 10, padding: '12px 16px' }}>
             <div style={{ fontSize: 24, fontWeight: 700, color, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{value}</div>
@@ -217,8 +223,8 @@ export default async function StudentAssignmentsPage() {
           {pendingCount === 0 && doneCount > 0 && (
             <div style={{ textAlign: 'center', padding: '20px 0' }}>
               <CheckCircle2 size={28} color="#10B981" style={{ display: 'block', margin: '0 auto 8px' }} />
-              <p style={{ fontSize: 14, fontWeight: 600, color: '#065F46', margin: 0 }}>You&apos;re all caught up!</p>
-              <p style={{ fontSize: 13, color: '#94A3B8', margin: '4px 0 0' }}>No pending or overdue assignments.</p>
+              <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--color-success-on-tint)', margin: 0 }}>You&apos;re all caught up!</p>
+              <p style={{ fontSize: 13, color: 'var(--color-text-muted)', margin: '4px 0 0' }}>No pending or overdue assignments.</p>
             </div>
           )}
         </div>
@@ -251,7 +257,7 @@ function AssignmentGroup({
       {/* Group header */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
         {icon}
-        <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, fontWeight: 700, color: '#0F172A', margin: 0 }}>
+        <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, fontWeight: 700, color: 'var(--color-text-primary)', margin: 0 }}>
           {title}
         </h2>
         <span style={{ fontSize: 12, fontWeight: 600, color: badgeColor, backgroundColor: badgeBg, borderRadius: 9999, padding: '1px 8px' }}>
@@ -310,12 +316,12 @@ function EmptyState({
   action?: React.ReactNode
 }) {
   return (
-    <div style={{ backgroundColor: '#FFFFFF', border: '2px dashed #E2E8F0', borderRadius: 14, padding: '56px 24px', textAlign: 'center' }}>
-      <div style={{ width: 60, height: 60, borderRadius: 16, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+    <div style={{ backgroundColor: 'var(--color-surface)', border: '2px dashed var(--color-border)', borderRadius: 14, padding: '56px 24px', textAlign: 'center' }}>
+      <div style={{ width: 60, height: 60, borderRadius: 16, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
         {icon}
       </div>
-      <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: '#0F172A', margin: '0 0 8px 0' }}>{title}</h3>
-      <p style={{ fontSize: 14, color: '#64748B', margin: '0 0 20px 0' }}>{description}</p>
+      <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 8px 0' }}>{title}</h3>
+      <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '0 0 20px 0' }}>{description}</p>
       {action}
     </div>
   )

@@ -42,7 +42,20 @@ export default async function TeacherDashboard() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/auth/login')
 
-  const { data: profileData } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+  let { data: profileData } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+
+  if (!profileData) {
+    const meta = user.user_metadata as { full_name?: string; role?: string } | undefined
+    await supabase.from('profiles').upsert({
+      id: user.id,
+      full_name: meta?.full_name ?? user.email ?? 'New User',
+      email: user.email ?? '',
+      role: (meta?.role ?? 'teacher') as import('@/lib/types').UserRole,
+    })
+    const { data: retried } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+    profileData = retried
+  }
+
   if (!profileData) redirect('/auth/login')
   const profile = profileData as Profile
   if (profile.role !== 'teacher') redirect(`/${profile.role}`)
@@ -112,13 +125,14 @@ export default async function TeacherDashboard() {
 
   return (
     <div style={{ padding: '28px 28px 40px', maxWidth: 1200, width: '100%' }}>
+      <style>{`.grading-row:hover { background-color: var(--color-surface-2); }`}</style>
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 28, gap: 16, flexWrap: 'wrap' }}>
         <div>
-          <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 26, fontWeight: 800, color: '#0F172A', margin: 0, letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 26, fontWeight: 800, color: 'var(--color-text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
             {greeting}, {profile.full_name.split(' ')[0]} 👋
           </h1>
-          <p style={{ fontSize: 14, color: '#64748B', margin: '5px 0 0 0' }}>
+          <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '5px 0 0 0' }}>
             {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
         </div>
@@ -130,10 +144,10 @@ export default async function TeacherDashboard() {
 
       {/* Stats */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 32 }}>
-        <StatCard icon={GraduationCap} label="My Classrooms" value={classrooms.length} iconBg="#EEF2FF" iconColor="#4F46E5" />
+        <StatCard icon={GraduationCap} label="My Classrooms" value={classrooms.length} iconBg="var(--color-primary-light)" iconColor="#4F46E5" />
         <StatCard icon={Store} label="My Courses" value={myCourses.length} iconBg="#F0FDF4" iconColor="#059669" />
-        <StatCard icon={Users} label="Total Students" value={totalStudents} iconBg="#D1FAE5" iconColor="#059669" />
-        <StatCard icon={ClipboardList} label="Assignments" value={totalAssignments} iconBg="#FEF3C7" iconColor="#D97706" />
+        <StatCard icon={Users} label="Total Students" value={totalStudents} iconBg="var(--color-success-light)" iconColor="#059669" />
+        <StatCard icon={ClipboardList} label="Assignments" value={totalAssignments} iconBg="var(--color-warning-light)" iconColor="#D97706" />
         <StatCard icon={Clock} label="Pending Grading" value={pendingSubmissions.length} iconBg="#FEE2E2" iconColor="#DC2626" />
       </div>
 
@@ -147,18 +161,18 @@ export default async function TeacherDashboard() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 14 }}>
             {myCourses.map(course => (
               <Link key={course.id} href={`/courses/${course.id}`} style={{ textDecoration: 'none' }}>
-                <div className="card-hover" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '16px 20px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', height: '100%' }}>
+                <div className="card-hover" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '16px 20px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', height: '100%' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-                    <div style={{ width: 38, height: 38, borderRadius: 9, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <div style={{ width: 38, height: 38, borderRadius: 9, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <BookOpen size={18} color="#4F46E5" />
                     </div>
                     <div style={{ minWidth: 0 }}>
-                      <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 700, color: '#0F172A', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{course.title}</p>
-                      <p style={{ fontSize: 12, color: '#64748B', margin: 0 }}>{course.category}</p>
+                      <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 700, color: 'var(--color-text-primary)', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{course.title}</p>
+                      <p style={{ fontSize: 12, color: 'var(--color-text-secondary)', margin: 0 }}>{course.category}</p>
                     </div>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: 12, fontWeight: 600, color: '#059669', backgroundColor: '#D1FAE5', borderRadius: 9999, padding: '2px 10px' }}>
+                    <span style={{ fontSize: 12, fontWeight: 600, color: '#059669', backgroundColor: 'var(--color-success-light)', borderRadius: 9999, padding: '2px 10px' }}>
                       {course.student_count ?? 0} enrolled
                     </span>
                     <span style={{ fontSize: 13, fontWeight: 700, color: course.price === 0 ? '#10B981' : '#0F172A' }}>
@@ -178,14 +192,14 @@ export default async function TeacherDashboard() {
           <h2 style={sectionHeading}>My Classrooms</h2>
 
           {classroomsWithCount.length === 0 ? (
-            <div style={{ backgroundColor: '#FFFFFF', border: '2px dashed #E2E8F0', borderRadius: 14, padding: '56px 24px', textAlign: 'center' }}>
-              <div style={{ width: 56, height: 56, borderRadius: 14, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+            <div style={{ backgroundColor: 'var(--color-surface)', border: '2px dashed var(--color-border)', borderRadius: 14, padding: '56px 24px', textAlign: 'center' }}>
+              <div style={{ width: 56, height: 56, borderRadius: 14, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
                 <GraduationCap size={28} color="#4F46E5" />
               </div>
-              <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: '#0F172A', margin: '0 0 8px 0' }}>
+              <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 8px 0' }}>
                 No classrooms yet
               </h3>
-              <p style={{ fontSize: 14, color: '#64748B', margin: '0 0 20px 0' }}>
+              <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '0 0 20px 0' }}>
                 Create your first classroom and share the code with students.
               </p>
             </div>
@@ -199,25 +213,25 @@ export default async function TeacherDashboard() {
                 >
                   <div
                     className="card-hover"
-                    style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '16px 20px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}
+                    style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '16px 20px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                      <div style={{ width: 44, height: 44, borderRadius: 10, backgroundColor: cls.cover_color || '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <div style={{ width: 44, height: 44, borderRadius: 10, backgroundColor: cls.cover_color || 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                         <BookOpen size={20} color={cls.cover_color ? '#FFFFFF' : '#4F46E5'} />
                       </div>
                       <div>
-                        <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, fontWeight: 700, color: '#0F172A', margin: '0 0 3px 0' }}>{cls.name}</p>
-                        <p style={{ fontSize: 13, color: '#64748B', margin: 0 }}>{cls.subject}</p>
+                        <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 3px 0' }}>{cls.name}</p>
+                        <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', margin: 0 }}>{cls.subject}</p>
                       </div>
                     </div>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: 20, flexShrink: 0 }}>
                       <div style={{ textAlign: 'center' }}>
-                        <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: '#0F172A', margin: 0 }}>{cls.student_count}</p>
-                        <p style={{ fontSize: 11, color: '#94A3B8', margin: 0 }}>students</p>
+                        <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)', margin: 0 }}>{cls.student_count}</p>
+                        <p style={{ fontSize: 11, color: 'var(--color-text-muted)', margin: 0 }}>students</p>
                       </div>
-                      <div style={{ backgroundColor: '#F8F9FC', border: '1px solid #E2E8F0', borderRadius: 8, padding: '4px 10px', textAlign: 'center' }}>
-                        <p style={{ fontSize: 10, color: '#94A3B8', margin: '0 0 1px 0', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Code</p>
+                      <div style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: 8, padding: '4px 10px', textAlign: 'center' }}>
+                        <p style={{ fontSize: 10, color: 'var(--color-text-muted)', margin: '0 0 1px 0', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Code</p>
                         <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 13, fontWeight: 700, color: '#4F46E5', margin: 0, letterSpacing: '0.08em' }}>{cls.class_code}</p>
                       </div>
                     </div>
@@ -231,11 +245,11 @@ export default async function TeacherDashboard() {
         {/* Grading Queue */}
         <section>
           <h2 style={{ ...sectionHeading, marginBottom: 16 }}>Grading Queue</h2>
-          <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+          <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
             {pendingSubmissions.length === 0 ? (
               <div style={{ padding: '36px 24px', textAlign: 'center' }}>
                 <CheckCircle2 size={32} color="#D1FAE5" style={{ margin: '0 auto 12px', display: 'block' }} />
-                <p style={{ fontSize: 14, color: '#64748B', margin: 0 }}>All submissions graded!</p>
+                <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>All submissions graded!</p>
               </div>
             ) : (
               pendingSubmissions.map((sub, i) => (
@@ -245,17 +259,16 @@ export default async function TeacherDashboard() {
                   style={{ textDecoration: 'none', display: 'block' }}
                 >
                   <div
-                    style={{ padding: '12px 16px', borderBottom: i < pendingSubmissions.length - 1 ? '1px solid #F1F5F9' : 'none', transition: 'background-color 120ms ease' }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#F8FAFC' }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent' }}
+                    className="grading-row"
+                    style={{ padding: '12px 16px', borderBottom: i < pendingSubmissions.length - 1 ? '1px solid var(--color-border)' : 'none', transition: 'background-color 120ms ease' }}
                   >
-                    <p style={{ fontSize: 13, fontWeight: 600, color: '#0F172A', margin: '0 0 2px 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-primary)', margin: '0 0 2px 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                       {sub.student?.full_name ?? 'Student'}
                     </p>
-                    <p style={{ fontSize: 12, color: '#64748B', margin: '0 0 4px 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    <p style={{ fontSize: 12, color: 'var(--color-text-secondary)', margin: '0 0 4px 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                       {sub.assignment?.title} · {sub.assignment?.classroom?.name}
                     </p>
-                    <span style={{ fontSize: 11, fontWeight: 600, color: '#D97706', backgroundColor: '#FEF3C7', borderRadius: 9999, padding: '1px 8px' }}>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: '#D97706', backgroundColor: 'var(--color-warning-light)', borderRadius: 9999, padding: '1px 8px' }}>
                       Needs grading
                     </span>
                   </div>
@@ -281,7 +294,7 @@ const sectionHeading: React.CSSProperties = {
   fontFamily: "'Plus Jakarta Sans', sans-serif",
   fontSize: 17,
   fontWeight: 700,
-  color: '#0F172A',
+  color: 'var(--color-text-primary)',
   margin: '0 0 16px 0',
   letterSpacing: '-0.01em',
 }

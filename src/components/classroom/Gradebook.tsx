@@ -119,16 +119,16 @@ export function Gradebook({ classroomName, assignments, students, isTeacher }: G
 
   if (assignments.length === 0) {
     return (
-      <div style={{ textAlign: 'center', padding: '64px 24px', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14 }}>
-        <p style={{ fontSize: 14, color: '#94A3B8', margin: 0 }}>No assignments created yet.</p>
+      <div style={{ textAlign: 'center', padding: '64px 24px', backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14 }}>
+        <p style={{ fontSize: 14, color: 'var(--color-text-muted)', margin: 0 }}>No assignments created yet.</p>
       </div>
     )
   }
 
   if (students.length === 0) {
     return (
-      <div style={{ textAlign: 'center', padding: '64px 24px', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14 }}>
-        <p style={{ fontSize: 14, color: '#94A3B8', margin: 0 }}>No students enrolled yet.</p>
+      <div style={{ textAlign: 'center', padding: '64px 24px', backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14 }}>
+        <p style={{ fontSize: 14, color: 'var(--color-text-muted)', margin: 0 }}>No students enrolled yet.</p>
       </div>
     )
   }
@@ -145,17 +145,17 @@ export function Gradebook({ classroomName, assignments, students, isTeacher }: G
             gap: 6,
             height: 36,
             padding: '0 14px',
-            backgroundColor: '#FFFFFF',
-            color: '#0F172A',
-            border: '1px solid #E2E8F0',
+            backgroundColor: 'var(--color-surface)',
+            color: 'var(--color-text-primary)',
+            border: '1px solid var(--color-border)',
             borderRadius: 8,
             fontSize: 13,
             fontWeight: 500,
             cursor: 'pointer',
             transition: 'background-color 120ms ease',
           }}
-          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#F1F5F9' }}
-          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#FFFFFF' }}
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface-2)' }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface)' }}
         >
           <Download size={14} />
           Export CSV
@@ -163,22 +163,22 @@ export function Gradebook({ classroomName, assignments, students, isTeacher }: G
       </div>
 
       {/* Table — horizontally scrollable */}
-      <div style={{ overflowX: 'auto', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+      <div style={{ overflowX: 'auto', backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 600 }}>
           <thead>
-            <tr style={{ backgroundColor: '#F8FAFC', borderBottom: '1px solid #F1F5F9' }}>
-              <th style={{ padding: '10px 16px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap', position: 'sticky', left: 0, backgroundColor: '#F8FAFC', zIndex: 1 }}>
+            <tr style={{ backgroundColor: 'var(--color-surface-2)', borderBottom: '1px solid var(--color-border)' }}>
+              <th style={{ padding: '10px 16px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap', position: 'sticky', left: 0, backgroundColor: 'var(--color-surface-2)', zIndex: 1 }}>
                 Student
               </th>
               {assignments.map(a => (
-                <th key={a.id} style={{ padding: '10px 16px', textAlign: 'center', fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.06em', minWidth: isTeacher ? 180 : 100 }}>
+                <th key={a.id} style={{ padding: '10px 16px', textAlign: 'center', fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em', minWidth: isTeacher ? 180 : 100 }}>
                   <div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 200 }} title={a.title}>
                     {a.title}
                   </div>
-                  <div style={{ fontSize: 10, color: '#94A3B8', fontWeight: 400, textTransform: 'none' }}>/{a.max_points} pts</div>
+                  <div style={{ fontSize: 10, color: 'var(--color-text-muted)', fontWeight: 400, textTransform: 'none' }}>/{a.max_points} pts</div>
                 </th>
               ))}
-              <th style={{ padding: '10px 16px', textAlign: 'center', fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+              <th style={{ padding: '10px 16px', textAlign: 'center', fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                 Total %
               </th>
             </tr>
@@ -192,14 +192,14 @@ export function Gradebook({ classroomName, assignments, students, isTeacher }: G
               return (
                 <tr
                   key={student.student_id}
-                  style={{ borderBottom: si < students.length - 1 ? '1px solid #F1F5F9' : 'none' }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#F8FAFC' }}
+                  style={{ borderBottom: si < students.length - 1 ? '1px solid var(--color-border)' : 'none' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface-2)' }}
                   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent' }}
                 >
                   {/* Student name - sticky */}
                   <td style={{ padding: '12px 16px', position: 'sticky', left: 0, backgroundColor: 'inherit', zIndex: 1 }}>
-                    <p style={{ fontSize: 14, fontWeight: 500, color: '#0F172A', margin: '0 0 2px 0', whiteSpace: 'nowrap' }}>{student.student_name}</p>
-                    <p style={{ fontSize: 12, color: '#94A3B8', margin: 0 }}>{student.student_email}</p>
+                    <p style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-text-primary)', margin: '0 0 2px 0', whiteSpace: 'nowrap' }}>{student.student_name}</p>
+                    <p style={{ fontSize: 12, color: 'var(--color-text-muted)', margin: 0 }}>{student.student_email}</p>
                   </td>
 
                   {assignments.map(a => {
@@ -226,17 +226,17 @@ export function Gradebook({ classroomName, assignments, students, isTeacher }: G
                                 style={{
                                   width: 60,
                                   height: 30,
-                                  border: '1px solid #E2E8F0',
+                                  border: '1px solid var(--color-border)',
                                   borderRadius: 6,
                                   padding: '0 8px',
                                   fontSize: 13,
                                   fontFamily: "'Inter', sans-serif",
-                                  color: '#0F172A',
+                                  color: 'var(--color-text-primary)',
                                   outline: 'none',
                                   textAlign: 'center',
                                 }}
                                 onFocus={e => { e.currentTarget.style.borderColor = '#4F46E5'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(79,70,229,0.1)' }}
-                                onBlur={e => { e.currentTarget.style.borderColor = '#E2E8F0'; e.currentTarget.style.boxShadow = 'none' }}
+                                onBlur={e => { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none' }}
                               />
                               <button
                                 onClick={() => saveGrade(student.student_id, a.id, a.max_points)}
@@ -246,7 +246,7 @@ export function Gradebook({ classroomName, assignments, students, isTeacher }: G
                                   width: 28,
                                   height: 28,
                                   borderRadius: 6,
-                                  backgroundColor: '#EEF2FF',
+                                  backgroundColor: 'var(--color-primary-light)',
                                   border: 'none',
                                   cursor: isSaving ? 'not-allowed' : 'pointer',
                                   display: 'flex',

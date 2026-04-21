@@ -11,9 +11,9 @@ interface AdminUserTableProps {
 }
 
 const roleBadge: Record<UserRole, { bg: string; color: string }> = {
-  student: { bg: '#DBEAFE', color: '#1E40AF' },
-  teacher: { bg: '#D1FAE5', color: '#065F46' },
-  admin:   { bg: '#EEF2FF', color: '#3730A3' },
+  student: { bg: '#DBEAFE', color: 'var(--color-info-on-tint)' },
+  teacher: { bg: 'var(--color-success-light)', color: 'var(--color-success-on-tint)' },
+  admin:   { bg: 'var(--color-primary-light)', color: 'var(--color-primary-on-tint)' },
 }
 
 export function AdminUserTable({ initialUsers }: AdminUserTableProps) {
@@ -35,17 +35,17 @@ export function AdminUserTable({ initialUsers }: AdminUserTableProps) {
   }
 
   return (
-    <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+    <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
       {/* Table header */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 180px 160px 140px', padding: '0 20px', height: 40, backgroundColor: '#F8FAFC', borderBottom: '1px solid #F1F5F9', alignItems: 'center', gap: 12 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 180px 160px 140px', padding: '0 20px', height: 40, backgroundColor: 'var(--color-surface-2)', borderBottom: '1px solid var(--color-border)', alignItems: 'center', gap: 12 }}>
         {['User', 'Email', 'Joined', 'Role'].map((h, i) => (
-          <span key={i} style={{ fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{h}</span>
+          <span key={i} style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{h}</span>
         ))}
       </div>
 
       {users.length === 0 ? (
         <div style={{ padding: '40px 24px', textAlign: 'center' }}>
-          <p style={{ fontSize: 14, color: '#94A3B8', margin: 0 }}>No users found.</p>
+          <p style={{ fontSize: 14, color: 'var(--color-text-muted)', margin: 0 }}>No users found.</p>
         </div>
       ) : (
         users.map((user, i) => {
@@ -61,12 +61,12 @@ export function AdminUserTable({ initialUsers }: AdminUserTableProps) {
                 gridTemplateColumns: '1fr 180px 160px 140px',
                 padding: '0 20px',
                 height: 56,
-                borderBottom: i < users.length - 1 ? '1px solid #F1F5F9' : 'none',
+                borderBottom: i < users.length - 1 ? '1px solid var(--color-border)' : 'none',
                 alignItems: 'center',
                 gap: 12,
                 transition: 'background-color 120ms ease',
               }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = '#F8FAFC' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface-2)' }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent' }}
             >
               {/* Name */}
@@ -79,18 +79,18 @@ export function AdminUserTable({ initialUsers }: AdminUserTableProps) {
                     <span style={{ fontSize: 12, fontWeight: 600, color: '#FFFFFF' }}>{initials}</span>
                   )}
                 </div>
-                <span style={{ fontSize: 14, fontWeight: 500, color: '#0F172A', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   {user.full_name}
                 </span>
               </div>
 
               {/* Email */}
-              <span style={{ fontSize: 13, color: '#64748B', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              <span style={{ fontSize: 13, color: 'var(--color-text-secondary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                 {user.email}
               </span>
 
               {/* Joined */}
-              <span style={{ fontSize: 13, color: '#94A3B8' }}>
+              <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>
                 {new Date(user.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
               </span>
 
@@ -99,7 +99,7 @@ export function AdminUserTable({ initialUsers }: AdminUserTableProps) {
                 {isUpdating ? (
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                     <Loader2 size={14} color="#4F46E5" className="animate-spin" />
-                    <span style={{ fontSize: 12, color: '#94A3B8' }}>Updating…</span>
+                    <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>Updating…</span>
                   </div>
                 ) : (
                   <div style={{ position: 'relative', display: 'inline-block' }}>

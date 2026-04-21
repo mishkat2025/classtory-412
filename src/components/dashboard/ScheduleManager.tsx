@@ -32,10 +32,10 @@ const TYPE_LABELS: Record<ScheduleItemType, string> = {
 }
 
 const TYPE_COLORS: Record<ScheduleItemType, { bg: string; text: string }> = {
-  exam:       { bg: '#FEE2E2', text: '#991B1B' },
-  assignment: { bg: '#FEF3C7', text: '#92400E' },
-  class:      { bg: '#D1FAE5', text: '#065F46' },
-  custom:     { bg: '#EEF2FF', text: '#3730A3' },
+  exam:       { bg: 'var(--color-danger-light)', text: '#991B1B' },
+  assignment: { bg: 'var(--color-warning-light)', text: '#92400E' },
+  class:      { bg: 'var(--color-success-light)', text: '#065F46' },
+  custom:     { bg: 'var(--color-primary-light)', text: '#3730A3' },
 }
 
 const TYPE_ICONS: Record<ScheduleItemType, React.ReactNode> = {
@@ -207,10 +207,10 @@ export function ScheduleManager({ teacherId, classrooms }: ScheduleManagerProps)
       <section>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <CalendarDays size={16} color="#4F46E5" />
             </div>
-            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: '#0F172A', margin: 0, letterSpacing: '-0.01em' }}>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)', margin: 0, letterSpacing: '-0.01em' }}>
               Schedule
             </h2>
           </div>
@@ -223,25 +223,25 @@ export function ScheduleManager({ teacherId, classrooms }: ScheduleManagerProps)
           </button>
         </div>
 
-        <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+        <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
           {loading ? (
             <div style={{ padding: '36px 24px', textAlign: 'center' }}>
               <Loader2 size={24} color="#94A3B8" style={{ margin: '0 auto', display: 'block', animation: 'spin 1s linear infinite' }} />
             </div>
           ) : items.length === 0 ? (
             <div style={{ padding: '40px 24px', textAlign: 'center' }}>
-              <div style={{ width: 48, height: 48, borderRadius: 12, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>
+              <div style={{ width: 48, height: 48, borderRadius: 12, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>
                 <CalendarDays size={22} color="#4F46E5" />
               </div>
-              <p style={{ fontSize: 14, color: '#64748B', margin: '0 0 4px 0', fontWeight: 500 }}>No schedule items yet</p>
-              <p style={{ fontSize: 13, color: '#94A3B8', margin: 0 }}>Add exams, class sessions, or deadlines.</p>
+              <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '0 0 4px 0', fontWeight: 500 }}>No schedule items yet</p>
+              <p style={{ fontSize: 13, color: 'var(--color-text-muted)', margin: 0 }}>Add exams, class sessions, or deadlines.</p>
             </div>
           ) : (
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ backgroundColor: '#F8FAFC', borderBottom: '1px solid #E2E8F0' }}>
+                <tr style={{ backgroundColor: 'var(--color-surface-2)', borderBottom: '1px solid var(--color-border)' }}>
                   {['Event', 'Type', 'Classroom', 'Date & Time', ''].map(h => (
-                    <th key={h} style={{ padding: '10px 16px', fontSize: 11, fontWeight: 600, color: '#64748B', textAlign: 'left', textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>
+                    <th key={h} style={{ padding: '10px 16px', fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textAlign: 'left', textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>
                       {h}
                     </th>
                   ))}
@@ -255,14 +255,14 @@ export function ScheduleManager({ teacherId, classrooms }: ScheduleManagerProps)
                     <tr
                       key={item.id}
                       style={{
-                        borderBottom: i < items.length - 1 ? '1px solid #F1F5F9' : 'none',
+                        borderBottom: i < items.length - 1 ? '1px solid var(--color-border)' : 'none',
                         opacity: isPast ? 0.55 : 1,
                       }}
                     >
                       <td style={{ padding: '12px 16px' }}>
-                        <p style={{ fontSize: 14, fontWeight: 600, color: '#0F172A', margin: '0 0 2px 0' }}>{item.title}</p>
+                        <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--color-text-primary)', margin: '0 0 2px 0' }}>{item.title}</p>
                         {item.description && (
-                          <p style={{ fontSize: 12, color: '#94A3B8', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 260 }}>{item.description}</p>
+                          <p style={{ fontSize: 12, color: 'var(--color-text-muted)', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 260 }}>{item.description}</p>
                         )}
                       </td>
                       <td style={{ padding: '12px 16px' }}>
@@ -272,8 +272,8 @@ export function ScheduleManager({ teacherId, classrooms }: ScheduleManagerProps)
                         </span>
                       </td>
                       <td style={{ padding: '12px 16px' }}>
-                        <span style={{ fontSize: 13, color: '#475569' }}>
-                          {(item.classroom as { name: string } | null)?.name ?? <span style={{ color: '#94A3B8' }}>—</span>}
+                        <span style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>
+                          {(item.classroom as { name: string } | null)?.name ?? <span style={{ color: 'var(--color-text-muted)' }}>—</span>}
                         </span>
                       </td>
                       <td style={{ padding: '12px 16px', whiteSpace: 'nowrap' }}>
@@ -286,7 +286,7 @@ export function ScheduleManager({ teacherId, classrooms }: ScheduleManagerProps)
                           <button
                             onClick={() => openEdit(item)}
                             title="Edit"
-                            style={{ width: 30, height: 30, borderRadius: 7, border: '1px solid #E2E8F0', backgroundColor: '#FFFFFF', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                            style={{ width: 30, height: 30, borderRadius: 7, border: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                           >
                             <Pencil size={13} color="#475569" />
                           </button>
@@ -294,7 +294,7 @@ export function ScheduleManager({ teacherId, classrooms }: ScheduleManagerProps)
                             onClick={() => handleDelete(item.id)}
                             title="Delete"
                             disabled={deletingId === item.id}
-                            style={{ width: 30, height: 30, borderRadius: 7, border: '1px solid #FEE2E2', backgroundColor: '#FFF5F5', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                            style={{ width: 30, height: 30, borderRadius: 7, border: '1px solid #FEE2E2', backgroundColor: 'var(--color-danger-light)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                           >
                             {deletingId === item.id
                               ? <Loader2 size={13} color="#DC2626" style={{ animation: 'spin 1s linear infinite' }} />
@@ -318,13 +318,13 @@ export function ScheduleManager({ teacherId, classrooms }: ScheduleManagerProps)
           style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(15,23,42,0.45)', zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}
           onClick={e => { if (e.target === e.currentTarget) setModalOpen(false) }}
         >
-          <div style={{ backgroundColor: '#FFFFFF', borderRadius: 16, width: '100%', maxWidth: 520, boxShadow: '0 8px 32px rgba(0,0,0,0.16)', overflow: 'hidden' }}>
+          <div style={{ backgroundColor: 'var(--color-surface)', borderRadius: 16, width: '100%', maxWidth: 520, boxShadow: '0 8px 32px rgba(0,0,0,0.16)', overflow: 'hidden' }}>
             {/* Header */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 24px', borderBottom: '1px solid #E2E8F0' }}>
-              <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: '#0F172A', margin: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 24px', borderBottom: '1px solid var(--color-border)' }}>
+              <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)', margin: 0 }}>
                 {editing ? 'Edit Schedule Item' : 'New Schedule Item'}
               </h3>
-              <button onClick={() => setModalOpen(false)} style={{ width: 30, height: 30, borderRadius: 8, border: '1px solid #E2E8F0', backgroundColor: '#FFFFFF', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <button onClick={() => setModalOpen(false)} style={{ width: 30, height: 30, borderRadius: 8, border: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <X size={15} color="#475569" />
               </button>
             </div>
@@ -389,7 +389,7 @@ export function ScheduleManager({ teacherId, classrooms }: ScheduleManagerProps)
 
               {/* Actions */}
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, paddingTop: 4 }}>
-                <button type="button" onClick={() => setModalOpen(false)} style={{ height: 38, padding: '0 16px', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', color: '#475569', borderRadius: 8, fontSize: 14, fontWeight: 500, cursor: 'pointer' }}>
+                <button type="button" onClick={() => setModalOpen(false)} style={{ height: 38, padding: '0 16px', backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', color: 'var(--color-text-secondary)', borderRadius: 8, fontSize: 14, fontWeight: 500, cursor: 'pointer' }}>
                   Cancel
                 </button>
                 <button type="submit" disabled={isSubmitting} style={{ height: 38, padding: '0 18px', backgroundColor: '#4F46E5', border: 'none', color: '#FFFFFF', borderRadius: 8, fontSize: 14, fontWeight: 500, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 7 }}>
@@ -422,8 +422,8 @@ function inputStyle(hasError: boolean): React.CSSProperties {
     borderRadius: 8,
     padding: '0 12px',
     fontSize: 14,
-    color: '#0F172A',
-    backgroundColor: '#FFFFFF',
+    color: 'var(--color-text-primary)',
+    backgroundColor: 'var(--color-surface)',
     outline: 'none',
     boxSizing: 'border-box',
   }

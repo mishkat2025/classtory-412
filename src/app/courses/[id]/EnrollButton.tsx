@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+import Link from 'next/link'
 import { Loader2, CheckCircle2 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 
@@ -11,11 +12,13 @@ interface EnrollButtonProps {
   courseName: string
   isAuthenticated: boolean
   isEnrolled: boolean
+  linkedClassroomId?: string | null
 }
 
-export function EnrollButton({ courseId, courseName, isAuthenticated, isEnrolled: initialEnrolled }: EnrollButtonProps) {
+export function EnrollButton({ courseId, courseName, isAuthenticated, isEnrolled: initialEnrolled, linkedClassroomId }: EnrollButtonProps) {
   const router = useRouter()
   const [enrolled, setEnrolled] = useState(initialEnrolled)
+  const [classroomId, setClassroomId] = useState(linkedClassroomId ?? null)
   const [loading, setLoading] = useState(false)
 
   async function handleEnroll() {
@@ -62,6 +65,7 @@ export function EnrollButton({ courseId, courseName, isAuthenticated, isEnrolled
       if (enrollErr && enrollErr.code !== '23505') {
         console.error('Classroom enrollment error:', enrollErr)
       }
+      setClassroomId(courseData.linked_classroom_id as string)
     }
 
     setLoading(false)
@@ -71,9 +75,19 @@ export function EnrollButton({ courseId, courseName, isAuthenticated, isEnrolled
 
   if (enrolled) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, height: 44, backgroundColor: '#D1FAE5', borderRadius: 10, border: '1px solid #10B981' }}>
-        <CheckCircle2 size={18} color="#059669" />
-        <span style={{ fontSize: 15, fontWeight: 600, color: '#059669' }}>Enrolled</span>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, height: 44, backgroundColor: 'var(--color-success-light)', borderRadius: 10, border: '1px solid #10B981' }}>
+          <CheckCircle2 size={18} color="#059669" />
+          <span style={{ fontSize: 15, fontWeight: 600, color: '#059669' }}>Enrolled</span>
+        </div>
+        {classroomId && (
+          <Link
+            href={`/classroom/${classroomId}`}
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, height: 44, backgroundColor: '#1E1B4B', color: '#FFFFFF', borderRadius: 10, textDecoration: 'none', fontSize: 14, fontWeight: 600 }}
+          >
+            Go to Course Room →
+          </Link>
+        )}
       </div>
     )
   }

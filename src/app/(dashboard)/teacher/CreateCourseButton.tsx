@@ -119,12 +119,12 @@ export function CreateCourseButton({ teacherId }: CreateCourseButtonProps) {
       {open && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
           <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.45)' }} onClick={() => setOpen(false)} />
-          <div style={{ position: 'relative', width: '100%', maxWidth: 520, backgroundColor: '#FFFFFF', borderRadius: 16, padding: '28px 28px 24px', boxShadow: '0 20px 60px rgba(0,0,0,0.2)' }}>
+          <div style={{ position: 'relative', width: '100%', maxWidth: 520, backgroundColor: 'var(--color-surface)', borderRadius: 16, padding: '28px 28px 24px', boxShadow: '0 20px 60px rgba(0,0,0,0.2)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
-              <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 18, fontWeight: 700, color: '#0F172A', margin: 0 }}>
+              <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--color-text-primary)', margin: 0 }}>
                 Create Course
               </h2>
-              <button onClick={() => setOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', display: 'flex', padding: 4, borderRadius: 6 }}>
+              <button onClick={() => setOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)', display: 'flex', padding: 4, borderRadius: 6 }}>
                 <X size={18} />
               </button>
             </div>
@@ -163,12 +163,12 @@ export function CreateCourseButton({ teacherId }: CreateCourseButtonProps) {
               </div>
 
               <div>
-                <label style={labelStyle}>Tags <span style={{ color: '#94A3B8', fontWeight: 400 }}>(comma separated)</span></label>
+                <label style={labelStyle}>Tags <span style={{ color: 'var(--color-text-muted)', fontWeight: 400 }}>(comma separated)</span></label>
                 <input {...register('tags')} placeholder="e.g. beginner, math, algebra" style={inputStyle(false)} />
               </div>
 
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 8 }}>
-                <button type="button" onClick={() => { setOpen(false); reset() }} style={{ height: 38, padding: '0 16px', backgroundColor: '#FFFFFF', color: '#0F172A', border: '1px solid #E2E8F0', borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: 'pointer' }}>
+                <button type="button" onClick={() => { setOpen(false); reset() }} style={{ height: 38, padding: '0 16px', backgroundColor: 'var(--color-surface)', color: 'var(--color-text-primary)', border: '1px solid var(--color-border)', borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: 'pointer' }}>
                   Cancel
                 </button>
                 <button type="submit" disabled={isSubmitting} style={{ height: 38, padding: '0 18px', backgroundColor: '#4F46E5', color: '#FFFFFF', border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: isSubmitting ? 'not-allowed' : 'pointer', opacity: isSubmitting ? 0.7 : 1, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
@@ -184,13 +184,13 @@ export function CreateCourseButton({ teacherId }: CreateCourseButtonProps) {
   )
 }
 
-const labelStyle: React.CSSProperties = { display: 'block', fontSize: 13, fontWeight: 500, color: '#0F172A', marginBottom: 6 }
+const labelStyle: React.CSSProperties = { display: 'block', fontSize: 13, fontWeight: 500, color: 'var(--color-text-primary)', marginBottom: 6 }
 const errStyle: React.CSSProperties = { fontSize: 12, color: '#EF4444', marginTop: 4, display: 'block' }
 function inputStyle(hasError: boolean): React.CSSProperties {
   return {
     width: '100%', height: 38, border: `1px solid ${hasError ? '#EF4444' : '#E2E8F0'}`,
     borderRadius: 8, padding: '0 12px', fontSize: 14, outline: 'none',
-    fontFamily: 'inherit', backgroundColor: '#FFFFFF', color: '#0F172A',
+    fontFamily: 'inherit', backgroundColor: 'var(--color-surface)', color: 'var(--color-text-primary)',
     boxSizing: 'border-box',
   }
 }

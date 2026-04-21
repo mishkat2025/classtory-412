@@ -88,7 +88,7 @@ export function LoginForm() {
           }}
           onBlur={e => {
             if (!errors.email) {
-              e.currentTarget.style.borderColor = '#E2E8F0'
+              e.currentTarget.style.borderColor = 'var(--color-border)'
               e.currentTarget.style.boxShadow = 'none'
             }
           }}
@@ -128,7 +128,7 @@ export function LoginForm() {
             }}
             onBlur={e => {
               if (!errors.password) {
-                e.currentTarget.style.borderColor = '#E2E8F0'
+                e.currentTarget.style.borderColor = 'var(--color-border)'
                 e.currentTarget.style.boxShadow = 'none'
               }
             }}
@@ -145,7 +145,7 @@ export function LoginForm() {
               background: 'none',
               border: 'none',
               cursor: 'pointer',
-              color: '#94A3B8',
+              color: 'var(--color-text-muted)',
               display: 'flex',
               padding: 2,
             }}
@@ -189,7 +189,7 @@ export function LoginForm() {
       </button>
 
       {/* Sign up link */}
-      <p style={{ textAlign: 'center', fontSize: 14, color: '#475569', margin: 0 }}>
+      <p style={{ textAlign: 'center', fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
         Don&apos;t have an account?{' '}
         <Link
           href="/auth/signup"
@@ -205,19 +205,19 @@ export function LoginForm() {
 const labelStyle: React.CSSProperties = {
   fontSize: 13,
   fontWeight: 500,
-  color: '#0F172A',
+  color: 'var(--color-text-primary)',
 }
 
 const inputStyle: React.CSSProperties = {
   height: 38,
   width: '100%',
-  border: '1px solid #E2E8F0',
+  border: '1px solid var(--color-border)',
   borderRadius: 8,
   padding: '0 12px',
   fontSize: 14,
   fontFamily: "'Inter', sans-serif",
-  color: '#0F172A',
-  backgroundColor: '#FFFFFF',
+  color: 'var(--color-text-primary)',
+  backgroundColor: 'var(--color-surface)',
   outline: 'none',
   transition: 'border-color 150ms ease, box-shadow 150ms ease',
   boxSizing: 'border-box',

@@ -77,8 +77,8 @@ export function ClassroomTabs({
       {/* ── Classroom header ─────────────────────────────────── */}
       <div
         style={{
-          backgroundColor: '#FFFFFF',
-          borderBottom: '1px solid #E2E8F0',
+          backgroundColor: 'var(--color-surface)',
+          borderBottom: '1px solid var(--color-border)',
           position: 'sticky',
           top: 0,
           zIndex: 20,
@@ -105,7 +105,7 @@ export function ClassroomTabs({
                 alignItems: 'center',
                 gap: 5,
                 fontSize: 13,
-                color: '#64748B',
+                color: 'var(--color-text-secondary)',
                 textDecoration: 'none',
                 fontWeight: 500,
               }}
@@ -124,9 +124,9 @@ export function ClassroomTabs({
                     gap: 6,
                     height: 34,
                     padding: '0 12px',
-                    backgroundColor: '#F1F5F9',
-                    color: '#0F172A',
-                    border: '1px solid #E2E8F0',
+                    backgroundColor: 'var(--color-surface-2)',
+                    color: 'var(--color-text-primary)',
+                    border: '1px solid var(--color-border)',
                     borderRadius: 8,
                     fontSize: 13,
                     fontWeight: 500,
@@ -144,9 +144,9 @@ export function ClassroomTabs({
                     gap: 6,
                     height: 34,
                     padding: '0 12px',
-                    backgroundColor: '#F1F5F9',
-                    color: '#0F172A',
-                    border: '1px solid #E2E8F0',
+                    backgroundColor: 'var(--color-surface-2)',
+                    color: 'var(--color-text-primary)',
+                    border: '1px solid var(--color-border)',
                     borderRadius: 8,
                     fontSize: 13,
                     fontWeight: 500,
@@ -195,7 +195,7 @@ export function ClassroomTabs({
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
                   fontSize: 22,
                   fontWeight: 800,
-                  color: '#0F172A',
+                  color: 'var(--color-text-primary)',
                   margin: '0 0 4px 0',
                   letterSpacing: '-0.02em',
                   lineHeight: 1.2,
@@ -205,10 +205,10 @@ export function ClassroomTabs({
               </h1>
 
               {classroom.teacher && (
-                <p style={{ fontSize: 13, color: '#64748B', margin: 0 }}>
+                <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', margin: 0 }}>
                   by {classroom.teacher.full_name}
                   {' · '}
-                  <span style={{ color: '#94A3B8' }}>
+                  <span style={{ color: 'var(--color-text-muted)' }}>
                     {totalStudents} {totalStudents === 1 ? 'student' : 'students'}
                   </span>
                 </p>
@@ -222,8 +222,8 @@ export function ClassroomTabs({
                   display: 'flex',
                   alignItems: 'center',
                   gap: 10,
-                  backgroundColor: '#F8F9FC',
-                  border: '1px solid #E2E8F0',
+                  backgroundColor: 'var(--color-bg)',
+                  border: '1px solid var(--color-border)',
                   borderRadius: 10,
                   padding: '10px 14px',
                   flexShrink: 0,
@@ -234,7 +234,7 @@ export function ClassroomTabs({
                     style={{
                       fontSize: 10,
                       fontWeight: 600,
-                      color: '#94A3B8',
+                      color: 'var(--color-text-muted)',
                       textTransform: 'uppercase',
                       letterSpacing: '0.08em',
                       margin: '0 0 2px 0',
@@ -261,7 +261,7 @@ export function ClassroomTabs({
                     width: 32,
                     height: 32,
                     borderRadius: 8,
-                    backgroundColor: codeCopied ? '#D1FAE5' : '#EEF2FF',
+                    backgroundColor: codeCopied ? '#D1FAE5' : 'var(--color-primary-light)',
                     border: 'none',
                     cursor: 'pointer',
                     display: 'flex',
@@ -309,10 +309,10 @@ export function ClassroomTabs({
                     marginBottom: -1,
                   }}
                   onMouseEnter={e => {
-                    if (!active) (e.currentTarget as HTMLElement).style.color = '#0F172A'
+                    if (!active) (e.currentTarget as HTMLElement).style.color = 'var(--color-text-primary)'
                   }}
                   onMouseLeave={e => {
-                    if (!active) (e.currentTarget as HTMLElement).style.color = '#475569'
+                    if (!active) (e.currentTarget as HTMLElement).style.color = 'var(--color-text-secondary)'
                   }}
                 >
                   <Icon size={15} />

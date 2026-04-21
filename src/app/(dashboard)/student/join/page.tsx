@@ -20,20 +20,20 @@ export default async function JoinClassroomPage() {
     <div style={{ padding: '28px 28px 40px', maxWidth: 540 }}>
       <Link
         href="/student"
-        style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: '#64748B', textDecoration: 'none', fontWeight: 500, marginBottom: 24 }}
+        style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--color-text-secondary)', textDecoration: 'none', fontWeight: 500, marginBottom: 24 }}
       >
         <ArrowLeft size={14} />
         Back to dashboard
       </Link>
 
-      <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: '#0F172A', margin: '0 0 6px 0', letterSpacing: '-0.02em' }}>
+      <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: 'var(--color-text-primary)', margin: '0 0 6px 0', letterSpacing: '-0.02em' }}>
         Join a Classroom
       </h1>
-      <p style={{ fontSize: 14, color: '#64748B', margin: '0 0 28px 0' }}>
+      <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '0 0 28px 0' }}>
         Enter the 6-character class code from your teacher.
       </p>
 
-      <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '28px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+      <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '28px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
         <JoinClassroomForm studentId={user.id} />
       </div>
     </div>

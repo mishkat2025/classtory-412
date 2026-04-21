@@ -18,6 +18,7 @@ import {
   Settings,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
+import { ThemeToggle } from '@/components/shared/ThemeToggle'
 import type { Profile } from '@/lib/types'
 
 interface NavItem {
@@ -338,6 +339,7 @@ export function Sidebar({ profile }: SidebarProps) {
                   {profile.role}
                 </div>
               </div>
+              <ThemeToggle compact />
               <button
                 onClick={handleLogout}
                 style={{
@@ -361,6 +363,7 @@ export function Sidebar({ profile }: SidebarProps) {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
               <Avatar initials={initials} avatarUrl={profile.avatar_url} />
+              <ThemeToggle compact />
               <button
                 onClick={handleLogout}
                 style={{

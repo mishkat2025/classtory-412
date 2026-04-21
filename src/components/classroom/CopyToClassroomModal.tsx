@@ -85,23 +85,23 @@ export function CopyToClassroomModal({
       onClick={e => { if (e.target === e.currentTarget) onClose() }}
     >
       <div style={{
-        backgroundColor: '#FFFFFF', borderRadius: 16, width: '100%', maxWidth: 460,
+        backgroundColor: 'var(--color-surface)', borderRadius: 16, width: '100%', maxWidth: 460,
         boxShadow: '0 20px 48px rgba(0,0,0,0.18)', overflow: 'hidden',
       }}>
         {/* Header */}
         <div style={{ padding: '20px 24px 0', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
           <div>
-            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: '#0F172A', margin: '0 0 4px' }}>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 4px' }}>
               Copy {contentType} to another class
             </h2>
             <p style={{
-              fontSize: 12, color: '#64748B', margin: 0,
+              fontSize: 12, color: 'var(--color-text-secondary)', margin: 0,
               maxWidth: 340, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
             }}>
               {contentPreview}
             </p>
           </div>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', padding: 4, marginTop: -2 }}>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)', padding: 4, marginTop: -2 }}>
             <X size={18} />
           </button>
         </div>
@@ -109,15 +109,15 @@ export function CopyToClassroomModal({
         {/* Body */}
         <div style={{ padding: '16px 24px 0' }}>
           {loading ? (
-            <div style={{ padding: '32px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, color: '#94A3B8', fontSize: 13 }}>
+            <div style={{ padding: '32px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, color: 'var(--color-text-muted)', fontSize: 13 }}>
               <Loader2 size={16} className="animate-spin" /> Loading classrooms…
             </div>
           ) : classrooms.length === 0 ? (
             <div style={{ padding: '32px 0', textAlign: 'center' }}>
-              <div style={{ width: 44, height: 44, borderRadius: 12, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>
+              <div style={{ width: 44, height: 44, borderRadius: 12, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>
                 <BookOpen size={20} color="#A5B4FC" />
               </div>
-              <p style={{ fontSize: 13, color: '#64748B', margin: 0 }}>No other classrooms found.</p>
+              <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', margin: 0 }}>No other classrooms found.</p>
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6, maxHeight: 280, overflowY: 'auto' }}>
@@ -132,14 +132,14 @@ export function CopyToClassroomModal({
                       display: 'flex', alignItems: 'center', gap: 12,
                       padding: '10px 12px', borderRadius: 10, cursor: isDone ? 'default' : 'pointer',
                       border: `1.5px solid ${isSelected ? '#4F46E5' : '#E2E8F0'}`,
-                      backgroundColor: isDone ? '#F0FDF4' : isSelected ? '#EEF2FF' : '#FFFFFF',
+                      backgroundColor: isDone ? 'var(--color-success-light)' : isSelected ? 'var(--color-primary-light)' : 'var(--color-surface)',
                       textAlign: 'left', transition: 'all 120ms ease',
                     }}
                   >
                     <div style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: cls.cover_color, flexShrink: 0 }} />
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: 13, fontWeight: 600, color: '#0F172A', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{cls.name}</div>
-                      <div style={{ fontSize: 11, color: '#64748B' }}>{cls.subject}</div>
+                      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{cls.name}</div>
+                      <div style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>{cls.subject}</div>
                     </div>
                     {isDone ? (
                       <Check size={15} color="#10B981" />
@@ -158,12 +158,12 @@ export function CopyToClassroomModal({
         </div>
 
         {/* Footer */}
-        <div style={{ padding: '16px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid #F1F5F9', marginTop: 16 }}>
-          <span style={{ fontSize: 12, color: '#94A3B8' }}>
+        <div style={{ padding: '16px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--color-border)', marginTop: 16 }}>
+          <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>
             {selected.size > 0 ? `${selected.size} class${selected.size > 1 ? 'es' : ''} selected` : 'Select one or more'}
           </span>
           <div style={{ display: 'flex', gap: 8 }}>
-            <button onClick={onClose} style={{ height: 36, padding: '0 16px', borderRadius: 8, border: '1px solid #E2E8F0', backgroundColor: '#FFFFFF', fontSize: 13, fontWeight: 500, cursor: 'pointer', color: '#0F172A' }}>
+            <button onClick={onClose} style={{ height: 36, padding: '0 16px', borderRadius: 8, border: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface)', fontSize: 13, fontWeight: 500, cursor: 'pointer', color: 'var(--color-text-primary)' }}>
               Cancel
             </button>
             <button

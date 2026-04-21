@@ -13,21 +13,22 @@ export function StatCard({ icon: Icon, label, value, iconBg, iconColor, trend }:
   return (
     <div
       style={{
-        backgroundColor: '#FFFFFF',
-        border: '1px solid #E2E8F0',
+        backgroundColor: 'var(--color-surface)',
+        border: '1px solid var(--color-border)',
         borderRadius: 14,
         padding: 20,
-        boxShadow: '0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)',
+        boxShadow: 'var(--shadow-card)',
         display: 'flex',
         flexDirection: 'column',
         gap: 14,
+        transition: 'background-color 200ms ease, border-color 200ms ease',
       }}
     >
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
         <p
           style={{
             fontSize: 13,
-            color: '#64748B',
+            color: 'var(--color-text-secondary)',
             margin: 0,
             fontWeight: 500,
           }}
@@ -56,7 +57,7 @@ export function StatCard({ icon: Icon, label, value, iconBg, iconColor, trend }:
             fontFamily: "'Plus Jakarta Sans', sans-serif",
             fontSize: 28,
             fontWeight: 700,
-            color: '#0F172A',
+            color: 'var(--color-text-primary)',
             margin: 0,
             lineHeight: 1,
           }}
@@ -74,7 +75,7 @@ export function StatCard({ icon: Icon, label, value, iconBg, iconColor, trend }:
             >
               {trend.direction === 'up' ? '↑' : '↓'}
             </span>
-            <span style={{ fontSize: 12, color: '#94A3B8' }}>{trend.label}</span>
+            <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>{trend.label}</span>
           </div>
         )}
       </div>

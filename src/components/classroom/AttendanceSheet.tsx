@@ -36,9 +36,9 @@ interface AttendanceSheetProps {
 const STATUS_CYCLE: AttendanceStatus[] = ['present', 'absent', 'late']
 
 const S: Record<AttendanceStatus, { label: string; short: string; bg: string; color: string; border: string }> = {
-  present: { label: 'Present', short: 'P', bg: '#D1FAE5', color: '#065F46', border: '#10B981' },
-  absent:  { label: 'Absent',  short: 'A', bg: '#FEE2E2', color: '#991B1B', border: '#EF4444' },
-  late:    { label: 'Late',    short: 'L', bg: '#FEF3C7', color: '#92400E', border: '#F59E0B' },
+  present: { label: 'Present', short: 'P', bg: 'var(--color-success-light)', color: 'var(--color-success-on-tint)', border: '#10B981' },
+  absent:  { label: 'Absent',  short: 'A', bg: 'var(--color-danger-light)', color: 'var(--color-danger-on-tint)', border: '#EF4444' },
+  late:    { label: 'Late',    short: 'L', bg: 'var(--color-warning-light)', color: 'var(--color-warning-on-tint)', border: '#F59E0B' },
 }
 
 /* ─── Helpers ───────────────────────────────────────────────────── */
@@ -266,10 +266,10 @@ export function AttendanceSheet({
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 12 }}>
           {[
             { label: 'Attendance %',   value: `${pct}%`, bg: pctBg,    color: pctColor  },
-            { label: 'Present',        value: present,    bg: '#D1FAE5', color: '#065F46' },
-            { label: 'Late',           value: late,       bg: '#FEF3C7', color: '#92400E' },
-            { label: 'Absent',         value: absent,     bg: '#FEE2E2', color: '#991B1B' },
-            { label: 'Total Sessions', value: total,      bg: '#EEF2FF', color: '#3730A3' },
+            { label: 'Present',        value: present,    bg: 'var(--color-success-light)', color: 'var(--color-success-on-tint)' },
+            { label: 'Late',           value: late,       bg: 'var(--color-warning-light)', color: 'var(--color-warning-on-tint)' },
+            { label: 'Absent',         value: absent,     bg: 'var(--color-danger-light)', color: 'var(--color-danger-on-tint)' },
+            { label: 'Total Sessions', value: total,      bg: 'var(--color-primary-light)', color: 'var(--color-primary-on-tint)' },
           ].map(({ label, value, bg, color }) => (
             <div key={label} style={{ backgroundColor: bg, borderRadius: 10, padding: '12px 16px' }}>
               <div style={{ fontSize: 22, fontWeight: 700, color, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{value}</div>
@@ -279,20 +279,20 @@ export function AttendanceSheet({
         </div>
 
         {/* History list */}
-        <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
-          <div style={{ padding: '0 20px', height: 40, backgroundColor: '#F8FAFC', borderBottom: '1px solid #F1F5F9', display: 'grid', gridTemplateColumns: '1fr 110px', alignItems: 'center' }}>
-            <span style={{ fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Date</span>
-            <span style={{ fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.06em', textAlign: 'center' }}>Status</span>
+        <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+          <div style={{ padding: '0 20px', height: 40, backgroundColor: 'var(--color-surface-2)', borderBottom: '1px solid var(--color-border)', display: 'grid', gridTemplateColumns: '1fr 110px', alignItems: 'center' }}>
+            <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Date</span>
+            <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em', textAlign: 'center' }}>Status</span>
           </div>
           {sortedOwn.length === 0 ? (
             <div style={{ padding: '40px 24px', textAlign: 'center' }}>
-              <p style={{ fontSize: 14, color: '#94A3B8', margin: 0 }}>No attendance records yet.</p>
+              <p style={{ fontSize: 14, color: 'var(--color-text-muted)', margin: 0 }}>No attendance records yet.</p>
             </div>
           ) : sortedOwn.map((r, i) => {
             const cfg = S[r.status]
             return (
-              <div key={r.date} style={{ display: 'grid', gridTemplateColumns: '1fr 110px', padding: '0 20px', height: 48, borderBottom: i < sortedOwn.length - 1 ? '1px solid #F1F5F9' : 'none', alignItems: 'center' }}>
-                <span style={{ fontSize: 14, color: '#0F172A' }}>{fmtFull(r.date)}</span>
+              <div key={r.date} style={{ display: 'grid', gridTemplateColumns: '1fr 110px', padding: '0 20px', height: 48, borderBottom: i < sortedOwn.length - 1 ? '1px solid var(--color-border)' : 'none', alignItems: 'center' }}>
+                <span style={{ fontSize: 14, color: 'var(--color-text-primary)' }}>{fmtFull(r.date)}</span>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                   <span style={{ fontSize: 12, fontWeight: 600, color: cfg.color, backgroundColor: cfg.bg, border: `1px solid ${cfg.border}`, borderRadius: 9999, padding: '2px 10px' }}>
                     {cfg.label}
@@ -321,11 +321,11 @@ export function AttendanceSheet({
       {/* ── Summary cards ── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 12 }}>
         {[
-          { label: 'Sessions',        value: totalSessions,                                        bg: '#EEF2FF', color: '#3730A3' },
-          { label: 'Students',        value: students.length,                                      bg: '#EEF2FF', color: '#3730A3' },
-          { label: 'Present (total)', value: records.filter(r => r.status === 'present').length,  bg: '#D1FAE5', color: '#065F46' },
-          { label: 'Late (total)',    value: records.filter(r => r.status === 'late').length,     bg: '#FEF3C7', color: '#92400E' },
-          { label: 'Absent (total)',  value: records.filter(r => r.status === 'absent').length,   bg: '#FEE2E2', color: '#991B1B' },
+          { label: 'Sessions',        value: totalSessions,                                        bg: 'var(--color-primary-light)', color: 'var(--color-primary-on-tint)' },
+          { label: 'Students',        value: students.length,                                      bg: 'var(--color-primary-light)', color: 'var(--color-primary-on-tint)' },
+          { label: 'Present (total)', value: records.filter(r => r.status === 'present').length,  bg: 'var(--color-success-light)', color: 'var(--color-success-on-tint)' },
+          { label: 'Late (total)',    value: records.filter(r => r.status === 'late').length,     bg: 'var(--color-warning-light)', color: 'var(--color-warning-on-tint)' },
+          { label: 'Absent (total)',  value: records.filter(r => r.status === 'absent').length,   bg: 'var(--color-danger-light)', color: 'var(--color-danger-on-tint)' },
         ].map(({ label, value, bg, color }) => (
           <div key={label} style={{ backgroundColor: bg, borderRadius: 10, padding: '12px 16px' }}>
             <div style={{ fontSize: 24, fontWeight: 700, color, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{value}</div>
@@ -338,18 +338,18 @@ export function AttendanceSheet({
       <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
         {/* Legend */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1, flexWrap: 'wrap' }}>
-          <span style={{ fontSize: 12, color: '#64748B' }}>Click a cell to cycle:</span>
+          <span style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>Click a cell to cycle:</span>
           {(Object.entries(S) as [AttendanceStatus, typeof S[AttendanceStatus]][]).map(([status, cfg]) => (
             <span key={status} style={{ display: 'inline-flex', alignItems: 'center', gap: 3, fontSize: 12, color: cfg.color, backgroundColor: cfg.bg, border: `1px solid ${cfg.border}`, borderRadius: 9999, padding: '2px 8px', fontWeight: 600 }}>
               {cfg.short} = {cfg.label}
             </span>
           ))}
-          <span style={{ fontSize: 12, color: '#94A3B8' }}>→ click again to clear</span>
+          <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>→ click again to clear</span>
         </div>
 
         {/* Add Date Column control */}
         {showAddDate ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, backgroundColor: '#EEF2FF', border: '1px solid #C7D2FE', borderRadius: 10, padding: '6px 10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, backgroundColor: 'var(--color-primary-light)', border: '1px solid #C7D2FE', borderRadius: 10, padding: '6px 10px' }}>
             <Calendar size={14} color="#4F46E5" />
             <input
               type="date"
@@ -361,7 +361,7 @@ export function AttendanceSheet({
                 if (e.key === 'Enter') addDateColumn()
                 if (e.key === 'Escape') setShowAddDate(false)
               }}
-              style={{ height: 30, border: '1px solid #C7D2FE', borderRadius: 6, padding: '0 8px', fontSize: 13, color: '#0F172A', outline: 'none', backgroundColor: '#FFFFFF', fontFamily: "'Inter', sans-serif" }}
+              style={{ height: 30, border: '1px solid #C7D2FE', borderRadius: 6, padding: '0 8px', fontSize: 13, color: 'var(--color-text-primary)', outline: 'none', backgroundColor: 'var(--color-surface)', fontFamily: "'Inter', sans-serif" }}
             />
             <button
               onClick={addDateColumn}
@@ -371,7 +371,7 @@ export function AttendanceSheet({
             </button>
             <button
               onClick={() => setShowAddDate(false)}
-              style={{ height: 30, width: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 6, border: '1px solid #E2E8F0', backgroundColor: '#FFFFFF', cursor: 'pointer', flexShrink: 0 }}
+              style={{ height: 30, width: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 6, border: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface)', cursor: 'pointer', flexShrink: 0 }}
             >
               <X size={13} color="#64748B" />
             </button>
@@ -379,7 +379,7 @@ export function AttendanceSheet({
         ) : (
           <button
             onClick={() => setShowAddDate(true)}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 6, height: 34, padding: '0 14px', borderRadius: 8, border: '1px solid #4F46E5', backgroundColor: '#EEF2FF', color: '#4F46E5', fontSize: 13, fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 6, height: 34, padding: '0 14px', borderRadius: 8, border: '1px solid #4F46E5', backgroundColor: 'var(--color-primary-light)', color: '#4F46E5', fontSize: 13, fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 }}
           >
             <Plus size={14} />
             Add Date Column
@@ -388,11 +388,11 @@ export function AttendanceSheet({
       </div>
 
       {/* ── Spreadsheet table ── */}
-      <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #CBD5E1', borderRadius: 14, overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+      <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid #CBD5E1', borderRadius: 14, overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
         {students.length === 0 ? (
           <div style={{ padding: '56px 24px', textAlign: 'center' }}>
             <Calendar size={36} color="#CBD5E1" style={{ marginBottom: 12 }} />
-            <p style={{ fontSize: 15, fontWeight: 600, color: '#64748B', margin: '0 0 4px 0' }}>No students enrolled yet</p>
+            <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--color-text-secondary)', margin: '0 0 4px 0' }}>No students enrolled yet</p>
           </div>
         ) : (
           <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '65vh' }}>
@@ -414,10 +414,10 @@ export function AttendanceSheet({
                   {/* Student header — sticky left + top */}
                   <th style={{
                     position: 'sticky', left: 0, top: 0, zIndex: 4,
-                    backgroundColor: '#F1F5F9',
+                    backgroundColor: 'var(--color-surface-2)',
                     padding: '0 16px',
                     textAlign: 'left',
-                    fontSize: 11, fontWeight: 700, color: '#475569',
+                    fontSize: 11, fontWeight: 700, color: 'var(--color-text-secondary)',
                     textTransform: 'uppercase', letterSpacing: '0.06em',
                     borderBottom: '2px solid #CBD5E1',
                     borderRight: '2px solid #94A3B8',
@@ -433,11 +433,11 @@ export function AttendanceSheet({
                       colSpan={4}
                       style={{
                         position: 'sticky', top: 0, zIndex: 3,
-                        backgroundColor: '#F8FAFC', borderBottom: '2px solid #CBD5E1',
+                        backgroundColor: 'var(--color-surface-2)', borderBottom: '2px solid #CBD5E1',
                         padding: '0 20px', textAlign: 'left',
                       }}
                     >
-                      <span style={{ fontSize: 13, color: '#94A3B8', fontWeight: 400 }}>
+                      <span style={{ fontSize: 13, color: 'var(--color-text-muted)', fontWeight: 400 }}>
                         No date columns yet — click &ldquo;Add Date Column&rdquo; above to begin
                       </span>
                     </th>
@@ -448,11 +448,11 @@ export function AttendanceSheet({
                     return (
                       <th key={date} style={{
                         position: 'sticky', top: 0, zIndex: 3,
-                        backgroundColor: isToday ? '#EEF2FF' : '#F1F5F9',
+                        backgroundColor: isToday ? 'var(--color-primary-light)' : 'var(--color-surface-2)',
                         padding: '6px 4px 4px',
                         textAlign: 'center',
-                        borderBottom: '2px solid #CBD5E1',
-                        borderLeft: '1px solid #E2E8F0',
+                        borderBottom: '2px solid var(--color-border-strong)',
+                        borderLeft: '1px solid var(--color-border)',
                         verticalAlign: 'bottom',
                       }}>
                         <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, paddingTop: 10 }}>
@@ -465,8 +465,8 @@ export function AttendanceSheet({
                               position: 'absolute', top: 0, right: 0,
                               width: 16, height: 16, borderRadius: '50%',
                               border: 'none',
-                              backgroundColor: isRemoving ? '#F1F5F9' : '#FEE2E2',
-                              color: '#991B1B', cursor: 'pointer',
+                              backgroundColor: isRemoving ? 'var(--color-surface-2)' : 'var(--color-danger-light)',
+                              color: 'var(--color-danger-on-tint)', cursor: 'pointer',
                               display: 'flex', alignItems: 'center', justifyContent: 'center',
                               opacity: (removingDate && !isRemoving) ? 0.3 : 1,
                               padding: 0, lineHeight: 1,
@@ -481,13 +481,13 @@ export function AttendanceSheet({
                           <span style={{ fontSize: 12, fontWeight: 700, color: isToday ? '#4F46E5' : '#334155', lineHeight: 1 }}>
                             {fmtShort(date)}
                           </span>
-                          <span style={{ fontSize: 10, color: '#94A3B8', lineHeight: 1 }}>
+                          <span style={{ fontSize: 10, color: 'var(--color-text-muted)', lineHeight: 1 }}>
                             {fmtWeekday(date)}
                           </span>
                           <div style={{ display: 'flex', gap: 2, marginTop: 2 }}>
-                            <span style={{ fontSize: 9, color: '#065F46', backgroundColor: '#D1FAE5', borderRadius: 3, padding: '0 3px', fontWeight: 700, lineHeight: '14px' }}>{ds.p}P</span>
-                            <span style={{ fontSize: 9, color: '#991B1B', backgroundColor: '#FEE2E2', borderRadius: 3, padding: '0 3px', fontWeight: 700, lineHeight: '14px' }}>{ds.a}A</span>
-                            <span style={{ fontSize: 9, color: '#92400E', backgroundColor: '#FEF3C7', borderRadius: 3, padding: '0 3px', fontWeight: 700, lineHeight: '14px' }}>{ds.l}L</span>
+                            <span style={{ fontSize: 9, color: 'var(--color-success-on-tint)', backgroundColor: 'var(--color-success-light)', borderRadius: 3, padding: '0 3px', fontWeight: 700, lineHeight: '14px' }}>{ds.p}P</span>
+                            <span style={{ fontSize: 9, color: 'var(--color-danger-on-tint)', backgroundColor: 'var(--color-danger-light)', borderRadius: 3, padding: '0 3px', fontWeight: 700, lineHeight: '14px' }}>{ds.a}A</span>
+                            <span style={{ fontSize: 9, color: 'var(--color-warning-on-tint)', backgroundColor: 'var(--color-warning-light)', borderRadius: 3, padding: '0 3px', fontWeight: 700, lineHeight: '14px' }}>{ds.l}L</span>
                           </div>
                         </div>
                       </th>
@@ -496,10 +496,10 @@ export function AttendanceSheet({
 
                   {/* Summary column headers: P, A, L, % */}
                   {[
-                    { key: 'P', color: '#065F46', bg: '#ECFDF5', title: 'Present total',  leftBorder: '2px solid #94A3B8' },
-                    { key: 'A', color: '#991B1B', bg: '#FFF5F5', title: 'Absent total',   leftBorder: '1px solid #E2E8F0' },
-                    { key: 'L', color: '#92400E', bg: '#FFFBEB', title: 'Late total',     leftBorder: '1px solid #E2E8F0' },
-                    { key: '%', color: '#3730A3', bg: '#EEF2FF', title: 'Attendance %',   leftBorder: '1px solid #E2E8F0' },
+                    { key: 'P', color: 'var(--color-success-on-tint)', bg: 'var(--color-success-light)', title: 'Present total',  leftBorder: '2px solid #94A3B8' },
+                    { key: 'A', color: 'var(--color-danger-on-tint)', bg: 'var(--color-danger-light)',  title: 'Absent total',   leftBorder: '1px solid var(--color-border)' },
+                    { key: 'L', color: 'var(--color-warning-on-tint)', bg: 'var(--color-warning-light)', title: 'Late total',     leftBorder: '1px solid var(--color-border)' },
+                    { key: '%', color: 'var(--color-primary-on-tint)', bg: 'var(--color-primary-light)', title: 'Attendance %',   leftBorder: '1px solid var(--color-border)' },
                   ].map(({ key, color, bg, title, leftBorder }) => (
                     <th key={key} title={title} style={{
                       position: 'sticky', top: 0, zIndex: 3,
@@ -521,7 +521,7 @@ export function AttendanceSheet({
                   const sum = getStudentSummary(student.id)
                   const pctColor = sum.pct < 50 ? '#991B1B' : sum.pct < 75 ? '#92400E' : '#065F46'
                   const pctBg   = sum.pct < 50 ? '#FEE2E2' : sum.pct < 75 ? '#FEF3C7' : '#D1FAE5'
-                  const rowBg = si % 2 === 0 ? '#FFFFFF' : '#F9FAFB'
+                  const rowBg = si % 2 === 0 ? 'var(--color-surface)' : 'var(--color-surface-2)'
 
                   return (
                     <tr key={student.id}>
@@ -531,7 +531,7 @@ export function AttendanceSheet({
                         position: 'sticky', left: 0, zIndex: 1,
                         backgroundColor: rowBg,
                         padding: '0 16px', height: 38,
-                        borderBottom: '1px solid #F1F5F9',
+                        borderBottom: '1px solid var(--color-border)',
                         borderRight: '2px solid #94A3B8',
                         boxShadow: '2px 0 6px rgba(0,0,0,0.04)',
                       }}>
@@ -546,10 +546,10 @@ export function AttendanceSheet({
                             }
                           </div>
                           <div style={{ minWidth: 0 }}>
-                            <p style={{ fontSize: 13, fontWeight: 600, color: '#0F172A', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 172 }}>
+                            <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-primary)', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 172 }}>
                               {student.full_name}
                             </p>
-                            <p style={{ fontSize: 10, color: '#94A3B8', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 172 }}>
+                            <p style={{ fontSize: 10, color: 'var(--color-text-muted)', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 172 }}>
                               {student.email}
                             </p>
                           </div>
@@ -580,8 +580,8 @@ export function AttendanceSheet({
                             style={{
                               height: 38, padding: 4,
                               textAlign: 'center',
-                              borderBottom: '1px solid #F1F5F9',
-                              borderLeft: '1px solid #EAECF0',
+                              borderBottom: '1px solid var(--color-border)',
+                              borderLeft: '1px solid var(--color-border)',
                               cursor: isLoading ? 'wait' : 'pointer',
                               backgroundColor: cellBg,
                               transition: 'background-color 60ms',
@@ -589,7 +589,7 @@ export function AttendanceSheet({
                               outline: 'none',
                             }}
                             onMouseEnter={e => {
-                              if (!isLoading) (e.currentTarget as HTMLElement).style.backgroundColor = status ? S[status].bg : '#F1F5F9'
+                              if (!isLoading) (e.currentTarget as HTMLElement).style.backgroundColor = status ? S[status].bg : 'var(--color-surface-2)'
                             }}
                             onMouseLeave={e => {
                               (e.currentTarget as HTMLElement).style.backgroundColor = cellBg
@@ -620,19 +620,19 @@ export function AttendanceSheet({
                       })}
 
                       {/* Summary: P */}
-                      <td style={{ height: 38, padding: '0 4px', textAlign: 'center', borderBottom: '1px solid #F1F5F9', borderLeft: '2px solid #94A3B8', backgroundColor: '#F0FDF4' }}>
-                        <span style={{ fontSize: 13, fontWeight: 700, color: '#065F46' }}>{sum.present}</span>
+                      <td style={{ height: 38, padding: '0 4px', textAlign: 'center', borderBottom: '1px solid var(--color-border)', borderLeft: '2px solid #94A3B8', backgroundColor: 'var(--color-success-light)' }}>
+                        <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-success-on-tint)' }}>{sum.present}</span>
                       </td>
                       {/* Summary: A */}
-                      <td style={{ height: 38, padding: '0 4px', textAlign: 'center', borderBottom: '1px solid #F1F5F9', borderLeft: '1px solid #E2E8F0', backgroundColor: '#FFF5F5' }}>
-                        <span style={{ fontSize: 13, fontWeight: 700, color: '#991B1B' }}>{sum.absent}</span>
+                      <td style={{ height: 38, padding: '0 4px', textAlign: 'center', borderBottom: '1px solid var(--color-border)', borderLeft: '1px solid var(--color-border)', backgroundColor: 'var(--color-danger-light)' }}>
+                        <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-danger-on-tint)' }}>{sum.absent}</span>
                       </td>
                       {/* Summary: L */}
-                      <td style={{ height: 38, padding: '0 4px', textAlign: 'center', borderBottom: '1px solid #F1F5F9', borderLeft: '1px solid #E2E8F0', backgroundColor: '#FFFBEB' }}>
-                        <span style={{ fontSize: 13, fontWeight: 700, color: '#92400E' }}>{sum.late}</span>
+                      <td style={{ height: 38, padding: '0 4px', textAlign: 'center', borderBottom: '1px solid var(--color-border)', borderLeft: '1px solid var(--color-border)', backgroundColor: 'var(--color-warning-light)' }}>
+                        <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-warning-on-tint)' }}>{sum.late}</span>
                       </td>
                       {/* Summary: % */}
-                      <td style={{ height: 38, padding: '0 4px', textAlign: 'center', borderBottom: '1px solid #F1F5F9', borderLeft: '1px solid #E2E8F0', backgroundColor: '#F8F8FF' }}>
+                      <td style={{ height: 38, padding: '0 4px', textAlign: 'center', borderBottom: '1px solid var(--color-border)', borderLeft: '1px solid var(--color-border)', backgroundColor: '#F8F8FF' }}>
                         <span style={{ fontSize: 11, fontWeight: 700, color: pctColor, backgroundColor: pctBg, borderRadius: 9999, padding: '2px 6px', whiteSpace: 'nowrap' }}>
                           {sum.pct}%
                         </span>
@@ -650,27 +650,27 @@ export function AttendanceSheet({
       {/* ── Add Attendance to Gradebook ── */}
       <div>
         {showGradebookForm && (
-          <div style={{ backgroundColor: '#F8F9FC', border: '1px solid #E2E8F0', borderRadius: 10, padding: '14px 16px', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+          <div style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: 10, padding: '14px 16px', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-              <label style={{ fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Column Name</label>
+              <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Column Name</label>
               <input
                 value={colName}
                 onChange={e => setColName(e.target.value)}
                 onKeyDown={e => { if (e.key === 'Enter') addAttendanceToGradebook() }}
                 placeholder="e.g. Attendance"
-                style={{ height: 34, padding: '0 10px', border: '1px solid #E2E8F0', borderRadius: 7, fontSize: 13, color: '#0F172A', outline: 'none', width: 170, backgroundColor: '#FFFFFF', fontFamily: "'Inter', sans-serif" }}
+                style={{ height: 34, padding: '0 10px', border: '1px solid var(--color-border)', borderRadius: 7, fontSize: 13, color: 'var(--color-text-primary)', outline: 'none', width: 170, backgroundColor: 'var(--color-surface)', fontFamily: "'Inter', sans-serif" }}
               />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-              <span style={{ fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Scoring</span>
-              <span style={{ fontSize: 12, color: '#475569', backgroundColor: '#EEF2FF', borderRadius: 6, padding: '4px 10px', whiteSpace: 'nowrap' }}>
+              <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Scoring</span>
+              <span style={{ fontSize: 12, color: 'var(--color-text-secondary)', backgroundColor: 'var(--color-primary-light)', borderRadius: 6, padding: '4px 10px', whiteSpace: 'nowrap' }}>
                 P = 1 &nbsp;·&nbsp; L = 0.5 &nbsp;·&nbsp; A = 0 &nbsp;/&nbsp; max = {totalSessions} sessions
               </span>
             </div>
             <div style={{ display: 'flex', gap: 8, marginLeft: 'auto' }}>
               <button
                 onClick={() => setShowGradebookForm(false)}
-                style={{ height: 34, padding: '0 14px', borderRadius: 7, border: '1px solid #E2E8F0', backgroundColor: '#FFFFFF', fontSize: 13, fontWeight: 500, color: '#475569', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 5 }}
+                style={{ height: 34, padding: '0 14px', borderRadius: 7, border: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface)', fontSize: 13, fontWeight: 500, color: 'var(--color-text-secondary)', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 5 }}
               >
                 <X size={13} /> Cancel
               </button>
@@ -688,16 +688,16 @@ export function AttendanceSheet({
 
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           {gradebookAdded ? (
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, height: 38, padding: '0 16px', borderRadius: 8, backgroundColor: '#D1FAE5', color: '#065F46', fontSize: 13, fontWeight: 600 }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, height: 38, padding: '0 16px', borderRadius: 8, backgroundColor: 'var(--color-success-light)', color: 'var(--color-success-on-tint)', fontSize: 13, fontWeight: 600 }}>
               <BookmarkCheck size={14} />
               Added to Grade Sheet
             </div>
           ) : (
             <button
               onClick={() => setShowGradebookForm(v => !v)}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 6, height: 38, padding: '0 16px', borderRadius: 8, border: '1px solid #E2E8F0', backgroundColor: '#FFFFFF', fontSize: 13, fontWeight: 600, color: '#4F46E5', cursor: 'pointer', transition: 'all 120ms ease' }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.backgroundColor = '#EEF2FF'}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.backgroundColor = '#FFFFFF'}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 6, height: 38, padding: '0 16px', borderRadius: 8, border: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface)', fontSize: 13, fontWeight: 600, color: '#4F46E5', cursor: 'pointer', transition: 'all 120ms ease' }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-primary-light)'}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface)'}
             >
               <BookmarkPlus size={14} />
               Add Attendance to Gradebook

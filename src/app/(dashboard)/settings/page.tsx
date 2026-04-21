@@ -14,10 +14,10 @@ export default async function SettingsPage() {
   return (
     <div style={{ padding: '28px 28px 60px', maxWidth: 680 }}>
       <div style={{ marginBottom: 28 }}>
-        <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: '#0F172A', margin: 0, letterSpacing: '-0.02em' }}>
+        <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: 'var(--color-text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
           Settings
         </h1>
-        <p style={{ fontSize: 14, color: '#64748B', margin: '5px 0 0 0' }}>
+        <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '5px 0 0 0' }}>
           Manage your account preferences
         </p>
       </div>

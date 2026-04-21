@@ -57,25 +57,25 @@ export function SubmissionForm({ assignmentId, classroomId, studentId, isOverdue
   }
 
   return (
-    <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '24px 28px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
-      <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: '#0F172A', margin: '0 0 4px 0' }}>
+    <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '24px 28px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+      <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 4px 0' }}>
         Your Submission
       </h2>
-      <p style={{ fontSize: 13, color: '#64748B', margin: '0 0 20px 0' }}>
+      <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', margin: '0 0 20px 0' }}>
         Worth {maxPoints} points
       </p>
 
       {isOverdue && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, backgroundColor: '#FEF3C7', border: '1px solid #FDE68A', borderRadius: 8, padding: '10px 14px', marginBottom: 16 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, backgroundColor: 'var(--color-warning-light)', border: '1px solid #FDE68A', borderRadius: 8, padding: '10px 14px', marginBottom: 16 }}>
           <AlertCircle size={15} color="#D97706" />
-          <p style={{ fontSize: 13, color: '#92400E', margin: 0, fontWeight: 500 }}>
+          <p style={{ fontSize: 13, color: 'var(--color-warning-on-tint)', margin: 0, fontWeight: 500 }}>
             This assignment is past due. Your submission will be marked late.
           </p>
         </div>
       )}
 
       {/* Tab switch */}
-      <div style={{ display: 'flex', gap: 0, marginBottom: 20, border: '1px solid #E2E8F0', borderRadius: 8, overflow: 'hidden', width: 'fit-content' }}>
+      <div style={{ display: 'flex', gap: 0, marginBottom: 20, border: '1px solid var(--color-border)', borderRadius: 8, overflow: 'hidden', width: 'fit-content' }}>
         {([
           { id: 'text' as const, label: 'Write text', Icon: Send },
           { id: 'file' as const, label: 'Upload file', Icon: Upload },
@@ -90,8 +90,8 @@ export function SubmissionForm({ assignmentId, classroomId, studentId, isOverdue
               gap: 6,
               height: 36,
               padding: '0 16px',
-              backgroundColor: tab === id ? '#4F46E5' : '#FFFFFF',
-              color: tab === id ? '#FFFFFF' : '#475569',
+              backgroundColor: tab === id ? '#4F46E5' : 'var(--color-surface)',
+              color: tab === id ? '#FFFFFF' : 'var(--color-text-secondary)',
               border: 'none',
               fontSize: 13,
               fontWeight: tab === id ? 600 : 400,
@@ -114,12 +114,12 @@ export function SubmissionForm({ assignmentId, classroomId, studentId, isOverdue
             rows={8}
             style={{
               width: '100%',
-              border: '1px solid #E2E8F0',
+              border: '1px solid var(--color-border)',
               borderRadius: 8,
               padding: '12px 14px',
               fontSize: 14,
               fontFamily: "'Inter', sans-serif",
-              color: '#0F172A',
+              color: 'var(--color-text-primary)',
               resize: 'vertical',
               outline: 'none',
               lineHeight: 1.7,
@@ -128,7 +128,7 @@ export function SubmissionForm({ assignmentId, classroomId, studentId, isOverdue
               marginBottom: 16,
             }}
             onFocus={e => { e.currentTarget.style.borderColor = '#4F46E5'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(79,70,229,0.1)' }}
-            onBlur={e => { e.currentTarget.style.borderColor = '#E2E8F0'; e.currentTarget.style.boxShadow = 'none' }}
+            onBlur={e => { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none' }}
           />
         ) : (
           <div style={{ marginBottom: 16 }}>

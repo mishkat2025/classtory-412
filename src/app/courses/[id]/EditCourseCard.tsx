@@ -112,23 +112,23 @@ export function EditCourseCard({ course, linkedClassroomId }: Props) {
   return (
     <>
       {/* Instructor management card */}
-      <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: 24, boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}>
+      <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: 24, boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}>
         {/* Badge */}
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 600, color: '#3730A3', backgroundColor: '#EEF2FF', borderRadius: 9999, padding: '3px 12px', marginBottom: 16 }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 600, color: 'var(--color-primary-on-tint)', backgroundColor: 'var(--color-primary-light)', borderRadius: 9999, padding: '3px 12px', marginBottom: 16 }}>
           Your Course
         </div>
 
         {/* Stats */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 20 }}>
-          <div style={{ backgroundColor: '#F8F9FC', border: '1px solid #E2E8F0', borderRadius: 10, padding: '12px 14px' }}>
-            <p style={{ fontSize: 22, fontWeight: 700, color: '#0F172A', margin: 0, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{course.student_count ?? 0}</p>
-            <p style={{ fontSize: 12, color: '#64748B', margin: 0 }}>Students enrolled</p>
+          <div style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: 10, padding: '12px 14px' }}>
+            <p style={{ fontSize: 22, fontWeight: 700, color: 'var(--color-text-primary)', margin: 0, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{course.student_count ?? 0}</p>
+            <p style={{ fontSize: 12, color: 'var(--color-text-secondary)', margin: 0 }}>Students enrolled</p>
           </div>
-          <div style={{ backgroundColor: '#F8F9FC', border: '1px solid #E2E8F0', borderRadius: 10, padding: '12px 14px' }}>
+          <div style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: 10, padding: '12px 14px' }}>
             <p style={{ fontSize: 22, fontWeight: 700, color: '#10B981', margin: 0, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
               {course.price === 0 ? 'Free' : `$${course.price}`}
             </p>
-            <p style={{ fontSize: 12, color: '#64748B', margin: 0 }}>Price</p>
+            <p style={{ fontSize: 12, color: 'var(--color-text-secondary)', margin: 0 }}>Price</p>
           </div>
         </div>
 
@@ -154,7 +154,7 @@ export function EditCourseCard({ course, linkedClassroomId }: Props) {
           <button
             onClick={handleSetupRoom}
             disabled={creatingRoom}
-            style={{ width: '100%', height: 42, backgroundColor: creatingRoom ? '#E2E8F0' : '#EEF2FF', color: creatingRoom ? '#94A3B8' : '#4F46E5', border: '1px solid #C7D2FE', borderRadius: 8, fontSize: 14, fontWeight: 600, cursor: creatingRoom ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 10 }}
+            style={{ width: '100%', height: 42, backgroundColor: creatingRoom ? '#E2E8F0' : 'var(--color-primary-light)', color: creatingRoom ? '#94A3B8' : '#4F46E5', border: '1px solid #C7D2FE', borderRadius: 8, fontSize: 14, fontWeight: 600, cursor: creatingRoom ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 10 }}
           >
             {creatingRoom ? <Loader2 size={14} className="animate-spin" /> : <LayoutDashboard size={15} />}
             {creatingRoom ? 'Setting up…' : 'Set Up Course Room'}
@@ -164,7 +164,7 @@ export function EditCourseCard({ course, linkedClassroomId }: Props) {
         <button
           onClick={handleDelete}
           disabled={deleting}
-          style={{ width: '100%', height: 42, backgroundColor: deleting ? '#F1F5F9' : '#FEE2E2', color: deleting ? '#94A3B8' : '#DC2626', border: '1px solid #FECACA', borderRadius: 8, fontSize: 14, fontWeight: 600, cursor: deleting ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
+          style={{ width: '100%', height: 42, backgroundColor: deleting ? 'var(--color-surface-2)' : 'var(--color-danger-light)', color: deleting ? '#94A3B8' : '#DC2626', border: '1px solid #FECACA', borderRadius: 8, fontSize: 14, fontWeight: 600, cursor: deleting ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
         >
           {deleting ? <Loader2 size={14} className="animate-spin" /> : <Trash2 size={14} />}
           {deleting ? 'Deleting…' : 'Delete Course'}
@@ -174,10 +174,10 @@ export function EditCourseCard({ course, linkedClassroomId }: Props) {
       {/* Edit modal */}
       {open && (
         <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(15,23,42,0.45)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: 16 }}>
-          <div style={{ backgroundColor: '#FFFFFF', borderRadius: 16, padding: 28, width: '100%', maxWidth: 520, maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 24px 48px rgba(0,0,0,0.18)', position: 'relative' }}>
+          <div style={{ backgroundColor: 'var(--color-surface)', borderRadius: 16, padding: 28, width: '100%', maxWidth: 520, maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 24px 48px rgba(0,0,0,0.18)', position: 'relative' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 22 }}>
-              <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 20, fontWeight: 800, color: '#0F172A', margin: 0 }}>Edit Course</h2>
-              <button onClick={() => setOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', padding: 4 }}><X size={20} /></button>
+              <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 20, fontWeight: 800, color: 'var(--color-text-primary)', margin: 0 }}>Edit Course</h2>
+              <button onClick={() => setOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)', padding: 4 }}><X size={20} /></button>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -207,12 +207,12 @@ export function EditCourseCard({ course, linkedClassroomId }: Props) {
                 </div>
               </div>
               <div>
-                <label style={lbl}>Tags <span style={{ fontWeight: 400, color: '#94A3B8' }}>(comma-separated)</span></label>
+                <label style={lbl}>Tags <span style={{ fontWeight: 400, color: 'var(--color-text-muted)' }}>(comma-separated)</span></label>
                 <input {...register('tags')} placeholder="e.g. math, algebra, grade 9" style={inp(false)} />
               </div>
 
               <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>
-                <button type="button" onClick={() => setOpen(false)} style={{ flex: 1, height: 40, backgroundColor: '#F1F5F9', color: '#475569', border: 'none', borderRadius: 8, fontSize: 14, fontWeight: 500, cursor: 'pointer' }}>
+                <button type="button" onClick={() => setOpen(false)} style={{ flex: 1, height: 40, backgroundColor: 'var(--color-surface-2)', color: 'var(--color-text-secondary)', border: 'none', borderRadius: 8, fontSize: 14, fontWeight: 500, cursor: 'pointer' }}>
                   Cancel
                 </button>
                 <button type="submit" disabled={isSubmitting} style={{ flex: 2, height: 40, backgroundColor: isSubmitting ? '#A5B4FC' : '#4F46E5', color: '#FFFFFF', border: 'none', borderRadius: 8, fontSize: 14, fontWeight: 600, cursor: isSubmitting ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
@@ -228,8 +228,8 @@ export function EditCourseCard({ course, linkedClassroomId }: Props) {
   )
 }
 
-const lbl: React.CSSProperties = { display: 'block', fontSize: 13, fontWeight: 500, color: '#0F172A', marginBottom: 6 }
+const lbl: React.CSSProperties = { display: 'block', fontSize: 13, fontWeight: 500, color: 'var(--color-text-primary)', marginBottom: 6 }
 const err: React.CSSProperties = { fontSize: 12, color: '#EF4444', marginTop: 4, display: 'block' }
 function inp(hasError: boolean): React.CSSProperties {
-  return { width: '100%', height: 38, border: `1px solid ${hasError ? '#EF4444' : '#E2E8F0'}`, borderRadius: 8, padding: '0 12px', fontSize: 14, fontFamily: 'inherit', backgroundColor: '#FFFFFF', color: '#0F172A', boxSizing: 'border-box', outline: 'none' }
+  return { width: '100%', height: 38, border: `1px solid ${hasError ? '#EF4444' : '#E2E8F0'}`, borderRadius: 8, padding: '0 12px', fontSize: 14, fontFamily: 'inherit', backgroundColor: 'var(--color-surface)', color: 'var(--color-text-primary)', boxSizing: 'border-box', outline: 'none' }
 }

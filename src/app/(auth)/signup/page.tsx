@@ -13,7 +13,7 @@ export default function SignupPage() {
       style={{
         minHeight: '100vh',
         display: 'flex',
-        backgroundColor: '#F8F9FC',
+        backgroundColor: 'var(--color-bg)',
       }}
     >
       {/* Left panel — branding */}
@@ -147,11 +147,11 @@ export default function SignupPage() {
           {/* Card */}
           <div
             style={{
-              backgroundColor: '#FFFFFF',
-              border: '1px solid #E2E8F0',
+              backgroundColor: 'var(--color-surface)',
+              border: '1px solid var(--color-border)',
               borderRadius: 14,
               padding: '36px 40px',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)',
+              boxShadow: 'var(--shadow-card)',
             }}
           >
             <div style={{ marginBottom: 28 }}>
@@ -160,14 +160,14 @@ export default function SignupPage() {
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
                   fontSize: 22,
                   fontWeight: 700,
-                  color: '#0F172A',
+                  color: 'var(--color-text-primary)',
                   margin: '0 0 6px 0',
                   letterSpacing: '-0.01em',
                 }}
               >
                 Create your account
               </h2>
-              <p style={{ fontSize: 14, color: '#475569', margin: 0 }}>
+              <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
                 Free to join — no credit card required
               </p>
             </div>

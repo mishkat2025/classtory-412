@@ -45,16 +45,16 @@ function getFileConfig(mimeType: string): {
   if (mimeType.startsWith('video/'))
     return { Icon: Video, color: '#7C3AED', bg: '#EDE9FE' }
   if (mimeType === 'application/pdf')
-    return { Icon: FileText, color: '#DC2626', bg: '#FEE2E2' }
+    return { Icon: FileText, color: '#DC2626', bg: 'var(--color-danger-light)' }
   if (
     mimeType.includes('spreadsheet') ||
     mimeType.includes('excel') ||
     mimeType.includes('csv')
   )
-    return { Icon: Sheet, color: '#059669', bg: '#D1FAE5' }
+    return { Icon: Sheet, color: '#059669', bg: 'var(--color-success-light)' }
   if (mimeType.includes('word') || mimeType.includes('document'))
     return { Icon: FileText, color: '#2563EB', bg: '#DBEAFE' }
-  return { Icon: File, color: '#64748B', bg: '#F1F5F9' }
+  return { Icon: File, color: 'var(--color-text-secondary)', bg: 'var(--color-surface-2)' }
 }
 
 function formatDate(iso: string): string {
@@ -210,7 +210,7 @@ export function MaterialsList({
       {isTeacher && (
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, alignItems: 'center' }}>
           {uploading && (
-            <span style={{ fontSize: 13, color: '#64748B', display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span style={{ fontSize: 13, color: 'var(--color-text-secondary)', display: 'flex', alignItems: 'center', gap: 6 }}>
               <Loader2 size={14} className="animate-spin" color="#4F46E5" />
               Uploading…
             </span>
@@ -251,8 +251,8 @@ export function MaterialsList({
       {materials.length === 0 ? (
         <div
           style={{
-            backgroundColor: '#FFFFFF',
-            border: '1px solid #E2E8F0',
+            backgroundColor: 'var(--color-surface)',
+            border: '1px solid var(--color-border)',
             borderRadius: 14,
             padding: '48px 24px',
             textAlign: 'center',
@@ -264,7 +264,7 @@ export function MaterialsList({
               width: 48,
               height: 48,
               borderRadius: 12,
-              backgroundColor: '#EEF2FF',
+              backgroundColor: 'var(--color-primary-light)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -278,13 +278,13 @@ export function MaterialsList({
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: 15,
               fontWeight: 700,
-              color: '#0F172A',
+              color: 'var(--color-text-primary)',
               margin: '0 0 6px 0',
             }}
           >
             No materials yet
           </p>
-          <p style={{ fontSize: 14, color: '#64748B', margin: 0 }}>
+          <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
             {isTeacher
               ? 'Upload files for your students.'
               : 'Your teacher hasn\'t uploaded any materials yet.'}
@@ -293,8 +293,8 @@ export function MaterialsList({
       ) : (
         <div
           style={{
-            backgroundColor: '#FFFFFF',
-            border: '1px solid #E2E8F0',
+            backgroundColor: 'var(--color-surface)',
+            border: '1px solid var(--color-border)',
             borderRadius: 14,
             overflow: 'hidden',
             boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
@@ -307,8 +307,8 @@ export function MaterialsList({
               gridTemplateColumns: isTeacher ? '1fr 140px 100px 120px 110px' : '1fr 140px 100px 120px 52px',
               padding: '0 20px',
               height: 40,
-              backgroundColor: '#F8FAFC',
-              borderBottom: '1px solid #F1F5F9',
+              backgroundColor: 'var(--color-surface-2)',
+              borderBottom: '1px solid var(--color-border)',
               alignItems: 'center',
               gap: 12,
             }}
@@ -319,7 +319,7 @@ export function MaterialsList({
                 style={{
                   fontSize: 11,
                   fontWeight: 600,
-                  color: '#64748B',
+                  color: 'var(--color-text-secondary)',
                   textTransform: 'uppercase',
                   letterSpacing: '0.06em',
                   textAlign: i >= 1 ? 'center' : 'left',
@@ -344,14 +344,14 @@ export function MaterialsList({
                   padding: '0 20px',
                   minHeight: 52,
                   borderBottom:
-                    i < materials.length - 1 ? '1px solid #F1F5F9' : 'none',
+                    i < materials.length - 1 ? '1px solid var(--color-border)' : 'none',
                   alignItems: 'center',
                   gap: 12,
                   opacity: isDeleting ? 0.5 : 1,
                   transition: 'background-color 120ms ease, opacity 150ms ease',
                 }}
                 onMouseEnter={e =>
-                  ((e.currentTarget as HTMLElement).style.backgroundColor = '#F8FAFC')
+                  ((e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface-2)')
                 }
                 onMouseLeave={e =>
                   ((e.currentTarget as HTMLElement).style.backgroundColor = 'transparent')
@@ -377,7 +377,7 @@ export function MaterialsList({
                     style={{
                       fontSize: 14,
                       fontWeight: 500,
-                      color: '#0F172A',
+                      color: 'var(--color-text-primary)',
                       whiteSpace: 'nowrap',
                       overflow: 'hidden',
                       textOverflow: 'ellipsis',
@@ -391,7 +391,7 @@ export function MaterialsList({
                 <span
                   style={{
                     fontSize: 13,
-                    color: '#64748B',
+                    color: 'var(--color-text-secondary)',
                     textAlign: 'center',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
@@ -403,14 +403,14 @@ export function MaterialsList({
 
                 {/* Size */}
                 <span
-                  style={{ fontSize: 13, color: '#94A3B8', textAlign: 'center' }}
+                  style={{ fontSize: 13, color: 'var(--color-text-muted)', textAlign: 'center' }}
                 >
                   {formatFileSize(material.file_size) || '—'}
                 </span>
 
                 {/* Date */}
                 <span
-                  style={{ fontSize: 13, color: '#64748B', textAlign: 'center' }}
+                  style={{ fontSize: 13, color: 'var(--color-text-secondary)', textAlign: 'center' }}
                 >
                   {formatDate(material.created_at)}
                 </span>
@@ -436,7 +436,7 @@ export function MaterialsList({
                       <button
                         onClick={() => setCopyingItem(material)}
                         title="Copy to classroom"
-                        style={{ ...iconBtn, color: '#3730A3', backgroundColor: '#EEF2FF', border: '1px solid #C7D2FE' }}
+                        style={{ ...iconBtn, color: 'var(--color-primary-on-tint)', backgroundColor: 'var(--color-primary-light)', border: '1px solid #C7D2FE' }}
                       >
                         <Copy size={14} />
                       </button>
@@ -471,7 +471,7 @@ const iconBtn: React.CSSProperties = {
   backgroundColor: 'transparent',
   border: 'none',
   cursor: 'pointer',
-  color: '#64748B',
+  color: 'var(--color-text-secondary)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',

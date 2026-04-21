@@ -94,14 +94,14 @@ export function FileUpload({ bucket, path, onUpload, accept, maxSizeMB = 50 }: F
           padding: '28px 20px',
           textAlign: 'center',
           cursor: uploading ? 'not-allowed' : 'pointer',
-          backgroundColor: isDragging ? '#EEF2FF' : '#F8F9FC',
+          backgroundColor: isDragging ? 'var(--color-primary-light)' : 'var(--color-bg)',
           transition: 'border-color 150ms ease, background-color 150ms ease',
         }}
       >
         {uploading ? (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
             <Loader2 size={28} color="#4F46E5" style={{ animation: 'spin 1s linear infinite' }} />
-            <p style={{ fontSize: 14, color: '#475569', margin: 0 }}>Uploading {selectedFile?.name}…</p>
+            <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>Uploading {selectedFile?.name}…</p>
             <div style={{ width: '100%', maxWidth: 200, height: 4, backgroundColor: '#E2E8F0', borderRadius: 999 }}>
               <div style={{ width: `${progress}%`, height: '100%', backgroundColor: '#4F46E5', borderRadius: 999, transition: 'width 300ms ease' }} />
             </div>
@@ -109,24 +109,24 @@ export function FileUpload({ bucket, path, onUpload, accept, maxSizeMB = 50 }: F
         ) : selectedFile ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, justifyContent: 'center' }}>
             <File size={20} color="#4F46E5" />
-            <span style={{ fontSize: 14, color: '#0F172A', fontWeight: 500 }}>{selectedFile.name}</span>
-            <span style={{ fontSize: 12, color: '#94A3B8' }}>({formatBytes(selectedFile.size)})</span>
+            <span style={{ fontSize: 14, color: 'var(--color-text-primary)', fontWeight: 500 }}>{selectedFile.name}</span>
+            <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>({formatBytes(selectedFile.size)})</span>
             <button
               onClick={e => { e.stopPropagation(); setSelectedFile(null) }}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', display: 'flex', padding: 2 }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)', display: 'flex', padding: 2 }}
             >
               <X size={14} />
             </button>
           </div>
         ) : (
           <>
-            <div style={{ width: 44, height: 44, borderRadius: 10, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>
+            <div style={{ width: 44, height: 44, borderRadius: 10, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>
               <Upload size={20} color="#4F46E5" />
             </div>
-            <p style={{ fontSize: 14, fontWeight: 500, color: '#0F172A', margin: '0 0 4px 0' }}>
+            <p style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-text-primary)', margin: '0 0 4px 0' }}>
               Drop file here or <span style={{ color: '#4F46E5' }}>browse</span>
             </p>
-            <p style={{ fontSize: 12, color: '#94A3B8', margin: 0 }}>
+            <p style={{ fontSize: 12, color: 'var(--color-text-muted)', margin: 0 }}>
               Max {maxSizeMB}MB {accept ? `· ${accept}` : ''}
             </p>
           </>

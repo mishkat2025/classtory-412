@@ -38,7 +38,7 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#F8F9FC' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--color-bg)', transition: 'background-color 200ms ease' }}>
       <Sidebar profile={profile as Profile} />
       <main style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', overflowX: 'hidden' }}>
         <div style={{ width: '100%', maxWidth: 1280, flex: 1, display: 'flex', flexDirection: 'column' }}>

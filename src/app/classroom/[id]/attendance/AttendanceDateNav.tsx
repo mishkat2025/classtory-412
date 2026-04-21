@@ -36,7 +36,7 @@ export function AttendanceDateNav({ classroomId, selectedDate }: AttendanceDateN
     <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
       <button
         onClick={() => changeDate(-1)}
-        style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#475569' }}
+        style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text-secondary)' }}
       >
         <ChevronLeft size={16} />
       </button>
@@ -48,23 +48,23 @@ export function AttendanceDateNav({ classroomId, selectedDate }: AttendanceDateN
         onChange={onDateChange}
         style={{
           height: 36,
-          border: '1px solid #E2E8F0',
+          border: '1px solid var(--color-border)',
           borderRadius: 8,
           padding: '0 10px',
           fontSize: 14,
           fontFamily: "'Inter', sans-serif",
-          color: '#0F172A',
+          color: 'var(--color-text-primary)',
           cursor: 'pointer',
           outline: 'none',
         }}
       />
 
-      <span style={{ fontSize: 14, color: '#475569', fontWeight: 500 }}>{displayDate}</span>
+      <span style={{ fontSize: 14, color: 'var(--color-text-secondary)', fontWeight: 500 }}>{displayDate}</span>
 
       <button
         onClick={() => changeDate(1)}
         disabled={isToday}
-        style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', cursor: isToday ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: isToday ? '#CBD5E1' : '#475569', opacity: isToday ? 0.5 : 1 }}
+        style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', cursor: isToday ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: isToday ? '#CBD5E1' : '#475569', opacity: isToday ? 0.5 : 1 }}
       >
         <ChevronRight size={16} />
       </button>
@@ -72,7 +72,7 @@ export function AttendanceDateNav({ classroomId, selectedDate }: AttendanceDateN
       {!isToday && (
         <button
           onClick={() => router.push(`/classroom/${classroomId}/attendance`)}
-          style={{ height: 32, padding: '0 12px', backgroundColor: '#EEF2FF', color: '#3730A3', border: 'none', borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer' }}
+          style={{ height: 32, padding: '0 12px', backgroundColor: 'var(--color-primary-light)', color: 'var(--color-primary-on-tint)', border: 'none', borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer' }}
         >
           Today
         </button>

@@ -85,6 +85,13 @@
   --color-sidebar-active: #4F46E5;
   --color-sidebar-hover:  #312E81;
 
+  /* Semantic badge/tint text — dark values for light tinted backgrounds */
+  --color-primary-on-tint:  #3730A3;
+  --color-success-on-tint:  #065F46;
+  --color-warning-on-tint:  #92400E;
+  --color-danger-on-tint:   #991B1B;
+  --color-info-on-tint:     #1E40AF;
+
   /* Typography */
   --font-heading: 'Plus Jakarta Sans', sans-serif;
   --font-body:    'Inter', sans-serif;
@@ -145,6 +152,59 @@
   }
 }
 
+/* ─── Dark mode — override CSS custom properties ───────────────── */
+.dark {
+  /* Atelier Indigo — Dark palette */
+  --color-bg:             #0F172A;
+  --color-surface:        #1E293B;
+  --color-surface-2:      #162032;
+  --color-border:         #334155;
+  --color-border-strong:  #475569;
+  --color-text-primary:   #F1F5F9;
+  --color-text-secondary: #CBD5E1;
+  --color-text-muted:     #94A3B8;
+
+  /* Semantic light backgrounds — tinted for dark mode visibility */
+  --color-primary-light:  rgba(99,102,241,0.20);
+  --color-success-light:  rgba(16,185,129,0.18);
+  --color-warning-light:  rgba(245,158,11,0.18);
+  --color-danger-light:   rgba(239,68,68,0.18);
+  --color-info-light:     rgba(59,130,246,0.18);
+
+  /* Semantic badge/tint text — bright values for dark tinted backgrounds */
+  --color-primary-on-tint:  #A5B4FC;
+  --color-success-on-tint:  #6EE7B7;
+  --color-warning-on-tint:  #FCD34D;
+  --color-danger-on-tint:   #FCA5A5;
+  --color-info-on-tint:     #93C5FD;
+
+  /* Shadows — deeper on dark backgrounds */
+  --shadow-card: 0 1px 4px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md:   0 4px 16px rgba(0,0,0,0.5);
+  --shadow-lg:   0 8px 28px rgba(0,0,0,0.6);
+
+  /* shadcn/ui token overrides */
+  --background:           #0F172A;
+  --foreground:           #F1F5F9;
+  --card:                 #1E293B;
+  --card-foreground:      #F1F5F9;
+  --popover:              #1E293B;
+  --popover-foreground:   #F1F5F9;
+  --secondary:            #1E293B;
+  --secondary-foreground: #F1F5F9;
+  --muted:                #1E293B;
+  --muted-foreground:     #94A3B8;
+  --accent:               #312E81;
+  --accent-foreground:    #A5B4FC;
+  --border:               #334155;
+  --input:                #334155;
+}
+
+/* ─── Smooth theme transitions ─────────────────────────────────── */
+html {
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
 @layer utilities {
   .card-hover {
     transition: box-shadow 150ms ease, transform 150ms ease;
@@ -152,6 +212,46 @@
   .card-hover:hover {
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     transform: translateY(-1px);
+  }
+
+  /* Dark-mode-aware surface utility — use on any white card container */
+  .cs-surface {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    transition: background-color 200ms ease, border-color 200ms ease;
+  }
+
+  /* ─── Hero section — responsive gradient for dark mode ─────── */
+  .hero-section {
+    background: linear-gradient(135deg, #EEF2FF 0%, #F8F9FC 55%, #F0F9FF 100%);
+    transition: background 200ms ease;
+  }
+  .dark .hero-section {
+    background: linear-gradient(135deg, #0F172A 0%, #161F32 50%, #0F172A 100%);
+  }
+
+  /* ─── Hero badge — switches colors for dark mode ────────────── */
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #EEF2FF;
+    border: 1px solid #C7D2FE;
+    border-radius: 9999px;
+    padding: 4px 14px;
+    margin-bottom: 28px;
+  }
+  .dark .hero-badge {
+    background-color: rgba(99,102,241,0.15);
+    border-color: rgba(165,180,252,0.25);
+  }
+  .hero-badge-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: #3730A3;
+  }
+  .dark .hero-badge-text {
+    color: #A5B4FC;
   }
 
   @media (max-width: 768px) {

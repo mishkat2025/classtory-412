@@ -33,7 +33,7 @@ export function CourseFilters({ categories }: CourseFiltersProps) {
     <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
       {/* Search */}
       <div style={{ position: 'relative', flex: '1 1 260px', minWidth: 200 }}>
-        <Search size={15} style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: '#94A3B8' }} />
+        <Search size={15} style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)' }} />
         <input
           type="search"
           placeholder="Search courses…"
@@ -42,24 +42,24 @@ export function CourseFilters({ categories }: CourseFiltersProps) {
           style={{
             width: '100%',
             height: 38,
-            border: '1px solid #E2E8F0',
+            border: '1px solid var(--color-border)',
             borderRadius: 8,
             paddingLeft: 34,
             paddingRight: q ? 32 : 12,
             fontSize: 14,
             fontFamily: "'Inter', sans-serif",
-            color: '#0F172A',
-            backgroundColor: '#FFFFFF',
+            color: 'var(--color-text-primary)',
+            backgroundColor: 'var(--color-surface)',
             outline: 'none',
             boxSizing: 'border-box',
           }}
           onFocus={e => { e.currentTarget.style.borderColor = '#4F46E5'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(79,70,229,0.1)' }}
-          onBlur={e => { e.currentTarget.style.borderColor = '#E2E8F0'; e.currentTarget.style.boxShadow = 'none' }}
+          onBlur={e => { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none' }}
         />
         {q && (
           <button
             onClick={() => updateParams({ q: '' })}
-            style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', display: 'flex', padding: 2 }}
+            style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)', display: 'flex', padding: 2 }}
           >
             <X size={14} />
           </button>
@@ -74,9 +74,9 @@ export function CourseFilters({ categories }: CourseFiltersProps) {
             height: 34,
             padding: '0 14px',
             borderRadius: 9999,
-            border: `1px solid ${!cat ? '#4F46E5' : '#E2E8F0'}`,
-            backgroundColor: !cat ? '#EEF2FF' : '#FFFFFF',
-            color: !cat ? '#3730A3' : '#475569',
+            border: `1px solid ${!cat ? '#4F46E5' : 'var(--color-border)'}`,
+            backgroundColor: !cat ? 'var(--color-primary-light)' : 'var(--color-surface)',
+            color: !cat ? '#3730A3' : 'var(--color-text-secondary)',
             fontSize: 13,
             fontWeight: !cat ? 600 : 400,
             cursor: 'pointer',
@@ -93,9 +93,9 @@ export function CourseFilters({ categories }: CourseFiltersProps) {
               height: 34,
               padding: '0 14px',
               borderRadius: 9999,
-              border: `1px solid ${cat === c ? '#4F46E5' : '#E2E8F0'}`,
-              backgroundColor: cat === c ? '#EEF2FF' : '#FFFFFF',
-              color: cat === c ? '#3730A3' : '#475569',
+              border: `1px solid ${cat === c ? '#4F46E5' : 'var(--color-border)'}`,
+              backgroundColor: cat === c ? 'var(--color-primary-light)' : 'var(--color-surface)',
+              color: cat === c ? '#3730A3' : 'var(--color-text-secondary)',
               fontSize: 13,
               fontWeight: cat === c ? 600 : 400,
               cursor: 'pointer',
@@ -107,7 +107,7 @@ export function CourseFilters({ categories }: CourseFiltersProps) {
         ))}
       </div>
 
-      {isPending && <span style={{ fontSize: 12, color: '#94A3B8' }}>Searching…</span>}
+      {isPending && <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>Searching…</span>}
     </div>
   )
 }

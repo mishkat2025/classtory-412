@@ -37,8 +37,8 @@ export function StudentList({ enrollments, isTeacher, teacherId }: StudentListPr
       {/* Count banner */}
       <div
         style={{
-          backgroundColor: '#FFFFFF',
-          border: '1px solid #E2E8F0',
+          backgroundColor: 'var(--color-surface)',
+          border: '1px solid var(--color-border)',
           borderRadius: 12,
           padding: '12px 20px',
           display: 'flex',
@@ -52,7 +52,7 @@ export function StudentList({ enrollments, isTeacher, teacherId }: StudentListPr
             width: 36,
             height: 36,
             borderRadius: 10,
-            backgroundColor: '#EEF2FF',
+            backgroundColor: 'var(--color-primary-light)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -66,13 +66,13 @@ export function StudentList({ enrollments, isTeacher, teacherId }: StudentListPr
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: 18,
               fontWeight: 700,
-              color: '#0F172A',
+              color: 'var(--color-text-primary)',
               marginRight: 6,
             }}
           >
             {students.length}
           </span>
-          <span style={{ fontSize: 14, color: '#64748B' }}>
+          <span style={{ fontSize: 14, color: 'var(--color-text-secondary)' }}>
             {students.length === 1 ? 'student enrolled' : 'students enrolled'}
           </span>
         </div>
@@ -81,8 +81,8 @@ export function StudentList({ enrollments, isTeacher, teacherId }: StudentListPr
       {students.length === 0 ? (
         <div
           style={{
-            backgroundColor: '#FFFFFF',
-            border: '1px solid #E2E8F0',
+            backgroundColor: 'var(--color-surface)',
+            border: '1px solid var(--color-border)',
             borderRadius: 14,
             padding: '48px 24px',
             textAlign: 'center',
@@ -94,7 +94,7 @@ export function StudentList({ enrollments, isTeacher, teacherId }: StudentListPr
               width: 48,
               height: 48,
               borderRadius: 12,
-              backgroundColor: '#EEF2FF',
+              backgroundColor: 'var(--color-primary-light)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -108,21 +108,21 @@ export function StudentList({ enrollments, isTeacher, teacherId }: StudentListPr
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: 15,
               fontWeight: 700,
-              color: '#0F172A',
+              color: 'var(--color-text-primary)',
               margin: '0 0 6px 0',
             }}
           >
             No students yet
           </p>
-          <p style={{ fontSize: 14, color: '#64748B', margin: 0 }}>
+          <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
             Share the class code so students can join.
           </p>
         </div>
       ) : (
         <div
           style={{
-            backgroundColor: '#FFFFFF',
-            border: '1px solid #E2E8F0',
+            backgroundColor: 'var(--color-surface)',
+            border: '1px solid var(--color-border)',
             borderRadius: 14,
             overflow: 'hidden',
             boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
@@ -142,11 +142,11 @@ export function StudentList({ enrollments, isTeacher, teacherId }: StudentListPr
                   gap: 14,
                   padding: '14px 20px',
                   borderBottom:
-                    i < students.length - 1 ? '1px solid #F1F5F9' : 'none',
+                    i < students.length - 1 ? '1px solid var(--color-border)' : 'none',
                   transition: 'background-color 120ms ease',
                 }}
                 onMouseEnter={e =>
-                  ((e.currentTarget as HTMLElement).style.backgroundColor = '#F8FAFC')
+                  ((e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface-2)')
                 }
                 onMouseLeave={e =>
                   ((e.currentTarget as HTMLElement).style.backgroundColor = 'transparent')
@@ -187,7 +187,7 @@ export function StudentList({ enrollments, isTeacher, teacherId }: StudentListPr
                       style={{
                         fontSize: 14,
                         fontWeight: 500,
-                        color: '#0F172A',
+                        color: 'var(--color-text-primary)',
                         whiteSpace: 'nowrap',
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
@@ -200,8 +200,8 @@ export function StudentList({ enrollments, isTeacher, teacherId }: StudentListPr
                         style={{
                           fontSize: 11,
                           fontWeight: 600,
-                          color: '#3730A3',
-                          backgroundColor: '#EEF2FF',
+                          color: 'var(--color-primary-on-tint)',
+                          backgroundColor: 'var(--color-primary-light)',
                           borderRadius: 9999,
                           padding: '1px 8px',
                         }}
@@ -211,7 +211,7 @@ export function StudentList({ enrollments, isTeacher, teacherId }: StudentListPr
                     )}
                   </div>
                   {isTeacher && (
-                    <p style={{ fontSize: 12, color: '#94A3B8', margin: 0, marginTop: 1 }}>
+                    <p style={{ fontSize: 12, color: 'var(--color-text-muted)', margin: 0, marginTop: 1 }}>
                       {student.email}
                     </p>
                   )}

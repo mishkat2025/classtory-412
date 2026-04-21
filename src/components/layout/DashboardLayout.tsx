@@ -9,7 +9,7 @@ interface DashboardLayoutProps {
 
 export function DashboardLayout({ profile, children }: DashboardLayoutProps) {
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#F8F9FC' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--color-bg)' }}>
       <Sidebar profile={profile} />
       <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
         <main style={{ flex: 1, overflow: 'auto' }}>
