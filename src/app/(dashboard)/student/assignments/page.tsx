@@ -56,7 +56,13 @@ export default async function StudentAssignmentsPage() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/auth/login')
 
-  const { data: profileData } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+  let { data: profileData } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+  if (!profileData) {
+    const meta = user.user_metadata as { full_name?: string; role?: string } | undefined
+    await supabase.from('profiles').upsert({ id: user.id, full_name: meta?.full_name ?? user.email ?? 'New User', email: user.email ?? '', role: (meta?.role ?? 'student') as import('@/lib/types').UserRole })
+    const { data: retried } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+    profileData = retried
+  }
   if (!profileData) redirect('/auth/login')
   const profile = profileData as Profile
   if (profile.role !== 'student') redirect(`/${profile.role}`)

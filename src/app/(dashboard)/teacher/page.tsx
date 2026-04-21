@@ -42,7 +42,20 @@ export default async function TeacherDashboard() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/auth/login')
 
-  const { data: profileData } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+  let { data: profileData } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+
+  if (!profileData) {
+    const meta = user.user_metadata as { full_name?: string; role?: string } | undefined
+    await supabase.from('profiles').upsert({
+      id: user.id,
+      full_name: meta?.full_name ?? user.email ?? 'New User',
+      email: user.email ?? '',
+      role: (meta?.role ?? 'teacher') as import('@/lib/types').UserRole,
+    })
+    const { data: retried } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+    profileData = retried
+  }
+
   if (!profileData) redirect('/auth/login')
   const profile = profileData as Profile
   if (profile.role !== 'teacher') redirect(`/${profile.role}`)
@@ -112,6 +125,7 @@ export default async function TeacherDashboard() {
 
   return (
     <div style={{ padding: '28px 28px 40px', maxWidth: 1200, width: '100%' }}>
+      <style>{`.grading-row:hover { background-color: var(--color-surface-2); }`}</style>
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 28, gap: 16, flexWrap: 'wrap' }}>
         <div>
@@ -245,9 +259,8 @@ export default async function TeacherDashboard() {
                   style={{ textDecoration: 'none', display: 'block' }}
                 >
                   <div
+                    className="grading-row"
                     style={{ padding: '12px 16px', borderBottom: i < pendingSubmissions.length - 1 ? '1px solid var(--color-border)' : 'none', transition: 'background-color 120ms ease' }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface-2)' }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent' }}
                   >
                     <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-primary)', margin: '0 0 2px 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                       {sub.student?.full_name ?? 'Student'}

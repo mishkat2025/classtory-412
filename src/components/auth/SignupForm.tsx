@@ -66,8 +66,9 @@ export function SignupForm() {
     })
 
     if (profileError) {
-      toast.error('Account created but profile setup failed. Please contact support.')
-      return
+      // Profile insert failed — log for debugging but don't block the user.
+      // The profile will be created lazily on first dashboard load via upsert.
+      console.error('[SignupForm] Profile insert failed:', profileError.message)
     }
 
     toast.success('Account created! Welcome to Classtory.')

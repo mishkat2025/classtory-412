@@ -89,14 +89,26 @@ export default async function StudentDashboard() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/auth/login')
 
-  /* Profile */
-  const { data: profileData, error: profileError } = await supabase
+  /* Profile — upsert fallback so a failed signup insert doesn't lock the user out */
+  let { data: profileData } = await supabase
     .from('profiles')
     .select('*')
     .eq('id', user.id)
     .single()
 
-  if (profileError || !profileData) redirect('/auth/login')
+  if (!profileData) {
+    const meta = user.user_metadata as { full_name?: string; role?: string } | undefined
+    await supabase.from('profiles').upsert({
+      id: user.id,
+      full_name: meta?.full_name ?? user.email ?? 'New User',
+      email: user.email ?? '',
+      role: (meta?.role ?? 'student') as import('@/lib/types').UserRole,
+    })
+    const { data: retried } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+    profileData = retried
+  }
+
+  if (!profileData) redirect('/auth/login')
 
   const profile = profileData as Profile
   if (profile.role !== 'student') redirect(`/${profile.role}`)
