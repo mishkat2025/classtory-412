@@ -6,7 +6,7 @@ export const metadata = { title: 'Privacy Policy — Classtory' }
 export default function PrivacyPage() {
   return (
     <div style={{ backgroundColor: 'var(--color-bg)', minHeight: '100vh' }}>
-      <nav style={{ backgroundColor: 'var(--color-surface)', borderBottom: '1px solid #E2E8F0', padding: '0 32px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <nav style={{ backgroundColor: 'var(--color-surface)', borderBottom: '1px solid var(--color-border)', padding: '0 32px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
           <div style={{ width: 30, height: 30, backgroundColor: '#4F46E5', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <BookOpen size={14} color="white" />
@@ -38,7 +38,7 @@ export default function PrivacyPage() {
             <div key={title} style={{ marginBottom: i < arr.length - 1 ? 32 : 0 }}>
               <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 10px' }}>{title}</h2>
               <p style={{ fontSize: 14, color: '#475569', lineHeight: 1.8, margin: 0 }}>{body}</p>
-              {i < arr.length - 1 && <hr style={{ border: 'none', borderTop: '1px solid #F1F5F9', marginTop: 32 }} />}
+              {i < arr.length - 1 && <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', marginTop: 32 }} />}
             </div>
           ))}
         </div>

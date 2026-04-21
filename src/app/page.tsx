@@ -6,6 +6,7 @@ import {
   GraduationCap, Layers, BarChart3,
 } from 'lucide-react'
 import { CourseCard } from '@/components/courses/CourseCard'
+import { ThemeToggle } from '@/components/shared/ThemeToggle'
 import type { CourseCardCourse } from '@/components/courses/CourseCard'
 
 export default async function LandingPage() {
@@ -54,6 +55,7 @@ export default async function LandingPage() {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <ThemeToggle variant="navbar" />
             {user ? (
               <Link
                 href={dashboardHref}
@@ -219,7 +221,7 @@ export default async function LandingPage() {
             </div>
           ) : (
             <div style={{ textAlign: 'center', padding: '64px 24px', backgroundColor: 'var(--color-bg)', borderRadius: 14, border: '1px dashed #CBD5E1' }}>
-              <div style={{ width: 56, height: 56, borderRadius: 14, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+              <div style={{ width: 56, height: 56, borderRadius: 14, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
                 <BookOpen size={26} color="#4F46E5" />
               </div>
               <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 6 }}>No courses yet</h3>
@@ -273,9 +275,9 @@ export default async function LandingPage() {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             {([
-              { Icon: Users,    bg: '#EEF2FF', ic: '#4F46E5', label: 'Student Management', desc: "Track who's enrolled, active, and thriving" },
-              { Icon: Shield,   bg: '#D1FAE5', ic: '#10B981', label: 'Secure Classrooms',  desc: 'Invite-only via unique 6-character class codes' },
-              { Icon: BarChart3,bg: '#FEF3C7', ic: '#F59E0B', label: 'Analytics & Grades', desc: 'Real-time grade tracking and CSV exports' },
+              { Icon: Users,    bg: 'var(--color-primary-light)', ic: '#4F46E5', label: 'Student Management', desc: "Track who's enrolled, active, and thriving" },
+              { Icon: Shield,   bg: 'var(--color-success-light)', ic: '#10B981', label: 'Secure Classrooms',  desc: 'Invite-only via unique 6-character class codes' },
+              { Icon: BarChart3,bg: 'var(--color-warning-light)', ic: '#F59E0B', label: 'Analytics & Grades', desc: 'Real-time grade tracking and CSV exports' },
             ] as const).map(({ Icon, bg, ic, label, desc }) => (
               <div key={label} style={{ backgroundColor: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 14, padding: '18px 22px', display: 'flex', alignItems: 'center', gap: 16 }}>
                 <div style={{ width: 44, height: 44, borderRadius: 10, backgroundColor: bg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>

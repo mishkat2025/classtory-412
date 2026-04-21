@@ -44,7 +44,7 @@ export function RecommendationCard({
         <div
           style={{
             height: 140,
-            backgroundColor: '#EEF2FF',
+            backgroundColor: 'var(--color-primary-light)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -147,7 +147,7 @@ export function RecommendationCard({
                 fontSize: 12,
                 fontWeight: 600,
                 color: '#4F46E5',
-                backgroundColor: '#EEF2FF',
+                backgroundColor: 'var(--color-primary-light)',
                 borderRadius: 9999,
                 padding: '3px 10px',
               }}

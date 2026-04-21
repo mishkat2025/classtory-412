@@ -66,7 +66,7 @@ export function SubmissionForm({ assignmentId, classroomId, studentId, isOverdue
       </p>
 
       {isOverdue && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, backgroundColor: '#FEF3C7', border: '1px solid #FDE68A', borderRadius: 8, padding: '10px 14px', marginBottom: 16 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, backgroundColor: 'var(--color-warning-light)', border: '1px solid #FDE68A', borderRadius: 8, padding: '10px 14px', marginBottom: 16 }}>
           <AlertCircle size={15} color="#D97706" />
           <p style={{ fontSize: 13, color: '#92400E', margin: 0, fontWeight: 500 }}>
             This assignment is past due. Your submission will be marked late.
@@ -90,8 +90,8 @@ export function SubmissionForm({ assignmentId, classroomId, studentId, isOverdue
               gap: 6,
               height: 36,
               padding: '0 16px',
-              backgroundColor: tab === id ? '#4F46E5' : '#FFFFFF',
-              color: tab === id ? '#FFFFFF' : '#475569',
+              backgroundColor: tab === id ? '#4F46E5' : 'var(--color-surface)',
+              color: tab === id ? '#FFFFFF' : 'var(--color-text-secondary)',
               border: 'none',
               fontSize: 13,
               fontWeight: tab === id ? 600 : 400,

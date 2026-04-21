@@ -114,7 +114,7 @@ export function CopyToClassroomModal({
             </div>
           ) : classrooms.length === 0 ? (
             <div style={{ padding: '32px 0', textAlign: 'center' }}>
-              <div style={{ width: 44, height: 44, borderRadius: 12, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>
+              <div style={{ width: 44, height: 44, borderRadius: 12, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>
                 <BookOpen size={20} color="#A5B4FC" />
               </div>
               <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', margin: 0 }}>No other classrooms found.</p>
@@ -132,7 +132,7 @@ export function CopyToClassroomModal({
                       display: 'flex', alignItems: 'center', gap: 12,
                       padding: '10px 12px', borderRadius: 10, cursor: isDone ? 'default' : 'pointer',
                       border: `1.5px solid ${isSelected ? '#4F46E5' : '#E2E8F0'}`,
-                      backgroundColor: isDone ? '#F0FDF4' : isSelected ? '#EEF2FF' : '#FFFFFF',
+                      backgroundColor: isDone ? 'var(--color-success-light)' : isSelected ? 'var(--color-primary-light)' : 'var(--color-surface)',
                       textAlign: 'left', transition: 'all 120ms ease',
                     }}
                   >
@@ -158,7 +158,7 @@ export function CopyToClassroomModal({
         </div>
 
         {/* Footer */}
-        <div style={{ padding: '16px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid #F1F5F9', marginTop: 16 }}>
+        <div style={{ padding: '16px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--color-border)', marginTop: 16 }}>
           <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>
             {selected.size > 0 ? `${selected.size} class${selected.size > 1 ? 'es' : ''} selected` : 'Select one or more'}
           </span>

@@ -300,28 +300,28 @@ export default async function StudentDashboard() {
           icon={BookOpen}
           label="Enrolled classes"
           value={enrollments.length}
-          iconBg="#EEF2FF"
+          iconBg="var(--color-primary-light)"
           iconColor="#4F46E5"
         />
         <StatCard
           icon={ClipboardList}
           label="Pending assignments"
           value={pendingCount}
-          iconBg="#FEF3C7"
+          iconBg="var(--color-warning-light)"
           iconColor="#D97706"
         />
         <StatCard
           icon={CheckCircle2}
           label="Submitted"
           value={submissions.length}
-          iconBg="#D1FAE5"
+          iconBg="var(--color-success-light)"
           iconColor="#059669"
         />
         <StatCard
           icon={BarChart3}
           label="Avg. grade"
           value={avgGrade !== null ? `${avgGrade}%` : '—'}
-          iconBg="#DBEAFE"
+          iconBg="var(--color-info-light)"
           iconColor="#2563EB"
         />
       </div>
@@ -362,7 +362,7 @@ export default async function StudentDashboard() {
                 width: 56,
                 height: 56,
                 borderRadius: 14,
-                backgroundColor: '#EEF2FF',
+                backgroundColor: 'var(--color-primary-light)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -552,7 +552,7 @@ export default async function StudentDashboard() {
                         padding: '12px 16px',
                         borderBottom:
                           i < gradedWork.length - 1
-                            ? '1px solid #F1F5F9'
+                            ? '1px solid var(--color-border)'
                             : 'none',
                         transition: 'background-color 120ms ease',
                       }}
@@ -683,7 +683,7 @@ const countBadge: React.CSSProperties = {
   fontSize: 12,
   fontWeight: 600,
   color: '#3730A3',
-  backgroundColor: '#EEF2FF',
+  backgroundColor: 'var(--color-primary-light)',
   borderRadius: 9999,
   padding: '1px 9px',
   minWidth: 24,

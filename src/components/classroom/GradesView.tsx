@@ -41,7 +41,7 @@ export function GradesView({
   return (
     <div>
       {/* Tab bar */}
-      <div style={{ display: 'flex', gap: 4, marginBottom: 20, borderBottom: '1px solid #E2E8F0', paddingBottom: 0 }}>
+      <div style={{ display: 'flex', gap: 4, marginBottom: 20, borderBottom: '1px solid var(--color-border)', paddingBottom: 0 }}>
         {tabs.map(({ id, label, Icon }) => (
           <button
             key={id}
@@ -52,7 +52,7 @@ export function GradesView({
               borderRadius: '8px 8px 0 0',
               border: 'none',
               borderBottom: tab === id ? '2px solid #4F46E5' : '2px solid transparent',
-              backgroundColor: tab === id ? '#EEF2FF' : 'transparent',
+              backgroundColor: tab === id ? 'var(--color-primary-light)' : 'transparent',
               color: tab === id ? '#4F46E5' : '#64748B',
               fontSize: 13, fontWeight: tab === id ? 600 : 500,
               cursor: 'pointer', transition: 'all 120ms ease',

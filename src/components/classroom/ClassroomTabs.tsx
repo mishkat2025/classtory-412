@@ -78,7 +78,7 @@ export function ClassroomTabs({
       <div
         style={{
           backgroundColor: 'var(--color-surface)',
-          borderBottom: '1px solid #E2E8F0',
+          borderBottom: '1px solid var(--color-border)',
           position: 'sticky',
           top: 0,
           zIndex: 20,
@@ -261,7 +261,7 @@ export function ClassroomTabs({
                     width: 32,
                     height: 32,
                     borderRadius: 8,
-                    backgroundColor: codeCopied ? '#D1FAE5' : '#EEF2FF',
+                    backgroundColor: codeCopied ? '#D1FAE5' : 'var(--color-primary-light)',
                     border: 'none',
                     cursor: 'pointer',
                     display: 'flex',

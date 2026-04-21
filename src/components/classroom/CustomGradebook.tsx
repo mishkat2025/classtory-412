@@ -389,7 +389,7 @@ export function CustomGradebook({
                                   onFocus={e => { e.currentTarget.style.borderColor = '#4F46E5'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(79,70,229,0.1)' }}
                                   onBlurCapture={e => { e.currentTarget.style.borderColor = '#E2E8F0'; e.currentTarget.style.boxShadow = 'none' }}
                                 />
-                                <button onClick={() => saveCell(col, student.id)} disabled={!!isSaving} title="Save" style={{ width: 26, height: 26, borderRadius: 6, backgroundColor: '#EEF2FF', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                <button onClick={() => saveCell(col, student.id)} disabled={!!isSaving} title="Save" style={{ width: 26, height: 26, borderRadius: 6, backgroundColor: 'var(--color-primary-light)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                                   {isSaving ? <Loader2 size={11} color="#4F46E5" className="animate-spin" /> : <Save size={11} color="#4F46E5" />}
                                 </button>
                               </div>

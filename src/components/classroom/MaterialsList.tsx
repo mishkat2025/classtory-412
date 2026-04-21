@@ -45,16 +45,16 @@ function getFileConfig(mimeType: string): {
   if (mimeType.startsWith('video/'))
     return { Icon: Video, color: '#7C3AED', bg: '#EDE9FE' }
   if (mimeType === 'application/pdf')
-    return { Icon: FileText, color: '#DC2626', bg: '#FEE2E2' }
+    return { Icon: FileText, color: '#DC2626', bg: 'var(--color-danger-light)' }
   if (
     mimeType.includes('spreadsheet') ||
     mimeType.includes('excel') ||
     mimeType.includes('csv')
   )
-    return { Icon: Sheet, color: '#059669', bg: '#D1FAE5' }
+    return { Icon: Sheet, color: '#059669', bg: 'var(--color-success-light)' }
   if (mimeType.includes('word') || mimeType.includes('document'))
     return { Icon: FileText, color: '#2563EB', bg: '#DBEAFE' }
-  return { Icon: File, color: 'var(--color-text-secondary)', bg: '#F1F5F9' }
+  return { Icon: File, color: 'var(--color-text-secondary)', bg: 'var(--color-surface-2)' }
 }
 
 function formatDate(iso: string): string {
@@ -264,7 +264,7 @@ export function MaterialsList({
               width: 48,
               height: 48,
               borderRadius: 12,
-              backgroundColor: '#EEF2FF',
+              backgroundColor: 'var(--color-primary-light)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -436,7 +436,7 @@ export function MaterialsList({
                       <button
                         onClick={() => setCopyingItem(material)}
                         title="Copy to classroom"
-                        style={{ ...iconBtn, color: '#3730A3', backgroundColor: '#EEF2FF', border: '1px solid #C7D2FE' }}
+                        style={{ ...iconBtn, color: '#3730A3', backgroundColor: 'var(--color-primary-light)', border: '1px solid #C7D2FE' }}
                       >
                         <Copy size={14} />
                       </button>

@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { NotificationBell } from '@/components/shared/NotificationBell'
+import { ThemeToggle } from '@/components/shared/ThemeToggle'
 import { Avatar } from '@/components/shared/Avatar'
 import type { Profile } from '@/lib/types'
 
@@ -13,7 +14,7 @@ export async function Navbar({ profile }: NavbarProps) {
       style={{
         height: 56,
         backgroundColor: 'var(--color-surface)',
-        borderBottom: '1px solid #E2E8F0',
+        borderBottom: '1px solid var(--color-border)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-end',
@@ -22,6 +23,7 @@ export async function Navbar({ profile }: NavbarProps) {
         flexShrink: 0,
       }}
     >
+      <ThemeToggle variant="navbar" />
       <NotificationBell userId={profile.id} />
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <Avatar name={profile.full_name} avatarUrl={profile.avatar_url} size={32} />

@@ -90,7 +90,7 @@ export function NotificationBell({ userId }: NotificationBellProps) {
           width: 36,
           height: 36,
           borderRadius: 8,
-          backgroundColor: open ? '#EEF2FF' : 'transparent',
+          backgroundColor: open ? 'var(--color-primary-light)' : 'transparent',
           border: '1px solid transparent',
           cursor: 'pointer',
           display: 'flex',

@@ -39,7 +39,7 @@ export function CourseCard({ course }: { course: CourseCardCourse }) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                background: 'linear-gradient(135deg, #EEF2FF, #E0E7FF)',
+                background: 'linear-gradient(135deg, var(--color-primary-light), #E0E7FF)',
               }}
             >
               <BookOpen size={40} color="#A5B4FC" />

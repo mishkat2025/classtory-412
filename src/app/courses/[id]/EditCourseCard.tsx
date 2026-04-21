@@ -114,7 +114,7 @@ export function EditCourseCard({ course, linkedClassroomId }: Props) {
       {/* Instructor management card */}
       <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: 24, boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}>
         {/* Badge */}
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 600, color: '#3730A3', backgroundColor: '#EEF2FF', borderRadius: 9999, padding: '3px 12px', marginBottom: 16 }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 600, color: '#3730A3', backgroundColor: 'var(--color-primary-light)', borderRadius: 9999, padding: '3px 12px', marginBottom: 16 }}>
           Your Course
         </div>
 
@@ -154,7 +154,7 @@ export function EditCourseCard({ course, linkedClassroomId }: Props) {
           <button
             onClick={handleSetupRoom}
             disabled={creatingRoom}
-            style={{ width: '100%', height: 42, backgroundColor: creatingRoom ? '#E2E8F0' : '#EEF2FF', color: creatingRoom ? '#94A3B8' : '#4F46E5', border: '1px solid #C7D2FE', borderRadius: 8, fontSize: 14, fontWeight: 600, cursor: creatingRoom ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 10 }}
+            style={{ width: '100%', height: 42, backgroundColor: creatingRoom ? '#E2E8F0' : 'var(--color-primary-light)', color: creatingRoom ? '#94A3B8' : '#4F46E5', border: '1px solid #C7D2FE', borderRadius: 8, fontSize: 14, fontWeight: 600, cursor: creatingRoom ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 10 }}
           >
             {creatingRoom ? <Loader2 size={14} className="animate-spin" /> : <LayoutDashboard size={15} />}
             {creatingRoom ? 'Setting up…' : 'Set Up Course Room'}
@@ -164,7 +164,7 @@ export function EditCourseCard({ course, linkedClassroomId }: Props) {
         <button
           onClick={handleDelete}
           disabled={deleting}
-          style={{ width: '100%', height: 42, backgroundColor: deleting ? '#F1F5F9' : '#FEE2E2', color: deleting ? '#94A3B8' : '#DC2626', border: '1px solid #FECACA', borderRadius: 8, fontSize: 14, fontWeight: 600, cursor: deleting ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
+          style={{ width: '100%', height: 42, backgroundColor: deleting ? 'var(--color-surface-2)' : 'var(--color-danger-light)', color: deleting ? '#94A3B8' : '#DC2626', border: '1px solid #FECACA', borderRadius: 8, fontSize: 14, fontWeight: 600, cursor: deleting ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
         >
           {deleting ? <Loader2 size={14} className="animate-spin" /> : <Trash2 size={14} />}
           {deleting ? 'Deleting…' : 'Delete Course'}

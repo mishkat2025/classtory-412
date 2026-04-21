@@ -72,7 +72,7 @@ export function AttendanceDateNav({ classroomId, selectedDate }: AttendanceDateN
       {!isToday && (
         <button
           onClick={() => router.push(`/classroom/${classroomId}/attendance`)}
-          style={{ height: 32, padding: '0 12px', backgroundColor: '#EEF2FF', color: '#3730A3', border: 'none', borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer' }}
+          style={{ height: 32, padding: '0 12px', backgroundColor: 'var(--color-primary-light)', color: '#3730A3', border: 'none', borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer' }}
         >
           Today
         </button>

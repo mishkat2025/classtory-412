@@ -68,10 +68,10 @@ function formatDue(iso: string): { label: string; overdue: boolean; urgent: bool
 }
 
 const submissionStatusConfig = {
-  graded:    { label: 'Graded',    bg: '#D1FAE5', color: '#065F46', Icon: Star },
+  graded:    { label: 'Graded',    bg: 'var(--color-success-light)', color: '#065F46', Icon: Star },
   submitted: { label: 'Submitted', bg: '#DBEAFE', color: '#1E40AF', Icon: CheckCircle2 },
-  late:      { label: 'Late',      bg: '#FEE2E2', color: '#991B1B', Icon: AlertCircle },
-  pending:   { label: 'Pending',   bg: '#FEF3C7', color: '#92400E', Icon: Clock },
+  late:      { label: 'Late',      bg: 'var(--color-danger-light)', color: '#991B1B', Icon: AlertCircle },
+  pending:   { label: 'Pending',   bg: 'var(--color-warning-light)', color: '#92400E', Icon: Clock },
 } as const
 
 export function AssignmentList({
@@ -264,8 +264,8 @@ export function AssignmentList({
               gap: 6,
               height: 36,
               padding: '0 14px',
-              backgroundColor: showForm ? '#F1F5F9' : '#4F46E5',
-              color: showForm ? '#0F172A' : '#FFFFFF',
+              backgroundColor: showForm ? 'var(--color-surface-2)' : '#4F46E5',
+              color: showForm ? 'var(--color-text-primary)' : '#FFFFFF',
               border: 'none',
               borderRadius: 8,
               fontSize: 13,
@@ -405,7 +405,7 @@ export function AssignmentList({
               width: 48,
               height: 48,
               borderRadius: 12,
-              backgroundColor: '#EEF2FF',
+              backgroundColor: 'var(--color-primary-light)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -490,7 +490,7 @@ export function AssignmentList({
               <div key={assignment.id} style={{ opacity: isDeleting ? 0.5 : 1, transition: 'opacity 150ms' }}>
                 {/* Edit panel */}
                 {isTeacher && isEditing && (
-                  <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--color-border)', backgroundColor: '#FAFBFF' }}>
+                  <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface-2)' }}>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 10 }}>
                       <div>
                         <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 4 }}>Title</label>
@@ -579,7 +579,7 @@ export function AssignmentList({
                           <button
                             disabled={added || gbLoading}
                             title={added ? 'Already in Grade Sheet' : 'Add as a grade column'}
-                            style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', borderRadius: 7, fontSize: 11, fontWeight: 600, cursor: added ? 'default' : 'pointer', border: 'none', backgroundColor: added ? '#D1FAE5' : '#EEF2FF', color: added ? '#065F46' : '#4F46E5', transition: 'all 120ms ease', whiteSpace: 'nowrap' }}
+                            style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', borderRadius: 7, fontSize: 11, fontWeight: 600, cursor: added ? 'default' : 'pointer', border: 'none', backgroundColor: added ? '#D1FAE5' : 'var(--color-primary-light)', color: added ? '#065F46' : '#4F46E5', transition: 'all 120ms ease', whiteSpace: 'nowrap' }}
                           >
                             {gbLoading ? <Loader2 size={11} className="animate-spin" /> : added ? <BookmarkCheck size={11} /> : <BookmarkPlus size={11} />}
                             {gbLoading ? 'Adding…' : added ? 'In sheet' : 'Add to sheet'}
@@ -595,10 +595,10 @@ export function AssignmentList({
                         <button onClick={() => startEdit(assignment)} title="Edit" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: 7, border: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface)', color: '#475569', cursor: 'pointer' }}>
                           <Pencil size={12} />
                         </button>
-                        <button onClick={() => setCopyingItem(assignment)} title="Copy to class" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: 7, border: '1px solid #C7D2FE', backgroundColor: '#EEF2FF', color: '#3730A3', cursor: 'pointer' }}>
+                        <button onClick={() => setCopyingItem(assignment)} title="Copy to class" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: 7, border: '1px solid #C7D2FE', backgroundColor: 'var(--color-primary-light)', color: '#3730A3', cursor: 'pointer' }}>
                           <Copy size={12} />
                         </button>
-                        <button onClick={() => handleDeleteAssignment(assignment)} disabled={isDeleting} title="Delete" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: 7, border: '1px solid #FECACA', backgroundColor: '#FEE2E2', color: '#991B1B', cursor: 'pointer' }}>
+                        <button onClick={() => handleDeleteAssignment(assignment)} disabled={isDeleting} title="Delete" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: 7, border: '1px solid #FECACA', backgroundColor: 'var(--color-danger-light)', color: '#991B1B', cursor: 'pointer' }}>
                           {isDeleting ? <Loader2 size={12} className="animate-spin" /> : <Trash2 size={12} />}
                         </button>
                       </div>

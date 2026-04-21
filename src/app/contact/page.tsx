@@ -6,7 +6,7 @@ export const metadata = { title: 'Contact — Classtory' }
 export default function ContactPage() {
   return (
     <div style={{ backgroundColor: 'var(--color-bg)', minHeight: '100vh' }}>
-      <nav style={{ backgroundColor: 'var(--color-surface)', borderBottom: '1px solid #E2E8F0', padding: '0 32px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <nav style={{ backgroundColor: 'var(--color-surface)', borderBottom: '1px solid var(--color-border)', padding: '0 32px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
           <div style={{ width: 30, height: 30, backgroundColor: '#4F46E5', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <BookOpen size={14} color="white" />
@@ -28,7 +28,7 @@ export default function ContactPage() {
       <div style={{ maxWidth: 560, margin: '0 auto', padding: '56px 24px' }}>
         <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 16, padding: '36px 32px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
-            <div style={{ width: 40, height: 40, backgroundColor: '#EEF2FF', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: 40, height: 40, backgroundColor: 'var(--color-primary-light)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Mail size={18} color="#4F46E5" />
             </div>
             <div>
@@ -41,7 +41,7 @@ export default function ContactPage() {
             hello@classtory.app
           </a>
 
-          <div style={{ borderTop: '1px solid #F1F5F9', marginTop: 28, paddingTop: 24, textAlign: 'center' }}>
+          <div style={{ borderTop: '1px solid var(--color-border)', marginTop: 28, paddingTop: 24, textAlign: 'center' }}>
             <p style={{ fontSize: 13, color: 'var(--color-text-muted)', margin: 0 }}>A contact form is coming soon. For now, email is the fastest way to reach us.</p>
           </div>
         </div>

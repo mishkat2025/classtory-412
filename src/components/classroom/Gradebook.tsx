@@ -192,7 +192,7 @@ export function Gradebook({ classroomName, assignments, students, isTeacher }: G
               return (
                 <tr
                   key={student.student_id}
-                  style={{ borderBottom: si < students.length - 1 ? '1px solid #F1F5F9' : 'none' }}
+                  style={{ borderBottom: si < students.length - 1 ? '1px solid var(--color-border)' : 'none' }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface-2)' }}
                   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent' }}
                 >
@@ -246,7 +246,7 @@ export function Gradebook({ classroomName, assignments, students, isTeacher }: G
                                   width: 28,
                                   height: 28,
                                   borderRadius: 6,
-                                  backgroundColor: '#EEF2FF',
+                                  backgroundColor: 'var(--color-primary-light)',
                                   border: 'none',
                                   cursor: isSaving ? 'not-allowed' : 'pointer',
                                   display: 'flex',

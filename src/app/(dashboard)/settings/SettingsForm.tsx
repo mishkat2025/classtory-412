@@ -58,7 +58,7 @@ export function SettingsForm({ profile }: { profile: Profile }) {
       style={{
         padding: '8px 16px', borderRadius: 8, border: 'none', cursor: 'pointer',
         fontSize: 13, fontWeight: 500,
-        backgroundColor: activeTab === id ? '#EEF2FF' : 'transparent',
+        backgroundColor: activeTab === id ? 'var(--color-primary-light)' : 'transparent',
         color: activeTab === id ? '#4F46E5' : '#64748B',
         transition: 'all 120ms ease',
       }}

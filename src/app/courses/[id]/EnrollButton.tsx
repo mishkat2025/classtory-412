@@ -71,7 +71,7 @@ export function EnrollButton({ courseId, courseName, isAuthenticated, isEnrolled
 
   if (enrolled) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, height: 44, backgroundColor: '#D1FAE5', borderRadius: 10, border: '1px solid #10B981' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, height: 44, backgroundColor: 'var(--color-success-light)', borderRadius: 10, border: '1px solid #10B981' }}>
         <CheckCircle2 size={18} color="#059669" />
         <span style={{ fontSize: 15, fontWeight: 600, color: '#059669' }}>Enrolled</span>
       </div>

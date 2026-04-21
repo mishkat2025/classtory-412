@@ -6,7 +6,7 @@ export const metadata = { title: 'For Teachers — Classtory' }
 export default function ForTeachersPage() {
   return (
     <div style={{ backgroundColor: 'var(--color-bg)', minHeight: '100vh' }}>
-      <nav style={{ backgroundColor: 'var(--color-surface)', borderBottom: '1px solid #E2E8F0', padding: '0 32px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <nav style={{ backgroundColor: 'var(--color-surface)', borderBottom: '1px solid var(--color-border)', padding: '0 32px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
           <div style={{ width: 30, height: 30, backgroundColor: '#4F46E5', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <BookOpen size={14} color="white" />
@@ -31,7 +31,7 @@ export default function ForTeachersPage() {
       <div style={{ maxWidth: 900, margin: '0 auto', padding: '56px 24px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 20 }}>
           {[
-            { icon: Users,         color: '#EEF2FF', iconColor: '#4F46E5', title: 'Private Classrooms',  desc: 'Create classrooms and invite students with a simple class code.' },
+            { icon: Users,         color: 'var(--color-primary-light)', iconColor: '#4F46E5', title: 'Private Classrooms',  desc: 'Create classrooms and invite students with a simple class code.' },
             { icon: BarChart3,     color: '#D1FAE5', iconColor: '#10B981', title: 'Gradebook & Reports', desc: 'Track grades, export CSV sheets, and give detailed feedback.' },
             { icon: FolderOpen,    color: '#FEF3C7', iconColor: '#F59E0B', title: 'Materials Library',   desc: 'Upload and share files, PDFs, and resources with your class.' },
             { icon: GraduationCap, color: '#DBEAFE', iconColor: '#3B82F6', title: 'Course Marketplace',  desc: 'Publish courses publicly and reach learners beyond your classroom.' },

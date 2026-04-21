@@ -39,7 +39,7 @@ export default async function AdminDashboard() {
       {/* Header */}
       <div style={{ marginBottom: 28 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
-          <div style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Shield size={16} color="#4F46E5" />
           </div>
           <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: 'var(--color-text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
@@ -51,10 +51,10 @@ export default async function AdminDashboard() {
 
       {/* Stats */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 16, marginBottom: 36 }}>
-        <StatCard icon={Users} label="Total Users" value={totalUsers ?? 0} iconBg="#EEF2FF" iconColor="#4F46E5" />
-        <StatCard icon={GraduationCap} label="Students" value={totalStudents ?? 0} iconBg="#D1FAE5" iconColor="#059669" />
-        <StatCard icon={Users} label="Teachers" value={totalTeachers ?? 0} iconBg="#FEF3C7" iconColor="#D97706" />
-        <StatCard icon={BookOpen} label="Courses" value={totalCourses ?? 0} iconBg="#DBEAFE" iconColor="#2563EB" />
+        <StatCard icon={Users} label="Total Users" value={totalUsers ?? 0} iconBg="var(--color-primary-light)" iconColor="#4F46E5" />
+        <StatCard icon={GraduationCap} label="Students" value={totalStudents ?? 0} iconBg="var(--color-success-light)" iconColor="#059669" />
+        <StatCard icon={Users} label="Teachers" value={totalTeachers ?? 0} iconBg="var(--color-warning-light)" iconColor="#D97706" />
+        <StatCard icon={BookOpen} label="Courses" value={totalCourses ?? 0} iconBg="var(--color-info-light)" iconColor="#2563EB" />
         <StatCard icon={BarChart3} label="Classrooms" value={totalClassrooms ?? 0} iconBg="#F3E8FF" iconColor="#9333EA" />
       </div>
 

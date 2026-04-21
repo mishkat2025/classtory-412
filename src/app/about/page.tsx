@@ -7,7 +7,7 @@ export default function AboutPage() {
   return (
     <div style={{ backgroundColor: 'var(--color-bg)', minHeight: '100vh' }}>
       {/* Nav */}
-      <nav style={{ backgroundColor: 'var(--color-surface)', borderBottom: '1px solid #E2E8F0', padding: '0 32px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <nav style={{ backgroundColor: 'var(--color-surface)', borderBottom: '1px solid var(--color-border)', padding: '0 32px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
           <div style={{ width: 30, height: 30, backgroundColor: '#4F46E5', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <BookOpen size={14} color="white" />
@@ -31,7 +31,7 @@ export default function AboutPage() {
       <div style={{ maxWidth: 800, margin: '0 auto', padding: '56px 24px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 20, marginBottom: 48 }}>
           {[
-            { icon: Users,    color: '#EEF2FF', iconColor: '#4F46E5', title: 'Community First',  desc: 'Built for students and teachers, not shareholders.' },
+            { icon: Users,    color: 'var(--color-primary-light)', iconColor: '#4F46E5', title: 'Community First',  desc: 'Built for students and teachers, not shareholders.' },
             { icon: Globe,    color: '#D1FAE5', iconColor: '#10B981', title: 'Global Reach',      desc: 'Accessible to learners everywhere, in every timezone.' },
             { icon: Sparkles, color: '#FEF3C7', iconColor: '#F59E0B', title: 'Always Improving',  desc: 'Continuously updated based on real classroom feedback.' },
           ].map(({ icon: Icon, color, iconColor, title, desc }) => (

@@ -130,10 +130,10 @@ export default async function TeacherDashboard() {
 
       {/* Stats */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 32 }}>
-        <StatCard icon={GraduationCap} label="My Classrooms" value={classrooms.length} iconBg="#EEF2FF" iconColor="#4F46E5" />
+        <StatCard icon={GraduationCap} label="My Classrooms" value={classrooms.length} iconBg="var(--color-primary-light)" iconColor="#4F46E5" />
         <StatCard icon={Store} label="My Courses" value={myCourses.length} iconBg="#F0FDF4" iconColor="#059669" />
-        <StatCard icon={Users} label="Total Students" value={totalStudents} iconBg="#D1FAE5" iconColor="#059669" />
-        <StatCard icon={ClipboardList} label="Assignments" value={totalAssignments} iconBg="#FEF3C7" iconColor="#D97706" />
+        <StatCard icon={Users} label="Total Students" value={totalStudents} iconBg="var(--color-success-light)" iconColor="#059669" />
+        <StatCard icon={ClipboardList} label="Assignments" value={totalAssignments} iconBg="var(--color-warning-light)" iconColor="#D97706" />
         <StatCard icon={Clock} label="Pending Grading" value={pendingSubmissions.length} iconBg="#FEE2E2" iconColor="#DC2626" />
       </div>
 
@@ -149,7 +149,7 @@ export default async function TeacherDashboard() {
               <Link key={course.id} href={`/courses/${course.id}`} style={{ textDecoration: 'none' }}>
                 <div className="card-hover" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '16px 20px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', height: '100%' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-                    <div style={{ width: 38, height: 38, borderRadius: 9, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <div style={{ width: 38, height: 38, borderRadius: 9, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <BookOpen size={18} color="#4F46E5" />
                     </div>
                     <div style={{ minWidth: 0 }}>
@@ -158,7 +158,7 @@ export default async function TeacherDashboard() {
                     </div>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: 12, fontWeight: 600, color: '#059669', backgroundColor: '#D1FAE5', borderRadius: 9999, padding: '2px 10px' }}>
+                    <span style={{ fontSize: 12, fontWeight: 600, color: '#059669', backgroundColor: 'var(--color-success-light)', borderRadius: 9999, padding: '2px 10px' }}>
                       {course.student_count ?? 0} enrolled
                     </span>
                     <span style={{ fontSize: 13, fontWeight: 700, color: course.price === 0 ? '#10B981' : '#0F172A' }}>
@@ -179,7 +179,7 @@ export default async function TeacherDashboard() {
 
           {classroomsWithCount.length === 0 ? (
             <div style={{ backgroundColor: 'var(--color-surface)', border: '2px dashed var(--color-border)', borderRadius: 14, padding: '56px 24px', textAlign: 'center' }}>
-              <div style={{ width: 56, height: 56, borderRadius: 14, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+              <div style={{ width: 56, height: 56, borderRadius: 14, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
                 <GraduationCap size={28} color="#4F46E5" />
               </div>
               <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 8px 0' }}>
@@ -202,7 +202,7 @@ export default async function TeacherDashboard() {
                     style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '16px 20px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                      <div style={{ width: 44, height: 44, borderRadius: 10, backgroundColor: cls.cover_color || '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <div style={{ width: 44, height: 44, borderRadius: 10, backgroundColor: cls.cover_color || 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                         <BookOpen size={20} color={cls.cover_color ? '#FFFFFF' : '#4F46E5'} />
                       </div>
                       <div>
@@ -255,7 +255,7 @@ export default async function TeacherDashboard() {
                     <p style={{ fontSize: 12, color: 'var(--color-text-secondary)', margin: '0 0 4px 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                       {sub.assignment?.title} · {sub.assignment?.classroom?.name}
                     </p>
-                    <span style={{ fontSize: 11, fontWeight: 600, color: '#D97706', backgroundColor: '#FEF3C7', borderRadius: 9999, padding: '1px 8px' }}>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: '#D97706', backgroundColor: 'var(--color-warning-light)', borderRadius: 9999, padding: '1px 8px' }}>
                       Needs grading
                     </span>
                   </div>

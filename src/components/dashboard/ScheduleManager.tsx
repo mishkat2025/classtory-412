@@ -32,10 +32,10 @@ const TYPE_LABELS: Record<ScheduleItemType, string> = {
 }
 
 const TYPE_COLORS: Record<ScheduleItemType, { bg: string; text: string }> = {
-  exam:       { bg: '#FEE2E2', text: '#991B1B' },
-  assignment: { bg: '#FEF3C7', text: '#92400E' },
-  class:      { bg: '#D1FAE5', text: '#065F46' },
-  custom:     { bg: '#EEF2FF', text: '#3730A3' },
+  exam:       { bg: 'var(--color-danger-light)', text: '#991B1B' },
+  assignment: { bg: 'var(--color-warning-light)', text: '#92400E' },
+  class:      { bg: 'var(--color-success-light)', text: '#065F46' },
+  custom:     { bg: 'var(--color-primary-light)', text: '#3730A3' },
 }
 
 const TYPE_ICONS: Record<ScheduleItemType, React.ReactNode> = {
@@ -207,7 +207,7 @@ export function ScheduleManager({ teacherId, classrooms }: ScheduleManagerProps)
       <section>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <CalendarDays size={16} color="#4F46E5" />
             </div>
             <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)', margin: 0, letterSpacing: '-0.01em' }}>
@@ -230,7 +230,7 @@ export function ScheduleManager({ teacherId, classrooms }: ScheduleManagerProps)
             </div>
           ) : items.length === 0 ? (
             <div style={{ padding: '40px 24px', textAlign: 'center' }}>
-              <div style={{ width: 48, height: 48, borderRadius: 12, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>
+              <div style={{ width: 48, height: 48, borderRadius: 12, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>
                 <CalendarDays size={22} color="#4F46E5" />
               </div>
               <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '0 0 4px 0', fontWeight: 500 }}>No schedule items yet</p>
@@ -239,7 +239,7 @@ export function ScheduleManager({ teacherId, classrooms }: ScheduleManagerProps)
           ) : (
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ backgroundColor: 'var(--color-surface-2)', borderBottom: '1px solid #E2E8F0' }}>
+                <tr style={{ backgroundColor: 'var(--color-surface-2)', borderBottom: '1px solid var(--color-border)' }}>
                   {['Event', 'Type', 'Classroom', 'Date & Time', ''].map(h => (
                     <th key={h} style={{ padding: '10px 16px', fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textAlign: 'left', textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>
                       {h}
@@ -255,7 +255,7 @@ export function ScheduleManager({ teacherId, classrooms }: ScheduleManagerProps)
                     <tr
                       key={item.id}
                       style={{
-                        borderBottom: i < items.length - 1 ? '1px solid #F1F5F9' : 'none',
+                        borderBottom: i < items.length - 1 ? '1px solid var(--color-border)' : 'none',
                         opacity: isPast ? 0.55 : 1,
                       }}
                     >
@@ -294,7 +294,7 @@ export function ScheduleManager({ teacherId, classrooms }: ScheduleManagerProps)
                             onClick={() => handleDelete(item.id)}
                             title="Delete"
                             disabled={deletingId === item.id}
-                            style={{ width: 30, height: 30, borderRadius: 7, border: '1px solid #FEE2E2', backgroundColor: '#FFF5F5', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                            style={{ width: 30, height: 30, borderRadius: 7, border: '1px solid #FEE2E2', backgroundColor: 'var(--color-danger-light)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                           >
                             {deletingId === item.id
                               ? <Loader2 size={13} color="#DC2626" style={{ animation: 'spin 1s linear infinite' }} />
@@ -320,7 +320,7 @@ export function ScheduleManager({ teacherId, classrooms }: ScheduleManagerProps)
         >
           <div style={{ backgroundColor: 'var(--color-surface)', borderRadius: 16, width: '100%', maxWidth: 520, boxShadow: '0 8px 32px rgba(0,0,0,0.16)', overflow: 'hidden' }}>
             {/* Header */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 24px', borderBottom: '1px solid #E2E8F0' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 24px', borderBottom: '1px solid var(--color-border)' }}>
               <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)', margin: 0 }}>
                 {editing ? 'Edit Schedule Item' : 'New Schedule Item'}
               </h3>

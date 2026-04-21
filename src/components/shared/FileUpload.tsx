@@ -94,7 +94,7 @@ export function FileUpload({ bucket, path, onUpload, accept, maxSizeMB = 50 }: F
           padding: '28px 20px',
           textAlign: 'center',
           cursor: uploading ? 'not-allowed' : 'pointer',
-          backgroundColor: isDragging ? '#EEF2FF' : '#F8F9FC',
+          backgroundColor: isDragging ? 'var(--color-primary-light)' : 'var(--color-bg)',
           transition: 'border-color 150ms ease, background-color 150ms ease',
         }}
       >
@@ -120,7 +120,7 @@ export function FileUpload({ bucket, path, onUpload, accept, maxSizeMB = 50 }: F
           </div>
         ) : (
           <>
-            <div style={{ width: 44, height: 44, borderRadius: 10, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>
+            <div style={{ width: 44, height: 44, borderRadius: 10, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>
               <Upload size={20} color="#4F46E5" />
             </div>
             <p style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-text-primary)', margin: '0 0 4px 0' }}>

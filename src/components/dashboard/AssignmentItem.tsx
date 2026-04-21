@@ -40,7 +40,7 @@ const statusConfig: Record<
 > = {
   pending: {
     label: 'Pending',
-    bg: '#FEF3C7',
+    bg: 'var(--color-warning-light)',
     text: '#92400E',
     icon: <Clock size={11} />,
   },
@@ -52,13 +52,13 @@ const statusConfig: Record<
   },
   graded: {
     label: 'Graded',
-    bg: '#D1FAE5',
+    bg: 'var(--color-success-light)',
     text: '#065F46',
     icon: <Star size={11} />,
   },
   overdue: {
     label: 'Overdue',
-    bg: '#FEE2E2',
+    bg: 'var(--color-danger-light)',
     text: '#991B1B',
     icon: <AlertCircle size={11} />,
   },

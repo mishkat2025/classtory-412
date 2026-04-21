@@ -130,7 +130,7 @@ export default async function StudentGradesPage() {
       {/* ── Header ── */}
       <div style={{ marginBottom: 28 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
-          <div style={{ width: 36, height: 36, borderRadius: 10, backgroundColor: '#DBEAFE', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: 36, height: 36, borderRadius: 10, backgroundColor: 'var(--color-info-light)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <BarChart3 size={18} color="#2563EB" />
           </div>
           <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: 'var(--color-text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
@@ -145,9 +145,9 @@ export default async function StudentGradesPage() {
       {/* ── Overall summary ── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 12, marginBottom: 32 }}>
         {[
-          { label: 'Classrooms',      value: classrooms.length,          bg: '#EEF2FF', color: '#3730A3' },
-          { label: 'Graded Work',     value: allGrades.length,            bg: '#D1FAE5', color: '#065F46' },
-          { label: 'Overall Average', value: overallAvg != null ? `${overallAvg}%` : '—', bg: overallAvg == null ? '#F1F5F9' : gradeBg(overallAvg), color: overallAvg == null ? '#64748B' : gradeColor(overallAvg) },
+          { label: 'Classrooms',      value: classrooms.length,          bg: 'var(--color-primary-light)', color: '#3730A3' },
+          { label: 'Graded Work',     value: allGrades.length,            bg: 'var(--color-success-light)', color: '#065F46' },
+          { label: 'Overall Average', value: overallAvg != null ? `${overallAvg}%` : '—', bg: overallAvg == null ? 'var(--color-surface-2)' : gradeBg(overallAvg), color: overallAvg == null ? '#64748B' : gradeColor(overallAvg) },
         ].map(({ label, value, bg, color }) => (
           <div key={label} style={{ backgroundColor: bg, borderRadius: 10, padding: '12px 16px' }}>
             <div style={{ fontSize: 24, fontWeight: 700, color, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{value}</div>
@@ -159,7 +159,7 @@ export default async function StudentGradesPage() {
       {/* ── No classrooms ── */}
       {classrooms.length === 0 && (
         <div style={{ backgroundColor: 'var(--color-surface)', border: '2px dashed var(--color-border)', borderRadius: 14, padding: '56px 24px', textAlign: 'center' }}>
-          <div style={{ width: 60, height: 60, borderRadius: 16, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+          <div style={{ width: 60, height: 60, borderRadius: 16, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
             <BookOpen size={28} color="#A5B4FC" />
           </div>
           <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 8px 0' }}>
@@ -197,7 +197,7 @@ export default async function StudentGradesPage() {
               justifyContent: 'space-between',
               gap: 12,
               flexWrap: 'wrap',
-              backgroundColor: '#FAFBFC',
+              backgroundColor: 'var(--color-surface-2)',
             }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -235,7 +235,7 @@ export default async function StudentGradesPage() {
                 )}
                 <Link
                   href={`/classroom/${classroom.id}/grades`}
-                  style={{ fontSize: 12, color: '#4F46E5', textDecoration: 'none', fontWeight: 600, backgroundColor: '#EEF2FF', borderRadius: 7, padding: '5px 10px', whiteSpace: 'nowrap' }}
+                  style={{ fontSize: 12, color: '#4F46E5', textDecoration: 'none', fontWeight: 600, backgroundColor: 'var(--color-primary-light)', borderRadius: 7, padding: '5px 10px', whiteSpace: 'nowrap' }}
                 >
                   Full gradebook →
                 </Link>
@@ -272,7 +272,7 @@ export default async function StudentGradesPage() {
                     {grades.map((g, i) => (
                       <tr
                         key={g.assignmentId}
-                        style={{ borderBottom: i < grades.length - 1 ? '1px solid #F9FAFB' : 'none' }}
+                        style={{ borderBottom: i < grades.length - 1 ? '1px solid var(--color-border)' : 'none' }}
                       >
                         {/* Assignment title */}
                         <td style={{ padding: '11px 16px', maxWidth: 280 }}>

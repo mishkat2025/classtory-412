@@ -300,7 +300,7 @@ export function AnnouncementFeed({
               width: 48,
               height: 48,
               borderRadius: 12,
-              backgroundColor: '#EEF2FF',
+              backgroundColor: 'var(--color-primary-light)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -340,7 +340,7 @@ export function AnnouncementFeed({
               style={{
                 padding: '20px 24px',
                 borderBottom:
-                  i < announcements.length - 1 ? '1px solid #F1F5F9' : 'none',
+                  i < announcements.length - 1 ? '1px solid var(--color-border)' : 'none',
               }}
             >
               {/* Author row */}
@@ -373,7 +373,7 @@ export function AnnouncementFeed({
                           fontSize: 11,
                           fontWeight: 600,
                           color: '#3730A3',
-                          backgroundColor: '#EEF2FF',
+                          backgroundColor: 'var(--color-primary-light)',
                           borderRadius: 9999,
                           padding: '1px 8px',
                         }}
@@ -443,7 +443,7 @@ export function AnnouncementFeed({
                   <button
                     onClick={() => setCopyingItem(item)}
                     title="Copy to another class"
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', backgroundColor: '#EEF2FF', border: '1px solid #C7D2FE', borderRadius: 7, fontSize: 11, fontWeight: 600, color: '#3730A3', cursor: 'pointer' }}
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', backgroundColor: 'var(--color-primary-light)', border: '1px solid #C7D2FE', borderRadius: 7, fontSize: 11, fontWeight: 600, color: '#3730A3', cursor: 'pointer' }}
                   >
                     <Copy size={11} /> Copy to class
                   </button>
@@ -451,7 +451,7 @@ export function AnnouncementFeed({
                     onClick={() => handleDelete(item)}
                     disabled={deletingId === item.id}
                     title="Delete"
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', backgroundColor: '#FEE2E2', border: '1px solid #FECACA', borderRadius: 7, fontSize: 11, fontWeight: 600, color: '#991B1B', cursor: 'pointer' }}
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', backgroundColor: 'var(--color-danger-light)', border: '1px solid #FECACA', borderRadius: 7, fontSize: 11, fontWeight: 600, color: '#991B1B', cursor: 'pointer' }}
                   >
                     {deletingId === item.id ? <Loader2 size={11} className="animate-spin" /> : <Trash2 size={11} />}
                     Delete

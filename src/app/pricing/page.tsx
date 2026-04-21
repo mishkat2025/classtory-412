@@ -9,7 +9,7 @@ const plans = [
     price: 'Free',
     desc: 'Everything you need to learn and collaborate.',
     color: '#4F46E5',
-    bg: '#EEF2FF',
+    bg: 'var(--color-primary-light)',
     features: ['Join unlimited classrooms', 'Submit assignments', 'Browse marketplace courses', 'View grades & attendance'],
   },
   {
@@ -17,7 +17,7 @@ const plans = [
     price: 'Free',
     desc: 'Powerful tools for educators, at no cost.',
     color: '#10B981',
-    bg: '#D1FAE5',
+    bg: 'var(--color-success-light)',
     features: ['Create unlimited classrooms', 'Publish marketplace courses', 'Grade & give feedback', 'Attendance tracking', 'Export grade reports'],
   },
 ]
@@ -25,7 +25,7 @@ const plans = [
 export default function PricingPage() {
   return (
     <div style={{ backgroundColor: 'var(--color-bg)', minHeight: '100vh' }}>
-      <nav style={{ backgroundColor: 'var(--color-surface)', borderBottom: '1px solid #E2E8F0', padding: '0 32px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <nav style={{ backgroundColor: 'var(--color-surface)', borderBottom: '1px solid var(--color-border)', padding: '0 32px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
           <div style={{ width: 30, height: 30, backgroundColor: '#4F46E5', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <BookOpen size={14} color="white" />
@@ -48,7 +48,7 @@ export default function PricingPage() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
           {plans.map(plan => (
             <div key={plan.name} style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 16, overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
-              <div style={{ backgroundColor: plan.bg, padding: '28px 28px 24px', borderBottom: '1px solid #E2E8F0' }}>
+              <div style={{ backgroundColor: plan.bg, padding: '28px 28px 24px', borderBottom: '1px solid var(--color-border)' }}>
                 <div style={{ fontSize: 12, fontWeight: 700, color: plan.color, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>{plan.name}</div>
                 <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 36, fontWeight: 800, color: 'var(--color-text-primary)', marginBottom: 8 }}>{plan.price}</div>
                 <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>{plan.desc}</div>

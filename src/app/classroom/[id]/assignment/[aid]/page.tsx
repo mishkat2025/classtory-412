@@ -167,7 +167,7 @@ export default async function AssignmentPage({
                 <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)', margin: 0 }}>Your Grade</h2>
               </div>
               <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', marginBottom: mySubmission.feedback ? 16 : 0 }}>
-                <div style={{ backgroundColor: '#D1FAE5', borderRadius: 10, padding: '12px 20px', textAlign: 'center' }}>
+                <div style={{ backgroundColor: 'var(--color-success-light)', borderRadius: 10, padding: '12px 20px', textAlign: 'center' }}>
                   <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 28, fontWeight: 800, color: '#059669', margin: '0 0 2px 0' }}>
                     {mySubmission.grade}/{assignment.max_points}
                   </p>
@@ -187,7 +187,7 @@ export default async function AssignmentPage({
             /* Submitted — show confirmation */
             <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '24px 28px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-                <div style={{ width: 40, height: 40, borderRadius: 10, backgroundColor: '#D1FAE5', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: 40, height: 40, borderRadius: 10, backgroundColor: 'var(--color-success-light)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <CheckCircle2 size={20} color="#059669" />
                 </div>
                 <div>
