@@ -142,11 +142,19 @@ export function ScheduleManager({ teacherId, classrooms }: ScheduleManagerProps)
   /* ── Submit ─────────────────────────────────────────────────────── */
   async function onSubmit(values: FormData) {
     const supabase = createClient()
+
+    // Parse the datetime-local string as local time → ISO
+    const parsedDate = new Date(values.event_date)
+    if (isNaN(parsedDate.getTime())) {
+      toast.error('Invalid date — please pick a date and time')
+      return
+    }
+
     const payload = {
       teacher_id: teacherId,
-      title: values.title,
-      description: values.description,
-      event_date: new Date(values.event_date).toISOString(),
+      title: values.title.trim(),
+      description: values.description ?? '',
+      event_date: parsedDate.toISOString(),
       type: values.type,
       classroom_id: values.classroom_id || null,
     }
@@ -156,13 +164,21 @@ export function ScheduleManager({ teacherId, classrooms }: ScheduleManagerProps)
         .from('schedule_items')
         .update(payload)
         .eq('id', editing.id)
-      if (error) { toast.error('Failed to update item'); return }
+      if (error) {
+        console.error('Schedule update error:', error)
+        toast.error(`Failed to update: ${error.message}`)
+        return
+      }
       toast.success('Schedule item updated')
     } else {
       const { error } = await supabase
         .from('schedule_items')
         .insert(payload)
-      if (error) { toast.error('Failed to create item'); return }
+      if (error) {
+        console.error('Schedule insert error:', error)
+        toast.error(`Failed to create: ${error.message}`)
+        return
+      }
       toast.success('Schedule item created')
     }
 

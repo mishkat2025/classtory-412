@@ -20,10 +20,12 @@ ALTER TABLE schedule_items ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Teachers manage own schedule_items" ON schedule_items;
 DROP POLICY IF EXISTS "Students view schedule_items for enrolled classrooms" ON schedule_items;
 
--- Teachers can fully manage schedule items they own
+-- Teachers can SELECT, INSERT, UPDATE, DELETE their own items
+-- Explicit WITH CHECK is required for INSERT/UPDATE to work under RLS
 CREATE POLICY "Teachers manage own schedule_items"
   ON schedule_items FOR ALL
-  USING (teacher_id = auth.uid());
+  USING    (teacher_id = auth.uid())
+  WITH CHECK (teacher_id = auth.uid());
 
 -- Students can read schedule items for their enrolled classrooms
 CREATE POLICY "Students view schedule_items for enrolled classrooms"
