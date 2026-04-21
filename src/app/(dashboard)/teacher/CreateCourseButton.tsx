@@ -20,7 +20,7 @@ const schema = z.object({
   description: z.string().min(10, 'Description must be at least 10 characters'),
   category: z.string().min(1, 'Select a category'),
   price: z.number().min(0, 'Price must be 0 or more'),
-  tags: z.string().default(''),
+  tags: z.string().min(0),
 })
 
 type FormData = z.infer<typeof schema>
