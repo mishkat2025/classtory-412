@@ -30,8 +30,8 @@ export function RecommendationCard({
     >
       <div
         style={{
-          backgroundColor: '#FFFFFF',
-          border: '1px solid #E2E8F0',
+          backgroundColor: 'var(--color-surface)',
+          border: '1px solid var(--color-border)',
           borderRadius: 14,
           overflow: 'hidden',
           boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
@@ -90,7 +90,7 @@ export function RecommendationCard({
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: 14,
               fontWeight: 700,
-              color: '#0F172A',
+              color: 'var(--color-text-primary)',
               margin: '0 0 4px 0',
               lineHeight: 1.35,
               letterSpacing: '-0.01em',
@@ -103,7 +103,7 @@ export function RecommendationCard({
             {title}
           </h4>
 
-          <p style={{ fontSize: 12, color: '#94A3B8', margin: '0 0 10px 0' }}>
+          <p style={{ fontSize: 12, color: 'var(--color-text-muted)', margin: '0 0 10px 0' }}>
             {instructor_name}
           </p>
 
@@ -118,13 +118,13 @@ export function RecommendationCard({
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
               <Star size={12} color="#F59E0B" fill="#F59E0B" />
-              <span style={{ fontSize: 12, fontWeight: 600, color: '#0F172A' }}>
+              <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-primary)' }}>
                 {rating > 0 ? rating.toFixed(1) : '—'}
               </span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
               <Users size={12} color="#94A3B8" />
-              <span style={{ fontSize: 12, color: '#64748B' }}>
+              <span style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>
                 {student_count.toLocaleString()}
               </span>
             </div>

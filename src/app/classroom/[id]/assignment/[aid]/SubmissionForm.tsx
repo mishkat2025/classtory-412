@@ -57,11 +57,11 @@ export function SubmissionForm({ assignmentId, classroomId, studentId, isOverdue
   }
 
   return (
-    <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '24px 28px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
-      <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: '#0F172A', margin: '0 0 4px 0' }}>
+    <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '24px 28px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+      <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 4px 0' }}>
         Your Submission
       </h2>
-      <p style={{ fontSize: 13, color: '#64748B', margin: '0 0 20px 0' }}>
+      <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', margin: '0 0 20px 0' }}>
         Worth {maxPoints} points
       </p>
 
@@ -75,7 +75,7 @@ export function SubmissionForm({ assignmentId, classroomId, studentId, isOverdue
       )}
 
       {/* Tab switch */}
-      <div style={{ display: 'flex', gap: 0, marginBottom: 20, border: '1px solid #E2E8F0', borderRadius: 8, overflow: 'hidden', width: 'fit-content' }}>
+      <div style={{ display: 'flex', gap: 0, marginBottom: 20, border: '1px solid var(--color-border)', borderRadius: 8, overflow: 'hidden', width: 'fit-content' }}>
         {([
           { id: 'text' as const, label: 'Write text', Icon: Send },
           { id: 'file' as const, label: 'Upload file', Icon: Upload },
@@ -114,12 +114,12 @@ export function SubmissionForm({ assignmentId, classroomId, studentId, isOverdue
             rows={8}
             style={{
               width: '100%',
-              border: '1px solid #E2E8F0',
+              border: '1px solid var(--color-border)',
               borderRadius: 8,
               padding: '12px 14px',
               fontSize: 14,
               fontFamily: "'Inter', sans-serif",
-              color: '#0F172A',
+              color: 'var(--color-text-primary)',
               resize: 'vertical',
               outline: 'none',
               lineHeight: 1.7,

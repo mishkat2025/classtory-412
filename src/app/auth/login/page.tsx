@@ -74,7 +74,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', backgroundColor: '#F8F9FC' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', backgroundColor: 'var(--color-bg)' }}>
 
       {/* ── Left panel — branding ────────────────────────────── */}
       <div
@@ -141,13 +141,13 @@ export default function LoginPage() {
             <div style={{ width: 28, height: 28, borderRadius: 6, backgroundColor: '#4F46E5', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <BookOpen size={16} color="#fff" />
             </div>
-            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 16, color: '#0F172A' }}>Classtory</span>
+            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 16, color: 'var(--color-text-primary)' }}>Classtory</span>
           </Link>
 
           {/* Card */}
-          <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '36px 40px', boxShadow: '0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)' }}>
+          <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '36px 40px', boxShadow: 'var(--shadow-card)' }}>
             <div style={{ marginBottom: 28 }}>
-              <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 22, fontWeight: 700, color: '#0F172A', margin: '0 0 6px 0', letterSpacing: '-0.01em' }}>
+              <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 22, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 6px 0', letterSpacing: '-0.01em' }}>
                 Welcome back
               </h2>
               <p style={{ fontSize: 14, color: '#475569', margin: 0 }}>Sign in to your Classtory account</p>
@@ -192,7 +192,7 @@ export default function LoginPage() {
                     type="button"
                     onClick={() => setShowPassword(v => !v)}
                     tabIndex={-1}
-                    style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', display: 'flex', padding: 2 }}
+                    style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)', display: 'flex', padding: 2 }}
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
                   >
                     {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -254,7 +254,7 @@ const fieldWrap: React.CSSProperties = {
 const labelStyle: React.CSSProperties = {
   fontSize: 13,
   fontWeight: 500,
-  color: '#0F172A',
+  color: 'var(--color-text-primary)',
 }
 
 function inputStyle(hasError: boolean): React.CSSProperties {
@@ -266,8 +266,8 @@ function inputStyle(hasError: boolean): React.CSSProperties {
     padding: '0 12px',
     fontSize: 14,
     fontFamily: "'Inter', sans-serif",
-    color: '#0F172A',
-    backgroundColor: '#FFFFFF',
+    color: 'var(--color-text-primary)',
+    backgroundColor: 'var(--color-surface)',
     outline: 'none',
     transition: 'border-color 150ms ease, box-shadow 150ms ease',
     boxSizing: 'border-box',

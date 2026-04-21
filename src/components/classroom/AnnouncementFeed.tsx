@@ -204,8 +204,8 @@ export function AnnouncementFeed({
       {/* Compose box */}
       <div
         style={{
-          backgroundColor: '#FFFFFF',
-          border: '1px solid #E2E8F0',
+          backgroundColor: 'var(--color-surface)',
+          border: '1px solid var(--color-border)',
           borderRadius: 14,
           padding: 20,
           boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
@@ -223,12 +223,12 @@ export function AnnouncementFeed({
               rows={3}
               style={{
                 width: '100%',
-                border: '1px solid #E2E8F0',
+                border: '1px solid var(--color-border)',
                 borderRadius: 8,
                 padding: '10px 12px',
                 fontSize: 14,
                 fontFamily: "'Inter', sans-serif",
-                color: '#0F172A',
+                color: 'var(--color-text-primary)',
                 resize: 'vertical',
                 outline: 'none',
                 transition: 'border-color 150ms ease, box-shadow 150ms ease',
@@ -252,7 +252,7 @@ export function AnnouncementFeed({
                 marginTop: 10,
               }}
             >
-              <span style={{ fontSize: 12, color: '#94A3B8' }}>
+              <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>
                 Ctrl+Enter to post
               </span>
               <button
@@ -287,8 +287,8 @@ export function AnnouncementFeed({
       {announcements.length === 0 ? (
         <div
           style={{
-            backgroundColor: '#FFFFFF',
-            border: '1px solid #E2E8F0',
+            backgroundColor: 'var(--color-surface)',
+            border: '1px solid var(--color-border)',
             borderRadius: 14,
             padding: '48px 24px',
             textAlign: 'center',
@@ -314,21 +314,21 @@ export function AnnouncementFeed({
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: 15,
               fontWeight: 700,
-              color: '#0F172A',
+              color: 'var(--color-text-primary)',
               margin: '0 0 6px 0',
             }}
           >
             No announcements yet
           </p>
-          <p style={{ fontSize: 14, color: '#64748B', margin: 0 }}>
+          <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
             Post something to get the conversation started.
           </p>
         </div>
       ) : (
         <div
           style={{
-            backgroundColor: '#FFFFFF',
-            border: '1px solid #E2E8F0',
+            backgroundColor: 'var(--color-surface)',
+            border: '1px solid var(--color-border)',
             borderRadius: 14,
             overflow: 'hidden',
             boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
@@ -362,7 +362,7 @@ export function AnnouncementFeed({
                       style={{
                         fontSize: 14,
                         fontWeight: 600,
-                        color: '#0F172A',
+                        color: 'var(--color-text-primary)',
                       }}
                     >
                       {item.author?.full_name ?? 'Unknown'}
@@ -382,7 +382,7 @@ export function AnnouncementFeed({
                       </span>
                     )}
                   </div>
-                  <span style={{ fontSize: 12, color: '#94A3B8' }}>
+                  <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>
                     {relativeTime(item.created_at)}
                   </span>
                 </div>
@@ -398,7 +398,7 @@ export function AnnouncementFeed({
                     style={{
                       width: '100%', border: '1px solid #4F46E5', borderRadius: 8,
                       padding: '10px 12px', fontSize: 14, fontFamily: "'Inter', sans-serif",
-                      color: '#0F172A', resize: 'vertical', outline: 'none',
+                      color: 'var(--color-text-primary)', resize: 'vertical', outline: 'none',
                       boxShadow: '0 0 0 3px rgba(79,70,229,0.1)', boxSizing: 'border-box', lineHeight: 1.6,
                     }}
                   />
@@ -413,7 +413,7 @@ export function AnnouncementFeed({
                     </button>
                     <button
                       onClick={() => setEditingId(null)}
-                      style={{ display: 'inline-flex', alignItems: 'center', gap: 5, height: 32, padding: '0 12px', backgroundColor: '#F1F5F9', color: '#0F172A', border: 'none', borderRadius: 7, fontSize: 12, fontWeight: 600, cursor: 'pointer' }}
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: 5, height: 32, padding: '0 12px', backgroundColor: 'var(--color-surface-2)', color: 'var(--color-text-primary)', border: 'none', borderRadius: 7, fontSize: 12, fontWeight: 600, cursor: 'pointer' }}
                     >
                       <X size={12} /> Cancel
                     </button>
@@ -436,7 +436,7 @@ export function AnnouncementFeed({
                   <button
                     onClick={() => startEdit(item)}
                     title="Edit"
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', backgroundColor: '#F1F5F9', border: '1px solid #E2E8F0', borderRadius: 7, fontSize: 11, fontWeight: 600, color: '#475569', cursor: 'pointer' }}
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, height: 28, padding: '0 10px', backgroundColor: 'var(--color-surface-2)', border: '1px solid var(--color-border)', borderRadius: 7, fontSize: 11, fontWeight: 600, color: '#475569', cursor: 'pointer' }}
                   >
                     <Pencil size={11} /> Edit
                   </button>

@@ -66,23 +66,23 @@ export function SettingsForm({ profile }: { profile: Profile }) {
   )
 
   return (
-    <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+    <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
       {/* Tabs */}
-      <div style={{ padding: '12px 16px', borderBottom: '1px solid #F1F5F9', display: 'flex', gap: 4 }}>
+      <div style={{ padding: '12px 16px', borderBottom: '1px solid var(--color-border)', display: 'flex', gap: 4 }}>
         {tab('profile', '👤 Profile')}
         {tab('password', '🔒 Password')}
       </div>
 
       <div style={{ padding: 24 }}>
         {/* Read-only info */}
-        <div style={{ backgroundColor: '#F8F9FC', border: '1px solid #E2E8F0', borderRadius: 10, padding: '12px 16px', marginBottom: 24, display: 'flex', gap: 24, flexWrap: 'wrap' }}>
+        <div style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: 10, padding: '12px 16px', marginBottom: 24, display: 'flex', gap: 24, flexWrap: 'wrap' }}>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 2 }}>Email</div>
-            <div style={{ fontSize: 14, color: '#0F172A' }}>{profile.email}</div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 2 }}>Email</div>
+            <div style={{ fontSize: 14, color: 'var(--color-text-primary)' }}>{profile.email}</div>
           </div>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 2 }}>Role</div>
-            <div style={{ fontSize: 14, color: '#0F172A', textTransform: 'capitalize' }}>{profile.role}</div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 2 }}>Role</div>
+            <div style={{ fontSize: 14, color: 'var(--color-text-primary)', textTransform: 'capitalize' }}>{profile.role}</div>
           </div>
         </div>
 
@@ -154,10 +154,10 @@ export function SettingsForm({ profile }: { profile: Profile }) {
   )
 }
 
-const labelStyle: React.CSSProperties = { display: 'block', fontSize: 13, fontWeight: 500, color: '#0F172A', marginBottom: 6 }
+const labelStyle: React.CSSProperties = { display: 'block', fontSize: 13, fontWeight: 500, color: 'var(--color-text-primary)', marginBottom: 6 }
 const errStyle: React.CSSProperties = { fontSize: 12, color: '#EF4444', marginTop: 4, display: 'block' }
 function inputStyle(hasError: boolean): React.CSSProperties {
-  return { width: '100%', height: 40, border: `1px solid ${hasError ? '#EF4444' : '#E2E8F0'}`, borderRadius: 8, padding: '0 12px', fontSize: 14, outline: 'none', fontFamily: 'inherit', backgroundColor: '#FFFFFF', color: '#0F172A', boxSizing: 'border-box' }
+  return { width: '100%', height: 40, border: `1px solid ${hasError ? '#EF4444' : '#E2E8F0'}`, borderRadius: 8, padding: '0 12px', fontSize: 14, outline: 'none', fontFamily: 'inherit', backgroundColor: 'var(--color-surface)', color: 'var(--color-text-primary)', boxSizing: 'border-box' }
 }
 function btnStyle(disabled: boolean): React.CSSProperties {
   return { height: 38, padding: '0 20px', backgroundColor: disabled ? '#E2E8F0' : '#4F46E5', color: disabled ? '#94A3B8' : '#FFFFFF', border: 'none', borderRadius: 8, fontSize: 14, fontWeight: 600, cursor: disabled ? 'not-allowed' : 'pointer', display: 'inline-flex', alignItems: 'center', gap: 6 }

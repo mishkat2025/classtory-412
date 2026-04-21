@@ -42,11 +42,11 @@ export default async function AdminDashboard() {
           <div style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Shield size={16} color="#4F46E5" />
           </div>
-          <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: '#0F172A', margin: 0, letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: 'var(--color-text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
             Admin Dashboard
           </h1>
         </div>
-        <p style={{ fontSize: 14, color: '#64748B', margin: 0 }}>Platform-wide overview and user management</p>
+        <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>Platform-wide overview and user management</p>
       </div>
 
       {/* Stats */}
@@ -60,7 +60,7 @@ export default async function AdminDashboard() {
 
       {/* User Table */}
       <section>
-        <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: '#0F172A', margin: '0 0 16px 0' }}>
+        <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 16px 0' }}>
           All Users
         </h2>
         <AdminUserTable initialUsers={(recentUsers ?? []) as Profile[]} />

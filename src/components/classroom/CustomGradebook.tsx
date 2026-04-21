@@ -78,7 +78,7 @@ function ColForm({
   }
 
   return (
-    <form onSubmit={submit} style={{ backgroundColor: '#F8F9FC', border: '1px solid #E2E8F0', borderRadius: 10, padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+    <form onSubmit={submit} style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: 10, padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 100px 100px', gap: 8 }}>
         <div>
           <label style={lbl}>Column title</label>
@@ -89,17 +89,17 @@ function ColForm({
           <input value={v.maxRaw} onChange={set('maxRaw')} type="number" min={1} step="any" placeholder="100" style={inp} />
         </div>
         <div>
-          <label style={lbl}>Convert to <span style={{ color: '#94A3B8', fontWeight: 400 }}>(opt)</span></label>
+          <label style={lbl}>Convert to <span style={{ color: 'var(--color-text-muted)', fontWeight: 400 }}>(opt)</span></label>
           <input value={v.maxConverted} onChange={set('maxConverted')} type="number" min={0} step="any" placeholder="—" style={inp} />
         </div>
       </div>
       {v.maxConverted && v.maxRaw && (
-        <p style={{ fontSize: 11, color: '#64748B', margin: 0 }}>
+        <p style={{ fontSize: 11, color: 'var(--color-text-secondary)', margin: 0 }}>
           Preview: score of <b>{Number(v.maxRaw)}</b> / {v.maxRaw} → <b>{v.maxConverted}</b> pts (full marks)
         </p>
       )}
       <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
-        <button type="button" onClick={onCancel} style={{ ...btn, backgroundColor: '#FFFFFF', color: '#475569', border: '1px solid #E2E8F0' }}>Cancel</button>
+        <button type="button" onClick={onCancel} style={{ ...btn, backgroundColor: 'var(--color-surface)', color: '#475569', border: '1px solid var(--color-border)' }}>Cancel</button>
         <button type="submit" disabled={saving} style={{ ...btn, backgroundColor: '#4F46E5', color: '#FFFFFF', border: 'none', opacity: saving ? 0.7 : 1, gap: 5 }}>
           {saving && <Loader2 size={12} className="animate-spin" />} Save
         </button>
@@ -249,8 +249,8 @@ export function CustomGradebook({
 
   if (students.length === 0) {
     return (
-      <div style={{ textAlign: 'center', padding: '64px 24px', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14 }}>
-        <p style={{ fontSize: 14, color: '#94A3B8', margin: 0 }}>No students enrolled yet.</p>
+      <div style={{ textAlign: 'center', padding: '64px 24px', backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14 }}>
+        <p style={{ fontSize: 14, color: 'var(--color-text-muted)', margin: 0 }}>No students enrolled yet.</p>
       </div>
     )
   }
@@ -260,13 +260,13 @@ export function CustomGradebook({
       {/* Toolbar */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
         <div>
-          <p style={{ fontSize: 13, color: '#64748B', margin: 0 }}>
+          <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', margin: 0 }}>
             {columns.length} column{columns.length !== 1 ? 's' : ''} · {students.length} student{students.length !== 1 ? 's' : ''}
             {maxTotal > 0 && ` · Total: ${maxTotal} pts`}
           </p>
         </div>
         <div style={{ display: 'flex', gap: 8 }}>
-          <button onClick={exportCsv} style={{ ...btn, backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', color: '#0F172A', gap: 5 }}>
+          <button onClick={exportCsv} style={{ ...btn, backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', color: 'var(--color-text-primary)', gap: 5 }}>
             <Download size={14} /> Export CSV
           </button>
           {isTeacher && !showAddForm && (
@@ -302,19 +302,19 @@ export function CustomGradebook({
 
       {/* Table */}
       {columns.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: '56px 24px', backgroundColor: '#FFFFFF', border: '2px dashed #E2E8F0', borderRadius: 14 }}>
-          <p style={{ fontSize: 15, fontWeight: 600, color: '#0F172A', margin: '0 0 6px 0' }}>No columns yet</p>
-          <p style={{ fontSize: 13, color: '#94A3B8', margin: 0 }}>
+        <div style={{ textAlign: 'center', padding: '56px 24px', backgroundColor: 'var(--color-surface)', border: '2px dashed var(--color-border)', borderRadius: 14 }}>
+          <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--color-text-primary)', margin: '0 0 6px 0' }}>No columns yet</p>
+          <p style={{ fontSize: 13, color: 'var(--color-text-muted)', margin: 0 }}>
             {isTeacher ? 'Click "Add Column" to create your first evaluation (e.g. Midterm, Quiz, Final).' : 'No evaluations set up yet.'}
           </p>
         </div>
       ) : (
-        <div style={{ overflowX: 'auto', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+        <div style={{ overflowX: 'auto', backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 500 }}>
             <thead>
-              <tr style={{ backgroundColor: '#F8FAFC', borderBottom: '2px solid #E2E8F0' }}>
+              <tr style={{ backgroundColor: 'var(--color-surface-2)', borderBottom: '2px solid #E2E8F0' }}>
                 {/* Student col */}
-                <th style={{ ...th, position: 'sticky', left: 0, backgroundColor: '#F8FAFC', zIndex: 2, textAlign: 'left', minWidth: 180 }}>
+                <th style={{ ...th, position: 'sticky', left: 0, backgroundColor: 'var(--color-surface-2)', zIndex: 2, textAlign: 'left', minWidth: 180 }}>
                   Student
                 </th>
                 {columns.map(col => (
@@ -329,7 +329,7 @@ export function CustomGradebook({
                           </>
                         )}
                       </div>
-                      <div style={{ fontSize: 10, color: '#94A3B8', fontWeight: 400, textTransform: 'none' }}>
+                      <div style={{ fontSize: 10, color: 'var(--color-text-muted)', fontWeight: 400, textTransform: 'none' }}>
                         {col.max_converted
                           ? `raw/${col.max_raw} → ${col.max_converted}pts`
                           : `/${col.max_raw} pts`}
@@ -340,7 +340,7 @@ export function CustomGradebook({
                 {/* Total */}
                 <th style={{ ...th, textAlign: 'center', minWidth: 90 }}>
                   Total
-                  <div style={{ fontSize: 10, color: '#94A3B8', fontWeight: 400, textTransform: 'none' }}>/{maxTotal}</div>
+                  <div style={{ fontSize: 10, color: 'var(--color-text-muted)', fontWeight: 400, textTransform: 'none' }}>/{maxTotal}</div>
                 </th>
               </tr>
             </thead>
@@ -360,8 +360,8 @@ export function CustomGradebook({
                     onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent' }}>
                     {/* Student */}
                     <td style={{ padding: '12px 16px', position: 'sticky', left: 0, backgroundColor: 'inherit', zIndex: 1 }}>
-                      <p style={{ fontSize: 14, fontWeight: 500, color: '#0F172A', margin: '0 0 2px 0', whiteSpace: 'nowrap' }}>{student.full_name}</p>
-                      <p style={{ fontSize: 12, color: '#94A3B8', margin: 0 }}>{student.email}</p>
+                      <p style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-text-primary)', margin: '0 0 2px 0', whiteSpace: 'nowrap' }}>{student.full_name}</p>
+                      <p style={{ fontSize: 12, color: 'var(--color-text-muted)', margin: 0 }}>{student.email}</p>
                     </td>
 
                     {/* Score cells */}
@@ -385,7 +385,7 @@ export function CustomGradebook({
                                   onChange={e => setCellEdit(col.id, student.id, e.target.value)}
                                   onBlur={() => saveCell(col, student.id)}
                                   placeholder="—"
-                                  style={{ width: 56, height: 30, border: '1px solid #E2E8F0', borderRadius: 6, padding: '0 6px', fontSize: 13, textAlign: 'center', fontFamily: "'Inter', sans-serif", outline: 'none', color: '#0F172A' }}
+                                  style={{ width: 56, height: 30, border: '1px solid var(--color-border)', borderRadius: 6, padding: '0 6px', fontSize: 13, textAlign: 'center', fontFamily: "'Inter', sans-serif", outline: 'none', color: 'var(--color-text-primary)' }}
                                   onFocus={e => { e.currentTarget.style.borderColor = '#4F46E5'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(79,70,229,0.1)' }}
                                   onBlurCapture={e => { e.currentTarget.style.borderColor = '#E2E8F0'; e.currentTarget.style.boxShadow = 'none' }}
                                 />
@@ -394,18 +394,18 @@ export function CustomGradebook({
                                 </button>
                               </div>
                               {conv !== null && col.max_converted && (
-                                <span style={{ fontSize: 10, color: '#64748B' }}>{conv} / {col.max_converted}</span>
+                                <span style={{ fontSize: 10, color: 'var(--color-text-secondary)' }}>{conv} / {col.max_converted}</span>
                               )}
                             </div>
                           ) : (
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
                               {raw !== null ? (
                                 <>
-                                  <span style={{ fontSize: 14, fontWeight: 700, fontFamily: "'Plus Jakarta Sans', sans-serif", color: '#0F172A' }}>
+                                  <span style={{ fontSize: 14, fontWeight: 700, fontFamily: "'Plus Jakarta Sans', sans-serif", color: 'var(--color-text-primary)' }}>
                                     {raw} / {col.max_raw}
                                   </span>
                                   {conv !== null && col.max_converted && (
-                                    <span style={{ fontSize: 11, color: '#64748B' }}>= {conv} pts</span>
+                                    <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>= {conv} pts</span>
                                   )}
                                 </>
                               ) : (
@@ -444,8 +444,8 @@ export function CustomGradebook({
 }
 
 /* ─── Shared style tokens ─────────────────────────────────────── */
-const lbl: React.CSSProperties = { display: 'block', fontSize: 11, fontWeight: 600, color: '#64748B', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '0.04em' }
-const inp: React.CSSProperties = { width: '100%', height: 34, border: '1px solid #E2E8F0', borderRadius: 7, padding: '0 10px', fontSize: 13, fontFamily: "'Inter', sans-serif", backgroundColor: '#FFFFFF', color: '#0F172A', outline: 'none', boxSizing: 'border-box' }
+const lbl: React.CSSProperties = { display: 'block', fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '0.04em' }
+const inp: React.CSSProperties = { width: '100%', height: 34, border: '1px solid var(--color-border)', borderRadius: 7, padding: '0 10px', fontSize: 13, fontFamily: "'Inter', sans-serif", backgroundColor: 'var(--color-surface)', color: 'var(--color-text-primary)', outline: 'none', boxSizing: 'border-box' }
 const btn: React.CSSProperties = { display: 'inline-flex', alignItems: 'center', height: 34, padding: '0 13px', borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: 'pointer', transition: 'all 120ms ease' }
-const th: React.CSSProperties = { padding: '10px 16px', fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.06em' }
-const iconBtn: React.CSSProperties = { background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', padding: 2, display: 'inline-flex', alignItems: 'center', borderRadius: 4 }
+const th: React.CSSProperties = { padding: '10px 16px', fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em' }
+const iconBtn: React.CSSProperties = { background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)', padding: 2, display: 'inline-flex', alignItems: 'center', borderRadius: 4 }

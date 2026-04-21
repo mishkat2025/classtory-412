@@ -48,8 +48,8 @@ export function AssignmentCard({
     >
       <div
         style={{
-          backgroundColor: '#FFFFFF',
-          border: '1px solid #E2E8F0',
+          backgroundColor: 'var(--color-surface)',
+          border: '1px solid var(--color-border)',
           borderLeft: `4px solid ${statusBorder}`,
           borderRadius: 12,
           padding: '14px 18px',
@@ -75,10 +75,10 @@ export function AssignmentCard({
 
         {/* Title + classroom */}
         <div style={{ flex: 1, minWidth: 0 }}>
-          <p style={{ fontSize: 14, fontWeight: 600, color: '#0F172A', margin: '0 0 2px 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--color-text-primary)', margin: '0 0 2px 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
             {title}
           </p>
-          <p style={{ fontSize: 12, color: '#64748B', margin: 0 }}>
+          <p style={{ fontSize: 12, color: 'var(--color-text-secondary)', margin: 0 }}>
             {classroomName} &nbsp;·&nbsp; {maxPoints} pts
           </p>
         </div>

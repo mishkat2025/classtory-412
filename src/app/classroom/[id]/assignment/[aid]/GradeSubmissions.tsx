@@ -55,9 +55,9 @@ export function GradeSubmissions({ submissions, maxPoints, assignmentId }: Grade
 
   if (submissions.length === 0) {
     return (
-      <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '40px 24px', textAlign: 'center', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+      <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '40px 24px', textAlign: 'center', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
         <Users size={32} color="#CBD5E1" style={{ margin: '0 auto 12px', display: 'block' }} />
-        <p style={{ fontSize: 14, color: '#64748B', margin: 0 }}>No submissions yet.</p>
+        <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>No submissions yet.</p>
       </div>
     )
   }
@@ -65,10 +65,10 @@ export function GradeSubmissions({ submissions, maxPoints, assignmentId }: Grade
   return (
     <div>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-        <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: '#0F172A', margin: 0 }}>
+        <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)', margin: 0 }}>
           Submissions
         </h2>
-        <span style={{ fontSize: 13, color: '#64748B' }}>
+        <span style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>
           {submissions.length} submission{submissions.length !== 1 ? 's' : ''}
         </span>
       </div>
@@ -82,7 +82,7 @@ export function GradeSubmissions({ submissions, maxPoints, assignmentId }: Grade
           const pct = gradeNum !== null ? Math.round((gradeNum / maxPoints) * 100) : null
 
           return (
-            <div key={sub.id} style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '20px 24px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+            <div key={sub.id} style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '20px 24px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
               {/* Student header */}
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16, gap: 12 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -95,8 +95,8 @@ export function GradeSubmissions({ submissions, maxPoints, assignmentId }: Grade
                     )}
                   </div>
                   <div>
-                    <p style={{ fontSize: 14, fontWeight: 600, color: '#0F172A', margin: '0 0 1px 0' }}>{sub.student?.full_name}</p>
-                    <p style={{ fontSize: 12, color: '#94A3B8', margin: 0 }}>
+                    <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--color-text-primary)', margin: '0 0 1px 0' }}>{sub.student?.full_name}</p>
+                    <p style={{ fontSize: 12, color: 'var(--color-text-muted)', margin: 0 }}>
                       {new Date(sub.submitted_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}
                     </p>
                   </div>
@@ -115,10 +115,10 @@ export function GradeSubmissions({ submissions, maxPoints, assignmentId }: Grade
 
               {/* Submission content */}
               {sub.text_content && (
-                <div style={{ backgroundColor: '#F8F9FC', borderRadius: 8, padding: '12px 14px', border: '1px solid #E2E8F0', marginBottom: 16 }}>
+                <div style={{ backgroundColor: 'var(--color-bg)', borderRadius: 8, padding: '12px 14px', border: '1px solid var(--color-border)', marginBottom: 16 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
                     <FileText size={13} color="#64748B" />
-                    <span style={{ fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Response</span>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Response</span>
                   </div>
                   <p style={{ fontSize: 14, color: '#475569', lineHeight: 1.7, margin: 0, whiteSpace: 'pre-wrap' }}>{sub.text_content}</p>
                 </div>
@@ -135,7 +135,7 @@ export function GradeSubmissions({ submissions, maxPoints, assignmentId }: Grade
               {/* Grading */}
               <div style={{ display: 'grid', gridTemplateColumns: '120px 1fr auto', gap: 10, alignItems: 'flex-start' }}>
                 <div>
-                  <label style={{ fontSize: 12, fontWeight: 500, color: '#64748B', display: 'block', marginBottom: 4 }}>Grade (/{maxPoints})</label>
+                  <label style={{ fontSize: 12, fontWeight: 500, color: 'var(--color-text-secondary)', display: 'block', marginBottom: 4 }}>Grade (/{maxPoints})</label>
                   <input
                     type="number"
                     min={0}
@@ -146,12 +146,12 @@ export function GradeSubmissions({ submissions, maxPoints, assignmentId }: Grade
                     style={{
                       height: 36,
                       width: '100%',
-                      border: '1px solid #E2E8F0',
+                      border: '1px solid var(--color-border)',
                       borderRadius: 8,
                       padding: '0 10px',
                       fontSize: 14,
                       fontFamily: "'Inter', sans-serif",
-                      color: '#0F172A',
+                      color: 'var(--color-text-primary)',
                       outline: 'none',
                       boxSizing: 'border-box',
                       textAlign: 'center',
@@ -164,7 +164,7 @@ export function GradeSubmissions({ submissions, maxPoints, assignmentId }: Grade
                   )}
                 </div>
                 <div>
-                  <label style={{ fontSize: 12, fontWeight: 500, color: '#64748B', display: 'block', marginBottom: 4 }}>Feedback (optional)</label>
+                  <label style={{ fontSize: 12, fontWeight: 500, color: 'var(--color-text-secondary)', display: 'block', marginBottom: 4 }}>Feedback (optional)</label>
                   <textarea
                     value={val.feedback}
                     onChange={e => setGrades(prev => { const n = new Map(prev); n.set(sub.id, { ...val, feedback: e.target.value }); return n })}
@@ -172,12 +172,12 @@ export function GradeSubmissions({ submissions, maxPoints, assignmentId }: Grade
                     rows={2}
                     style={{
                       width: '100%',
-                      border: '1px solid #E2E8F0',
+                      border: '1px solid var(--color-border)',
                       borderRadius: 8,
                       padding: '8px 10px',
                       fontSize: 13,
                       fontFamily: "'Inter', sans-serif",
-                      color: '#0F172A',
+                      color: 'var(--color-text-primary)',
                       resize: 'vertical',
                       outline: 'none',
                       boxSizing: 'border-box',

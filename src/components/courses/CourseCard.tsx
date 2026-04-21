@@ -15,8 +15,8 @@ export function CourseCard({ course }: { course: CourseCardCourse }) {
       <div
         className="card-hover"
         style={{
-          backgroundColor: '#FFFFFF',
-          border: '1px solid #E2E8F0',
+          backgroundColor: 'var(--color-surface)',
+          border: '1px solid var(--color-border)',
           borderRadius: 14,
           overflow: 'hidden',
           boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
@@ -71,7 +71,7 @@ export function CourseCard({ course }: { course: CourseCardCourse }) {
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: 15,
               fontWeight: 700,
-              color: '#0F172A',
+              color: 'var(--color-text-primary)',
               marginBottom: 6,
               lineHeight: 1.4,
               display: '-webkit-box',
@@ -83,7 +83,7 @@ export function CourseCard({ course }: { course: CourseCardCourse }) {
             {course.title}
           </h3>
 
-          <p style={{ fontSize: 12, color: '#64748B', marginBottom: 14 }}>
+          <p style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginBottom: 14 }}>
             by {course.instructor?.full_name ?? 'Instructor'}
           </p>
 
@@ -91,10 +91,10 @@ export function CourseCard({ course }: { course: CourseCardCourse }) {
             {/* Rating */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
               <Star size={13} fill="#F59E0B" color="#F59E0B" />
-              <span style={{ fontSize: 13, fontWeight: 600, color: '#0F172A' }}>
+              <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-primary)' }}>
                 {course.rating?.toFixed(1) ?? '—'}
               </span>
-              <span style={{ fontSize: 12, color: '#94A3B8' }}>
+              <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>
                 ({course.student_count ?? 0})
               </span>
             </div>

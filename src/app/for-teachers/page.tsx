@@ -5,15 +5,15 @@ export const metadata = { title: 'For Teachers — Classtory' }
 
 export default function ForTeachersPage() {
   return (
-    <div style={{ backgroundColor: '#F8F9FC', minHeight: '100vh' }}>
-      <nav style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E2E8F0', padding: '0 32px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+    <div style={{ backgroundColor: 'var(--color-bg)', minHeight: '100vh' }}>
+      <nav style={{ backgroundColor: 'var(--color-surface)', borderBottom: '1px solid #E2E8F0', padding: '0 32px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
           <div style={{ width: 30, height: 30, backgroundColor: '#4F46E5', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <BookOpen size={14} color="white" />
           </div>
-          <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 16, color: '#0F172A' }}>Classtory</span>
+          <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 16, color: 'var(--color-text-primary)' }}>Classtory</span>
         </Link>
-        <Link href="/" style={{ fontSize: 13, color: '#64748B', textDecoration: 'none' }}>← Back to home</Link>
+        <Link href="/" style={{ fontSize: 13, color: 'var(--color-text-secondary)', textDecoration: 'none' }}>← Back to home</Link>
       </nav>
 
       <div style={{ backgroundColor: '#1E1B4B', padding: '72px 24px', textAlign: 'center' }}>
@@ -36,12 +36,12 @@ export default function ForTeachersPage() {
             { icon: FolderOpen,    color: '#FEF3C7', iconColor: '#F59E0B', title: 'Materials Library',   desc: 'Upload and share files, PDFs, and resources with your class.' },
             { icon: GraduationCap, color: '#DBEAFE', iconColor: '#3B82F6', title: 'Course Marketplace',  desc: 'Publish courses publicly and reach learners beyond your classroom.' },
           ].map(({ icon: Icon, color, iconColor, title, desc }) => (
-            <div key={title} style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '24px 20px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+            <div key={title} style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '24px 20px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
               <div style={{ width: 40, height: 40, borderRadius: 10, backgroundColor: color, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 14 }}>
                 <Icon size={18} color={iconColor} />
               </div>
-              <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, fontWeight: 700, color: '#0F172A', margin: '0 0 6px' }}>{title}</h3>
-              <p style={{ fontSize: 13, color: '#64748B', margin: 0, lineHeight: 1.6 }}>{desc}</p>
+              <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 6px' }}>{title}</h3>
+              <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.6 }}>{desc}</p>
             </div>
           ))}
         </div>

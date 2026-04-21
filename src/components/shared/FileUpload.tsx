@@ -109,11 +109,11 @@ export function FileUpload({ bucket, path, onUpload, accept, maxSizeMB = 50 }: F
         ) : selectedFile ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, justifyContent: 'center' }}>
             <File size={20} color="#4F46E5" />
-            <span style={{ fontSize: 14, color: '#0F172A', fontWeight: 500 }}>{selectedFile.name}</span>
-            <span style={{ fontSize: 12, color: '#94A3B8' }}>({formatBytes(selectedFile.size)})</span>
+            <span style={{ fontSize: 14, color: 'var(--color-text-primary)', fontWeight: 500 }}>{selectedFile.name}</span>
+            <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>({formatBytes(selectedFile.size)})</span>
             <button
               onClick={e => { e.stopPropagation(); setSelectedFile(null) }}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', display: 'flex', padding: 2 }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)', display: 'flex', padding: 2 }}
             >
               <X size={14} />
             </button>
@@ -123,10 +123,10 @@ export function FileUpload({ bucket, path, onUpload, accept, maxSizeMB = 50 }: F
             <div style={{ width: 44, height: 44, borderRadius: 10, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>
               <Upload size={20} color="#4F46E5" />
             </div>
-            <p style={{ fontSize: 14, fontWeight: 500, color: '#0F172A', margin: '0 0 4px 0' }}>
+            <p style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-text-primary)', margin: '0 0 4px 0' }}>
               Drop file here or <span style={{ color: '#4F46E5' }}>browse</span>
             </p>
-            <p style={{ fontSize: 12, color: '#94A3B8', margin: 0 }}>
+            <p style={{ fontSize: 12, color: 'var(--color-text-muted)', margin: 0 }}>
               Max {maxSizeMB}MB {accept ? `· ${accept}` : ''}
             </p>
           </>

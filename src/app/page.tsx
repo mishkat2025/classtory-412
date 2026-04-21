@@ -36,16 +36,16 @@ export default async function LandingPage() {
   const courses = (featuredCourses ?? []) as CourseCardCourse[]
 
   return (
-    <div style={{ backgroundColor: '#F8F9FC', minHeight: '100vh', fontFamily: "'Inter', sans-serif" }}>
+    <div style={{ backgroundColor: 'var(--color-bg)', minHeight: '100vh', fontFamily: "'Inter', sans-serif" }}>
 
       {/* ── NAVBAR ─────────────────────────────────────────────── */}
-      <nav style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E2E8F0', position: 'sticky', top: 0, zIndex: 50 }}>
+      <nav style={{ backgroundColor: 'var(--color-surface)', borderBottom: '1px solid #E2E8F0', position: 'sticky', top: 0, zIndex: 50 }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 64 }}>
           <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
             <div style={{ width: 36, height: 36, backgroundColor: '#4F46E5', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <BookOpen size={20} color="white" />
             </div>
-            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 20, color: '#0F172A' }}>Classtory</span>
+            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 20, color: 'var(--color-text-primary)' }}>Classtory</span>
           </Link>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
@@ -95,7 +95,7 @@ export default async function LandingPage() {
             <span style={{ fontSize: 13, fontWeight: 600, color: '#3730A3' }}>The all-in-one education platform</span>
           </div>
 
-          <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 54, fontWeight: 800, color: '#0F172A', lineHeight: 1.1, marginBottom: 24, letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 54, fontWeight: 800, color: 'var(--color-text-primary)', lineHeight: 1.1, marginBottom: 24, letterSpacing: '-0.02em' }}>
             Learn, Teach &{' '}
             <span style={{ color: '#4F46E5' }}>Collaborate</span>
             <br />in One Place
@@ -114,7 +114,7 @@ export default async function LandingPage() {
             </Link>
             <Link
               href="/auth/signup"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, backgroundColor: '#FFFFFF', color: '#0F172A', border: '1px solid #E2E8F0', borderRadius: 10, padding: '13px 28px', fontSize: 15, fontWeight: 600, textDecoration: 'none' }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, backgroundColor: 'var(--color-surface)', color: 'var(--color-text-primary)', border: '1px solid var(--color-border)', borderRadius: 10, padding: '13px 28px', fontSize: 15, fontWeight: 600, textDecoration: 'none' }}
             >
               Start for free
             </Link>
@@ -123,7 +123,7 @@ export default async function LandingPage() {
       </section>
 
       {/* ── STATS STRIP ────────────────────────────────────────── */}
-      <section style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid #E2E8F0', borderBottom: '1px solid #E2E8F0' }}>
+      <section style={{ backgroundColor: 'var(--color-surface)', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid #E2E8F0' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '36px 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 32, textAlign: 'center' }}>
           {([
             { label: 'Active Students',  value: totalStudents  ? `${totalStudents.toLocaleString()}+`  : '1,000+', Icon: Users,         bg: '#EEF2FF', ic: '#4F46E5' },
@@ -135,8 +135,8 @@ export default async function LandingPage() {
               <div style={{ width: 48, height: 48, borderRadius: 12, backgroundColor: bg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Icon size={22} color={ic} />
               </div>
-              <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 28, fontWeight: 700, color: '#0F172A' }}>{value}</div>
-              <div style={{ fontSize: 13, color: '#64748B' }}>{label}</div>
+              <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 28, fontWeight: 700, color: 'var(--color-text-primary)' }}>{value}</div>
+              <div style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>{label}</div>
             </div>
           ))}
         </div>
@@ -146,10 +146,10 @@ export default async function LandingPage() {
       <section style={{ padding: '80px 24px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 56 }}>
-            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 34, fontWeight: 700, color: '#0F172A', marginBottom: 12 }}>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 34, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 12 }}>
               Everything you need to succeed
             </h2>
-            <p style={{ fontSize: 16, color: '#64748B', maxWidth: 460, margin: '0 auto' }}>
+            <p style={{ fontSize: 16, color: 'var(--color-text-secondary)', maxWidth: 460, margin: '0 auto' }}>
               Whether you're a student looking to grow or a teacher building a classroom, Classtory has you covered.
             </p>
           </div>
@@ -178,13 +178,13 @@ export default async function LandingPage() {
               <div
                 key={title}
                 className="card-hover"
-                style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '28px 28px 32px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}
+                style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '28px 28px 32px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}
               >
                 <div style={{ width: 48, height: 48, borderRadius: 12, backgroundColor: bg, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
                   <Icon size={22} color={ic} />
                 </div>
-                <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 18, fontWeight: 700, color: '#0F172A', marginBottom: 10 }}>{title}</h3>
-                <p style={{ fontSize: 14, color: '#64748B', lineHeight: 1.7, marginBottom: 20 }}>{desc}</p>
+                <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 10 }}>{title}</h3>
+                <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', lineHeight: 1.7, marginBottom: 20 }}>{desc}</p>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {bullets.map(b => (
                     <li key={b} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#475569' }}>
@@ -200,12 +200,12 @@ export default async function LandingPage() {
       </section>
 
       {/* ── FEATURED COURSES ───────────────────────────────────── */}
-      <section style={{ backgroundColor: '#FFFFFF', padding: '80px 24px', borderTop: '1px solid #E2E8F0', borderBottom: '1px solid #E2E8F0' }}>
+      <section style={{ backgroundColor: 'var(--color-surface)', padding: '80px 24px', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid #E2E8F0' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 40, flexWrap: 'wrap', gap: 12 }}>
             <div>
-              <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 28, fontWeight: 700, color: '#0F172A', marginBottom: 6 }}>Featured Courses</h2>
-              <p style={{ fontSize: 14, color: '#64748B' }}>Top-rated courses from expert instructors</p>
+              <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 28, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 6 }}>Featured Courses</h2>
+              <p style={{ fontSize: 14, color: 'var(--color-text-secondary)' }}>Top-rated courses from expert instructors</p>
             </div>
             <Link href="/courses" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 600, color: '#4F46E5', textDecoration: 'none' }}>
               View all <ArrowRight size={14} />
@@ -219,12 +219,12 @@ export default async function LandingPage() {
               ))}
             </div>
           ) : (
-            <div style={{ textAlign: 'center', padding: '64px 24px', backgroundColor: '#F8F9FC', borderRadius: 14, border: '1px dashed #CBD5E1' }}>
+            <div style={{ textAlign: 'center', padding: '64px 24px', backgroundColor: 'var(--color-bg)', borderRadius: 14, border: '1px dashed #CBD5E1' }}>
               <div style={{ width: 56, height: 56, borderRadius: 14, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
                 <BookOpen size={26} color="#4F46E5" />
               </div>
-              <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: '#0F172A', marginBottom: 6 }}>No courses yet</h3>
-              <p style={{ fontSize: 14, color: '#64748B', marginBottom: 24 }}>Be the first to create a course on Classtory.</p>
+              <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 6 }}>No courses yet</h3>
+              <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', marginBottom: 24 }}>Be the first to create a course on Classtory.</p>
               <Link
                 href="/auth/signup"
                 style={{ display: 'inline-flex', alignItems: 'center', gap: 8, backgroundColor: '#4F46E5', color: '#FFFFFF', borderRadius: 8, padding: '10px 20px', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}
@@ -293,12 +293,12 @@ export default async function LandingPage() {
       </section>
 
       {/* ── FINAL CTA ──────────────────────────────────────────── */}
-      <section style={{ padding: '88px 24px', textAlign: 'center', backgroundColor: '#F8F9FC' }}>
+      <section style={{ padding: '88px 24px', textAlign: 'center', backgroundColor: 'var(--color-bg)' }}>
         <div style={{ maxWidth: 540, margin: '0 auto' }}>
-          <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 36, fontWeight: 700, color: '#0F172A', marginBottom: 14 }}>
+          <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 36, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 14 }}>
             Ready to get started?
           </h2>
-          <p style={{ fontSize: 16, color: '#64748B', lineHeight: 1.75, marginBottom: 40 }}>
+          <p style={{ fontSize: 16, color: 'var(--color-text-secondary)', lineHeight: 1.75, marginBottom: 40 }}>
             Join thousands of students and teachers already using Classtory. Free to start, powerful to scale.
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -310,7 +310,7 @@ export default async function LandingPage() {
             </Link>
             <Link
               href="/courses"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, backgroundColor: '#FFFFFF', color: '#0F172A', border: '1px solid #E2E8F0', borderRadius: 10, padding: '13px 28px', fontSize: 15, fontWeight: 600, textDecoration: 'none' }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, backgroundColor: 'var(--color-surface)', color: 'var(--color-text-primary)', border: '1px solid var(--color-border)', borderRadius: 10, padding: '13px 28px', fontSize: 15, fontWeight: 600, textDecoration: 'none' }}
             >
               Browse courses
             </Link>
@@ -341,7 +341,7 @@ export default async function LandingPage() {
                 <div style={{ fontSize: 11, fontWeight: 600, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 14 }}>{heading}</div>
                 {links.map(item => (
                   <div key={item.label} style={{ marginBottom: 9 }}>
-                    <Link href={item.href} style={{ fontSize: 13, color: '#64748B', textDecoration: 'none' }}>{item.label}</Link>
+                    <Link href={item.href} style={{ fontSize: 13, color: 'var(--color-text-secondary)', textDecoration: 'none' }}>{item.label}</Link>
                   </div>
                 ))}
               </div>

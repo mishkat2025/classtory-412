@@ -12,7 +12,7 @@ export async function Navbar({ profile }: NavbarProps) {
     <div
       style={{
         height: 56,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: 'var(--color-surface)',
         borderBottom: '1px solid #E2E8F0',
         display: 'flex',
         alignItems: 'center',
@@ -26,8 +26,8 @@ export async function Navbar({ profile }: NavbarProps) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <Avatar name={profile.full_name} avatarUrl={profile.avatar_url} size={32} />
         <div style={{ display: 'none' }} className="sm:block">
-          <p style={{ fontSize: 13, fontWeight: 600, color: '#0F172A', margin: 0 }}>{profile.full_name}</p>
-          <p style={{ fontSize: 11, color: '#94A3B8', margin: 0, textTransform: 'capitalize' }}>{profile.role}</p>
+          <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-primary)', margin: 0 }}>{profile.full_name}</p>
+          <p style={{ fontSize: 11, color: 'var(--color-text-muted)', margin: 0, textTransform: 'capitalize' }}>{profile.role}</p>
         </div>
       </div>
     </div>

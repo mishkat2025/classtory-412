@@ -13,7 +13,7 @@ export default function LoginPage() {
       style={{
         minHeight: '100vh',
         display: 'flex',
-        backgroundColor: '#F8F9FC',
+        backgroundColor: 'var(--color-bg)',
       }}
     >
       {/* Left panel — branding */}
@@ -169,7 +169,7 @@ export default function LoginPage() {
             >
               <BookOpen size={16} color="#fff" />
             </div>
-            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 16, color: '#0F172A' }}>
+            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 16, color: 'var(--color-text-primary)' }}>
               Classtory
             </span>
           </Link>
@@ -177,11 +177,11 @@ export default function LoginPage() {
           {/* Card */}
           <div
             style={{
-              backgroundColor: '#FFFFFF',
-              border: '1px solid #E2E8F0',
+              backgroundColor: 'var(--color-surface)',
+              border: '1px solid var(--color-border)',
               borderRadius: 14,
               padding: '36px 40px',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)',
+              boxShadow: 'var(--shadow-card)',
             }}
           >
             <div style={{ marginBottom: 28 }}>
@@ -190,7 +190,7 @@ export default function LoginPage() {
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
                   fontSize: 22,
                   fontWeight: 700,
-                  color: '#0F172A',
+                  color: 'var(--color-text-primary)',
                   margin: '0 0 6px 0',
                   letterSpacing: '-0.01em',
                 }}

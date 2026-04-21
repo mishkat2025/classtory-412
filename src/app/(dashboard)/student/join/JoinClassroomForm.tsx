@@ -74,7 +74,7 @@ export function JoinClassroomForm({ studentId }: JoinClassroomFormProps) {
   return (
     <form onSubmit={handleJoin} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-        <label style={{ fontSize: 13, fontWeight: 500, color: '#0F172A' }}>Class Code</label>
+        <label style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-text-primary)' }}>Class Code</label>
         <input
           type="text"
           value={code}
@@ -90,8 +90,8 @@ export function JoinClassroomForm({ studentId }: JoinClassroomFormProps) {
             fontSize: 20,
             fontFamily: "'Plus Jakarta Sans', sans-serif",
             fontWeight: 700,
-            color: '#0F172A',
-            backgroundColor: '#FFFFFF',
+            color: 'var(--color-text-primary)',
+            backgroundColor: 'var(--color-surface)',
             outline: 'none',
             letterSpacing: '0.2em',
             textTransform: 'uppercase',
@@ -101,7 +101,7 @@ export function JoinClassroomForm({ studentId }: JoinClassroomFormProps) {
           onBlur={e => { if (!error) { e.currentTarget.style.borderColor = '#E2E8F0'; e.currentTarget.style.boxShadow = 'none' } }}
         />
         {error && <span style={{ fontSize: 12, color: '#EF4444' }}>{error}</span>}
-        <p style={{ fontSize: 12, color: '#94A3B8', margin: 0 }}>
+        <p style={{ fontSize: 12, color: 'var(--color-text-muted)', margin: 0 }}>
           Ask your teacher for the class code.
         </p>
       </div>

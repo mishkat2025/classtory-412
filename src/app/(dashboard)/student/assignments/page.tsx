@@ -120,11 +120,11 @@ export default async function StudentAssignmentsPage() {
           <div style={{ width: 36, height: 36, borderRadius: 10, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <ClipboardList size={18} color="#4F46E5" />
           </div>
-          <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: '#0F172A', margin: 0, letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: 'var(--color-text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
             My Assignments
           </h1>
         </div>
-        <p style={{ fontSize: 14, color: '#64748B', margin: '0 0 0 46px' }}>
+        <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '0 0 0 46px' }}>
           All assignments across your enrolled classrooms
         </p>
       </div>
@@ -218,7 +218,7 @@ export default async function StudentAssignmentsPage() {
             <div style={{ textAlign: 'center', padding: '20px 0' }}>
               <CheckCircle2 size={28} color="#10B981" style={{ display: 'block', margin: '0 auto 8px' }} />
               <p style={{ fontSize: 14, fontWeight: 600, color: '#065F46', margin: 0 }}>You&apos;re all caught up!</p>
-              <p style={{ fontSize: 13, color: '#94A3B8', margin: '4px 0 0' }}>No pending or overdue assignments.</p>
+              <p style={{ fontSize: 13, color: 'var(--color-text-muted)', margin: '4px 0 0' }}>No pending or overdue assignments.</p>
             </div>
           )}
         </div>
@@ -251,7 +251,7 @@ function AssignmentGroup({
       {/* Group header */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
         {icon}
-        <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, fontWeight: 700, color: '#0F172A', margin: 0 }}>
+        <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, fontWeight: 700, color: 'var(--color-text-primary)', margin: 0 }}>
           {title}
         </h2>
         <span style={{ fontSize: 12, fontWeight: 600, color: badgeColor, backgroundColor: badgeBg, borderRadius: 9999, padding: '1px 8px' }}>
@@ -310,12 +310,12 @@ function EmptyState({
   action?: React.ReactNode
 }) {
   return (
-    <div style={{ backgroundColor: '#FFFFFF', border: '2px dashed #E2E8F0', borderRadius: 14, padding: '56px 24px', textAlign: 'center' }}>
+    <div style={{ backgroundColor: 'var(--color-surface)', border: '2px dashed var(--color-border)', borderRadius: 14, padding: '56px 24px', textAlign: 'center' }}>
       <div style={{ width: 60, height: 60, borderRadius: 16, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
         {icon}
       </div>
-      <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: '#0F172A', margin: '0 0 8px 0' }}>{title}</h3>
-      <p style={{ fontSize: 14, color: '#64748B', margin: '0 0 20px 0' }}>{description}</p>
+      <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 8px 0' }}>{title}</h3>
+      <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '0 0 20px 0' }}>{description}</p>
       {action}
     </div>
   )

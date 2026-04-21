@@ -133,7 +133,7 @@ export function SignupForm() {
               background: 'none',
               border: 'none',
               cursor: 'pointer',
-              color: '#94A3B8',
+              color: 'var(--color-text-muted)',
               display: 'flex',
               padding: 2,
             }}
@@ -157,7 +157,7 @@ export function SignupForm() {
               appearance: 'none',
               paddingRight: 36,
               cursor: 'pointer',
-              backgroundColor: '#FFFFFF',
+              backgroundColor: 'var(--color-surface)',
             }}
           >
             <option value="student">Student</option>
@@ -170,7 +170,7 @@ export function SignupForm() {
               right: 10,
               top: '50%',
               transform: 'translateY(-50%)',
-              color: '#94A3B8',
+              color: 'var(--color-text-muted)',
               pointerEvents: 'none',
             }}
           />
@@ -179,7 +179,7 @@ export function SignupForm() {
       </div>
 
       {/* Terms note */}
-      <p style={{ fontSize: 12, color: '#94A3B8', margin: 0, lineHeight: 1.5 }}>
+      <p style={{ fontSize: 12, color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.5 }}>
         By creating an account you agree to our{' '}
         <Link href="/terms" style={{ color: '#4F46E5', textDecoration: 'none' }}>Terms of Service</Link>
         {' '}and{' '}
@@ -241,7 +241,7 @@ const fieldWrap: React.CSSProperties = {
 const labelStyle: React.CSSProperties = {
   fontSize: 13,
   fontWeight: 500,
-  color: '#0F172A',
+  color: 'var(--color-text-primary)',
 }
 
 function fieldStyle(hasError: boolean): React.CSSProperties {
@@ -252,8 +252,8 @@ function fieldStyle(hasError: boolean): React.CSSProperties {
     padding: '0 12px',
     fontSize: 14,
     fontFamily: "'Inter', sans-serif",
-    color: '#0F172A',
-    backgroundColor: '#FFFFFF',
+    color: 'var(--color-text-primary)',
+    backgroundColor: 'var(--color-surface)',
     outline: 'none',
     transition: 'border-color 150ms ease, box-shadow 150ms ease',
     boxSizing: 'border-box',

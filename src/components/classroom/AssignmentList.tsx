@@ -285,8 +285,8 @@ export function AssignmentList({
         <form
           onSubmit={handleSubmit(onSubmit)}
           style={{
-            backgroundColor: '#FFFFFF',
-            border: '1px solid #E2E8F0',
+            backgroundColor: 'var(--color-surface)',
+            border: '1px solid var(--color-border)',
             borderRadius: 14,
             padding: '24px',
             boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
@@ -300,7 +300,7 @@ export function AssignmentList({
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: 15,
               fontWeight: 700,
-              color: '#0F172A',
+              color: 'var(--color-text-primary)',
               margin: 0,
             }}
           >
@@ -392,8 +392,8 @@ export function AssignmentList({
       {assignments.length === 0 ? (
         <div
           style={{
-            backgroundColor: '#FFFFFF',
-            border: '1px solid #E2E8F0',
+            backgroundColor: 'var(--color-surface)',
+            border: '1px solid var(--color-border)',
             borderRadius: 14,
             padding: '48px 24px',
             textAlign: 'center',
@@ -419,13 +419,13 @@ export function AssignmentList({
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: 15,
               fontWeight: 700,
-              color: '#0F172A',
+              color: 'var(--color-text-primary)',
               margin: '0 0 6px 0',
             }}
           >
             No assignments yet
           </p>
-          <p style={{ fontSize: 14, color: '#64748B', margin: 0 }}>
+          <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
             {isTeacher
               ? 'Create your first assignment to get started.'
               : 'Your teacher hasn\'t posted any assignments yet.'}
@@ -434,8 +434,8 @@ export function AssignmentList({
       ) : (
         <div
           style={{
-            backgroundColor: '#FFFFFF',
-            border: '1px solid #E2E8F0',
+            backgroundColor: 'var(--color-surface)',
+            border: '1px solid var(--color-border)',
             borderRadius: 14,
             overflow: 'hidden',
             boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
@@ -448,8 +448,8 @@ export function AssignmentList({
               gridTemplateColumns: isTeacher ? '1fr 160px 90px 120px 130px 120px' : '1fr 160px 90px 120px 40px',
               padding: '0 20px',
               height: 40,
-              backgroundColor: '#F8FAFC',
-              borderBottom: '1px solid #F1F5F9',
+              backgroundColor: 'var(--color-surface-2)',
+              borderBottom: '1px solid var(--color-border)',
               alignItems: 'center',
               gap: 12,
             }}
@@ -464,7 +464,7 @@ export function AssignmentList({
                   style={{
                     fontSize: 11,
                     fontWeight: 600,
-                    color: '#64748B',
+                    color: 'var(--color-text-secondary)',
                     textTransform: 'uppercase',
                     letterSpacing: '0.06em',
                     textAlign: i >= 1 ? 'center' : 'left',
@@ -490,32 +490,32 @@ export function AssignmentList({
               <div key={assignment.id} style={{ opacity: isDeleting ? 0.5 : 1, transition: 'opacity 150ms' }}>
                 {/* Edit panel */}
                 {isTeacher && isEditing && (
-                  <div style={{ padding: '16px 20px', borderBottom: '1px solid #F1F5F9', backgroundColor: '#FAFBFF' }}>
+                  <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--color-border)', backgroundColor: '#FAFBFF' }}>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 10 }}>
                       <div>
-                        <label style={{ fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 4 }}>Title</label>
+                        <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 4 }}>Title</label>
                         <input value={editForm.title} onChange={e => setEditForm(f => ({ ...f, title: e.target.value }))} style={{ width: '100%', height: 34, border: '1px solid #C7D2FE', borderRadius: 7, padding: '0 10px', fontSize: 13, outline: 'none', boxSizing: 'border-box' }} />
                       </div>
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 80px', gap: 8 }}>
                         <div>
-                          <label style={{ fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 4 }}>Due</label>
+                          <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 4 }}>Due</label>
                           <input type="datetime-local" value={editForm.due_date} onChange={e => setEditForm(f => ({ ...f, due_date: e.target.value }))} style={{ width: '100%', height: 34, border: '1px solid #C7D2FE', borderRadius: 7, padding: '0 8px', fontSize: 13, outline: 'none', boxSizing: 'border-box' }} />
                         </div>
                         <div>
-                          <label style={{ fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 4 }}>Pts</label>
+                          <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 4 }}>Pts</label>
                           <input type="number" min={1} max={1000} value={editForm.max_points} onChange={e => setEditForm(f => ({ ...f, max_points: Number(e.target.value) }))} style={{ width: '100%', height: 34, border: '1px solid #C7D2FE', borderRadius: 7, padding: '0 8px', fontSize: 13, outline: 'none', boxSizing: 'border-box' }} />
                         </div>
                       </div>
                     </div>
                     <div>
-                      <label style={{ fontSize: 11, fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 4 }}>Instructions</label>
+                      <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 4 }}>Instructions</label>
                       <textarea value={editForm.description} onChange={e => setEditForm(f => ({ ...f, description: e.target.value }))} rows={2} style={{ width: '100%', border: '1px solid #C7D2FE', borderRadius: 7, padding: '6px 10px', fontSize: 13, outline: 'none', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.5 }} />
                     </div>
                     <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
                       <button onClick={() => saveEdit(assignment.id)} disabled={isSavingEdit} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, height: 32, padding: '0 12px', backgroundColor: '#4F46E5', color: '#FFFFFF', border: 'none', borderRadius: 7, fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
                         {isSavingEdit ? <Loader2 size={12} className="animate-spin" /> : <Check size={12} />} Save
                       </button>
-                      <button onClick={() => setEditingId(null)} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, height: 32, padding: '0 12px', backgroundColor: '#F1F5F9', color: '#0F172A', border: 'none', borderRadius: 7, fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
+                      <button onClick={() => setEditingId(null)} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, height: 32, padding: '0 12px', backgroundColor: 'var(--color-surface-2)', color: 'var(--color-text-primary)', border: 'none', borderRadius: 7, fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
                         <X size={12} /> Cancel
                       </button>
                     </div>
@@ -542,7 +542,7 @@ export function AssignmentList({
                     onMouseLeave={e => ((e.currentTarget as HTMLElement).style.backgroundColor = 'transparent')}
                   >
                     {/* Title */}
-                    <span style={{ fontSize: 14, fontWeight: 500, color: '#0F172A', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                       {assignment.title}
                     </span>
 
@@ -560,7 +560,7 @@ export function AssignmentList({
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                       {isTeacher ? (
                         <span style={{ fontSize: 13, fontWeight: 600, color: assignment.submission_count > 0 ? '#059669' : '#94A3B8' }}>
-                          {assignment.submission_count}<span style={{ fontWeight: 400, color: '#94A3B8' }}>/{totalStudents}</span>
+                          {assignment.submission_count}<span style={{ fontWeight: 400, color: 'var(--color-text-muted)' }}>/{totalStudents}</span>
                         </span>
                       ) : (
                         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 11, fontWeight: 600, color: statusCfg.color, backgroundColor: statusCfg.bg, borderRadius: 9999, padding: '3px 10px' }}>
@@ -592,7 +592,7 @@ export function AssignmentList({
                     {isTeacher ? (
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}
                         onClick={e => { e.preventDefault(); e.stopPropagation() }}>
-                        <button onClick={() => startEdit(assignment)} title="Edit" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: 7, border: '1px solid #E2E8F0', backgroundColor: '#FFFFFF', color: '#475569', cursor: 'pointer' }}>
+                        <button onClick={() => startEdit(assignment)} title="Edit" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: 7, border: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface)', color: '#475569', cursor: 'pointer' }}>
                           <Pencil size={12} />
                         </button>
                         <button onClick={() => setCopyingItem(assignment)} title="Copy to class" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 28, height: 28, borderRadius: 7, border: '1px solid #C7D2FE', backgroundColor: '#EEF2FF', color: '#3730A3', cursor: 'pointer' }}>
@@ -629,7 +629,7 @@ function Field({
 }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-      <label style={{ fontSize: 13, fontWeight: 500, color: '#0F172A' }}>{label}</label>
+      <label style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-text-primary)' }}>{label}</label>
       {children}
       {error && <span style={{ fontSize: 12, color: '#EF4444' }}>{error}</span>}
     </div>
@@ -645,8 +645,8 @@ function inputStyle(hasError: boolean): React.CSSProperties {
     padding: '0 12px',
     fontSize: 14,
     fontFamily: "'Inter', sans-serif",
-    color: '#0F172A',
-    backgroundColor: '#FFFFFF',
+    color: 'var(--color-text-primary)',
+    backgroundColor: 'var(--color-surface)',
     outline: 'none',
     transition: 'border-color 150ms ease, box-shadow 150ms ease',
     boxSizing: 'border-box',
@@ -683,9 +683,9 @@ const primaryBtn: React.CSSProperties = {
 const secondaryBtn: React.CSSProperties = {
   height: 36,
   padding: '0 16px',
-  backgroundColor: '#FFFFFF',
-  color: '#0F172A',
-  border: '1px solid #E2E8F0',
+  backgroundColor: 'var(--color-surface)',
+  color: 'var(--color-text-primary)',
+  border: '1px solid var(--color-border)',
   borderRadius: 8,
   fontSize: 13,
   fontWeight: 500,

@@ -145,6 +145,52 @@
   }
 }
 
+/* ─── Dark mode — override CSS custom properties ───────────────── */
+.dark {
+  /* Atelier Indigo — Dark palette */
+  --color-bg:             #0F172A;
+  --color-surface:        #1E293B;
+  --color-surface-2:      #0F172A;
+  --color-border:         #334155;
+  --color-border-strong:  #475569;
+  --color-text-primary:   #F8FAFC;
+  --color-text-secondary: #CBD5E1;
+  --color-text-muted:     #64748B;
+
+  /* Semantic light backgrounds — darken in dark mode */
+  --color-primary-light:  #1E3A5F;
+  --color-success-light:  #052e16;
+  --color-warning-light:  #1c1400;
+  --color-danger-light:   #2d0a0a;
+  --color-info-light:     #0c1a33;
+
+  /* Shadows — subtler on dark backgrounds */
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-md:   0 4px 12px rgba(0,0,0,0.4);
+  --shadow-lg:   0 8px 24px rgba(0,0,0,0.5);
+
+  /* shadcn/ui token overrides */
+  --background:           #0F172A;
+  --foreground:           #F8FAFC;
+  --card:                 #1E293B;
+  --card-foreground:      #F8FAFC;
+  --popover:              #1E293B;
+  --popover-foreground:   #F8FAFC;
+  --secondary:            #1E293B;
+  --secondary-foreground: #F8FAFC;
+  --muted:                #1E293B;
+  --muted-foreground:     #64748B;
+  --accent:               #312E81;
+  --accent-foreground:    #A5B4FC;
+  --border:               #334155;
+  --input:                #334155;
+}
+
+/* ─── Smooth theme transitions ─────────────────────────────────── */
+html {
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
 @layer utilities {
   .card-hover {
     transition: box-shadow 150ms ease, transform 150ms ease;
@@ -152,6 +198,13 @@
   .card-hover:hover {
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     transform: translateY(-1px);
+  }
+
+  /* Dark-mode-aware surface utility — use on any white card container */
+  .cs-surface {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    transition: background-color 200ms ease, border-color 200ms ease;
   }
 
   @media (max-width: 768px) {

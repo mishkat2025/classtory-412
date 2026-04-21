@@ -132,16 +132,16 @@ export function NotificationBell({ userId }: NotificationBellProps) {
           top: 44,
           right: 0,
           width: 360,
-          backgroundColor: '#FFFFFF',
-          border: '1px solid #E2E8F0',
+          backgroundColor: 'var(--color-surface)',
+          border: '1px solid var(--color-border)',
           borderRadius: 14,
           boxShadow: '0 8px 24px rgba(0,0,0,0.10)',
           zIndex: 100,
           overflow: 'hidden',
         }}>
           {/* Header */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 16px', borderBottom: '1px solid #F1F5F9' }}>
-            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 700, color: '#0F172A' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 16px', borderBottom: '1px solid var(--color-border)' }}>
+            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 700, color: 'var(--color-text-primary)' }}>
               Notifications
             </span>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -156,7 +156,7 @@ export function NotificationBell({ userId }: NotificationBellProps) {
               )}
               <button
                 onClick={() => setOpen(false)}
-                style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', display: 'flex', padding: 2 }}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)', display: 'flex', padding: 2 }}
               >
                 <X size={16} />
               </button>
@@ -166,11 +166,11 @@ export function NotificationBell({ userId }: NotificationBellProps) {
           {/* List */}
           <div style={{ maxHeight: 400, overflowY: 'auto' }}>
             {loading ? (
-              <div style={{ padding: '24px', textAlign: 'center', color: '#94A3B8', fontSize: 14 }}>Loading…</div>
+              <div style={{ padding: '24px', textAlign: 'center', color: 'var(--color-text-muted)', fontSize: 14 }}>Loading…</div>
             ) : notifications.length === 0 ? (
               <div style={{ padding: '32px 24px', textAlign: 'center' }}>
                 <Bell size={28} color="#CBD5E1" style={{ margin: '0 auto 10px', display: 'block' }} />
-                <p style={{ fontSize: 14, color: '#94A3B8', margin: 0 }}>No notifications yet</p>
+                <p style={{ fontSize: 14, color: 'var(--color-text-muted)', margin: 0 }}>No notifications yet</p>
               </div>
             ) : (
               notifications.map((notif, i) => (
@@ -196,12 +196,12 @@ export function NotificationBell({ userId }: NotificationBellProps) {
                   <div style={{ flex: 1, minWidth: 0, paddingLeft: notif.is_read ? 20 : 0 }}>
                     {notif.link ? (
                       <Link href={notif.link} style={{ textDecoration: 'none' }}>
-                        <p style={{ fontSize: 13, color: '#0F172A', margin: '0 0 3px 0', lineHeight: 1.5 }}>{notif.message}</p>
+                        <p style={{ fontSize: 13, color: 'var(--color-text-primary)', margin: '0 0 3px 0', lineHeight: 1.5 }}>{notif.message}</p>
                       </Link>
                     ) : (
-                      <p style={{ fontSize: 13, color: '#0F172A', margin: '0 0 3px 0', lineHeight: 1.5 }}>{notif.message}</p>
+                      <p style={{ fontSize: 13, color: 'var(--color-text-primary)', margin: '0 0 3px 0', lineHeight: 1.5 }}>{notif.message}</p>
                     )}
-                    <span style={{ fontSize: 11, color: '#94A3B8' }}>{relativeTime(notif.created_at)}</span>
+                    <span style={{ fontSize: 11, color: 'var(--color-text-muted)' }}>{relativeTime(notif.created_at)}</span>
                   </div>
                 </div>
               ))

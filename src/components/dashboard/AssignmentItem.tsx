@@ -91,11 +91,11 @@ export function AssignmentItem({
           alignItems: 'center',
           gap: 14,
           padding: '14px 20px',
-          borderBottom: isLast ? 'none' : '1px solid #F1F5F9',
+          borderBottom: isLast ? 'none' : '1px solid var(--color-border)',
           transition: 'background-color 120ms ease',
         }}
         onMouseEnter={e =>
-          ((e.currentTarget as HTMLElement).style.backgroundColor = '#F8FAFC')
+          ((e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface-2)')
         }
         onMouseLeave={e =>
           ((e.currentTarget as HTMLElement).style.backgroundColor = 'transparent')
@@ -127,7 +127,7 @@ export function AssignmentItem({
             style={{
               fontSize: 14,
               fontWeight: 500,
-              color: '#0F172A',
+              color: 'var(--color-text-primary)',
               margin: '0 0 3px 0',
               whiteSpace: 'nowrap',
               overflow: 'hidden',
@@ -136,7 +136,7 @@ export function AssignmentItem({
           >
             {title}
           </p>
-          <p style={{ fontSize: 12, color: '#94A3B8', margin: 0 }}>
+          <p style={{ fontSize: 12, color: 'var(--color-text-muted)', margin: 0 }}>
             {classroom_name}
             {' · '}
             <span style={{ color: due.urgent && effectiveStatus === 'pending' ? '#D97706' : '#94A3B8' }}>
@@ -160,7 +160,7 @@ export function AssignmentItem({
             >
               {grade}
             </span>
-            <span style={{ fontSize: 11, color: '#94A3B8' }}>/{max_points}</span>
+            <span style={{ fontSize: 11, color: 'var(--color-text-muted)' }}>/{max_points}</span>
           </div>
         ) : (
           <span

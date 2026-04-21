@@ -133,11 +133,11 @@ export default async function StudentGradesPage() {
           <div style={{ width: 36, height: 36, borderRadius: 10, backgroundColor: '#DBEAFE', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <BarChart3 size={18} color="#2563EB" />
           </div>
-          <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: '#0F172A', margin: 0, letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: 'var(--color-text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
             My Grades
           </h1>
         </div>
-        <p style={{ fontSize: 14, color: '#64748B', margin: '0 0 0 46px' }}>
+        <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '0 0 0 46px' }}>
           Grades from all your classrooms in one place
         </p>
       </div>
@@ -158,14 +158,14 @@ export default async function StudentGradesPage() {
 
       {/* ── No classrooms ── */}
       {classrooms.length === 0 && (
-        <div style={{ backgroundColor: '#FFFFFF', border: '2px dashed #E2E8F0', borderRadius: 14, padding: '56px 24px', textAlign: 'center' }}>
+        <div style={{ backgroundColor: 'var(--color-surface)', border: '2px dashed var(--color-border)', borderRadius: 14, padding: '56px 24px', textAlign: 'center' }}>
           <div style={{ width: 60, height: 60, borderRadius: 16, backgroundColor: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
             <BookOpen size={28} color="#A5B4FC" />
           </div>
-          <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: '#0F172A', margin: '0 0 8px 0' }}>
+          <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 8px 0' }}>
             No classrooms yet
           </h3>
-          <p style={{ fontSize: 14, color: '#64748B', margin: '0 0 20px 0' }}>
+          <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '0 0 20px 0' }}>
             Join a classroom to see your grades here.
           </p>
           <Link href="/student/join" style={{ display: 'inline-flex', alignItems: 'center', height: 38, padding: '0 20px', backgroundColor: '#4F46E5', color: '#FFFFFF', borderRadius: 8, fontSize: 14, fontWeight: 500, textDecoration: 'none' }}>
@@ -180,8 +180,8 @@ export default async function StudentGradesPage() {
           <div
             key={classroom.id}
             style={{
-              backgroundColor: '#FFFFFF',
-              border: '1px solid #E2E8F0',
+              backgroundColor: 'var(--color-surface)',
+              border: '1px solid var(--color-border)',
               borderRadius: 16,
               overflow: 'hidden',
               boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
@@ -191,7 +191,7 @@ export default async function StudentGradesPage() {
             <div style={{
               borderLeft: `6px solid ${classroom.cover_color ?? '#4F46E5'}`,
               padding: '16px 20px',
-              borderBottom: '1px solid #F1F5F9',
+              borderBottom: '1px solid var(--color-border)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -201,15 +201,15 @@ export default async function StudentGradesPage() {
             }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: '#0F172A', margin: 0 }}>
+                  <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)', margin: 0 }}>
                     {classroom.name}
                   </h2>
-                  <span style={{ fontSize: 12, color: '#64748B', backgroundColor: '#F1F5F9', borderRadius: 9999, padding: '1px 8px' }}>
+                  <span style={{ fontSize: 12, color: 'var(--color-text-secondary)', backgroundColor: 'var(--color-surface-2)', borderRadius: 9999, padding: '1px 8px' }}>
                     {classroom.subject}
                   </span>
                 </div>
                 {classroom.teacher && (
-                  <p style={{ fontSize: 12, color: '#94A3B8', margin: '3px 0 0 0' }}>
+                  <p style={{ fontSize: 12, color: 'var(--color-text-muted)', margin: '3px 0 0 0' }}>
                     {classroom.teacher.full_name}
                   </p>
                 )}
@@ -222,7 +222,7 @@ export default async function StudentGradesPage() {
                       <div style={{ fontSize: 20, fontWeight: 700, color: gradeColor(average), fontFamily: "'Plus Jakarta Sans', sans-serif", lineHeight: 1 }}>
                         {average}%
                       </div>
-                      <div style={{ fontSize: 10, color: '#94A3B8', lineHeight: 1, marginTop: 2 }}>
+                      <div style={{ fontSize: 10, color: 'var(--color-text-muted)', lineHeight: 1, marginTop: 2 }}>
                         avg · {grades.length} graded
                       </div>
                     </div>
@@ -245,7 +245,7 @@ export default async function StudentGradesPage() {
             {/* Grade table */}
             {grades.length === 0 ? (
               <div style={{ padding: '28px 20px', textAlign: 'center' }}>
-                <p style={{ fontSize: 13, color: '#94A3B8', margin: 0 }}>
+                <p style={{ fontSize: 13, color: 'var(--color-text-muted)', margin: 0 }}>
                   No graded assignments yet for this classroom.
                 </p>
               </div>
@@ -253,14 +253,14 @@ export default async function StudentGradesPage() {
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                   <thead>
-                    <tr style={{ backgroundColor: '#F8FAFC' }}>
+                    <tr style={{ backgroundColor: 'var(--color-surface-2)' }}>
                       {['Assignment', 'Due', 'Score', 'Grade', ''].map(h => (
                         <th key={h} style={{
                           padding: '8px 16px',
                           textAlign: h === 'Score' || h === 'Grade' || h === '' ? 'center' : 'left',
-                          fontSize: 11, fontWeight: 700, color: '#64748B',
+                          fontSize: 11, fontWeight: 700, color: 'var(--color-text-secondary)',
                           textTransform: 'uppercase', letterSpacing: '0.05em',
-                          borderBottom: '1px solid #F1F5F9',
+                          borderBottom: '1px solid var(--color-border)',
                           whiteSpace: 'nowrap',
                         }}>
                           {h}
@@ -280,7 +280,7 @@ export default async function StudentGradesPage() {
                             href={`/classroom/${classroom.id}/assignment/${g.assignmentId}`}
                             style={{ textDecoration: 'none' }}
                           >
-                            <p style={{ fontSize: 13, fontWeight: 500, color: '#0F172A', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            <p style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-text-primary)', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                               {g.title}
                             </p>
                           </Link>
@@ -288,16 +288,16 @@ export default async function StudentGradesPage() {
 
                         {/* Due date */}
                         <td style={{ padding: '11px 16px', whiteSpace: 'nowrap' }}>
-                          <span style={{ fontSize: 12, color: '#64748B' }}>
+                          <span style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>
                             {new Date(g.dueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                           </span>
                         </td>
 
                         {/* Raw score */}
                         <td style={{ padding: '11px 16px', textAlign: 'center', whiteSpace: 'nowrap' }}>
-                          <span style={{ fontSize: 13, fontWeight: 600, color: '#0F172A' }}>
+                          <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-primary)' }}>
                             {g.grade}
-                            <span style={{ fontSize: 11, color: '#94A3B8', fontWeight: 400 }}>/{g.maxPoints}</span>
+                            <span style={{ fontSize: 11, color: 'var(--color-text-muted)', fontWeight: 400 }}>/{g.maxPoints}</span>
                           </span>
                         </td>
 

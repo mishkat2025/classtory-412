@@ -65,17 +65,17 @@ export default async function AttendancePage({
       <div style={{ padding: '28px 28px 40px', maxWidth: 1200, width: '100%' }}>
         <Link
           href={`/classroom/${classroomId}`}
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: '#64748B', textDecoration: 'none', fontWeight: 500, marginBottom: 24 }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--color-text-secondary)', textDecoration: 'none', fontWeight: 500, marginBottom: 24 }}
         >
           <ArrowLeft size={14} />
           Back to {classroom.name}
         </Link>
 
         <div style={{ marginBottom: 24 }}>
-          <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: '#0F172A', margin: '0 0 4px 0', letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: 'var(--color-text-primary)', margin: '0 0 4px 0', letterSpacing: '-0.02em' }}>
             Attendance
           </h1>
-          <p style={{ fontSize: 14, color: '#64748B', margin: 0 }}>{classroom.name}</p>
+          <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>{classroom.name}</p>
         </div>
 
         <AttendanceSheet
@@ -107,17 +107,17 @@ export default async function AttendancePage({
     <div style={{ padding: '28px 28px 40px', maxWidth: 960, width: '100%' }}>
       <Link
         href={`/classroom/${classroomId}`}
-        style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: '#64748B', textDecoration: 'none', fontWeight: 500, marginBottom: 24 }}
+        style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--color-text-secondary)', textDecoration: 'none', fontWeight: 500, marginBottom: 24 }}
       >
         <ArrowLeft size={14} />
         Back to {classroom.name}
       </Link>
 
       <div style={{ marginBottom: 24 }}>
-        <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: '#0F172A', margin: '0 0 4px 0', letterSpacing: '-0.02em' }}>
+        <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 24, fontWeight: 800, color: 'var(--color-text-primary)', margin: '0 0 4px 0', letterSpacing: '-0.02em' }}>
           My Attendance
         </h1>
-        <p style={{ fontSize: 14, color: '#64748B', margin: 0 }}>{classroom.name}</p>
+        <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>{classroom.name}</p>
       </div>
 
       <AttendanceSheet

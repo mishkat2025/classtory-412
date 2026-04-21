@@ -109,14 +109,14 @@ export function CreateClassroomButton({ teacherId }: CreateClassroomButtonProps)
           />
 
           {/* Dialog */}
-          <div style={{ position: 'relative', width: '100%', maxWidth: 480, backgroundColor: '#FFFFFF', borderRadius: 16, padding: '28px 28px 24px', boxShadow: '0 20px 60px rgba(0,0,0,0.2)' }}>
+          <div style={{ position: 'relative', width: '100%', maxWidth: 480, backgroundColor: 'var(--color-surface)', borderRadius: 16, padding: '28px 28px 24px', boxShadow: '0 20px 60px rgba(0,0,0,0.2)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
-              <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 18, fontWeight: 700, color: '#0F172A', margin: 0 }}>
+              <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--color-text-primary)', margin: 0 }}>
                 Create Classroom
               </h2>
               <button
                 onClick={() => setOpen(false)}
-                style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', display: 'flex', padding: 4, borderRadius: 6 }}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)', display: 'flex', padding: 4, borderRadius: 6 }}
               >
                 <X size={18} />
               </button>
@@ -144,7 +144,7 @@ export function CreateClassroomButton({ teacherId }: CreateClassroomButtonProps)
               </Field>
 
               <div>
-                <label style={{ fontSize: 13, fontWeight: 500, color: '#0F172A', display: 'block', marginBottom: 8 }}>Cover color</label>
+                <label style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-text-primary)', display: 'block', marginBottom: 8 }}>Cover color</label>
                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                   {COVER_COLORS.map(color => (
                     <button
@@ -174,7 +174,7 @@ export function CreateClassroomButton({ teacherId }: CreateClassroomButtonProps)
                 <button
                   type="button"
                   onClick={() => { setOpen(false); reset() }}
-                  style={{ height: 38, padding: '0 16px', backgroundColor: '#FFFFFF', color: '#0F172A', border: '1px solid #E2E8F0', borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: 'pointer' }}
+                  style={{ height: 38, padding: '0 16px', backgroundColor: 'var(--color-surface)', color: 'var(--color-text-primary)', border: '1px solid var(--color-border)', borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: 'pointer' }}
                 >
                   Cancel
                 </button>
@@ -212,7 +212,7 @@ export function CreateClassroomButton({ teacherId }: CreateClassroomButtonProps)
 function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-      <label style={{ fontSize: 13, fontWeight: 500, color: '#0F172A' }}>{label}</label>
+      <label style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-text-primary)' }}>{label}</label>
       {children}
       {error && <span style={{ fontSize: 12, color: '#EF4444' }}>{error}</span>}
     </div>
@@ -228,8 +228,8 @@ function inputStyle(hasError: boolean): React.CSSProperties {
     padding: '0 12px',
     fontSize: 14,
     fontFamily: "'Inter', sans-serif",
-    color: '#0F172A',
-    backgroundColor: '#FFFFFF',
+    color: 'var(--color-text-primary)',
+    backgroundColor: 'var(--color-surface)',
     outline: 'none',
     transition: 'border-color 150ms ease, box-shadow 150ms ease',
     boxSizing: 'border-box',

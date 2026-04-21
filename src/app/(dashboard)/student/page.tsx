@@ -248,14 +248,14 @@ export default async function StudentDashboard() {
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: 26,
               fontWeight: 800,
-              color: '#0F172A',
+              color: 'var(--color-text-primary)',
               margin: 0,
               letterSpacing: '-0.02em',
             }}
           >
             {greeting}, {firstName} 👋
           </h1>
-          <p style={{ fontSize: 14, color: '#64748B', margin: '5px 0 0 0' }}>
+          <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '5px 0 0 0' }}>
             {new Date().toLocaleDateString('en-US', {
               weekday: 'long',
               year: 'numeric',
@@ -350,8 +350,8 @@ export default async function StudentDashboard() {
         {enrollments.length === 0 ? (
           <div
             style={{
-              backgroundColor: '#FFFFFF',
-              border: '2px dashed #E2E8F0',
+              backgroundColor: 'var(--color-surface)',
+              border: '2px dashed var(--color-border)',
               borderRadius: 14,
               padding: '48px 24px',
               textAlign: 'center',
@@ -376,13 +376,13 @@ export default async function StudentDashboard() {
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
                 fontSize: 16,
                 fontWeight: 700,
-                color: '#0F172A',
+                color: 'var(--color-text-primary)',
                 margin: '0 0 8px 0',
               }}
             >
               No classrooms yet
             </h3>
-            <p style={{ fontSize: 14, color: '#64748B', margin: '0 0 20px 0' }}>
+            <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '0 0 20px 0' }}>
               Join a classroom with the code your teacher shared.
             </p>
             <Link
@@ -451,8 +451,8 @@ export default async function StudentDashboard() {
           <h2 style={{ ...sectionHeading, marginBottom: 16 }}>Upcoming & Overdue</h2>
           <div
             style={{
-              backgroundColor: '#FFFFFF',
-              border: '1px solid #E2E8F0',
+              backgroundColor: 'var(--color-surface)',
+              border: '1px solid var(--color-border)',
               borderRadius: 14,
               overflow: 'hidden',
               boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
@@ -467,7 +467,7 @@ export default async function StudentDashboard() {
                   color="#D1FAE5"
                   style={{ margin: '0 auto 12px', display: 'block' }}
                 />
-                <p style={{ fontSize: 14, color: '#64748B', margin: 0 }}>
+                <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
                   You&apos;re all caught up — no pending assignments!
                 </p>
               </div>
@@ -513,8 +513,8 @@ export default async function StudentDashboard() {
           </div>
           <div
             style={{
-              backgroundColor: '#FFFFFF',
-              border: '1px solid #E2E8F0',
+              backgroundColor: 'var(--color-surface)',
+              border: '1px solid var(--color-border)',
               borderRadius: 14,
               overflow: 'hidden',
               boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
@@ -522,7 +522,7 @@ export default async function StudentDashboard() {
           >
             {gradedWork.length === 0 ? (
               <div style={{ padding: '28px 20px', textAlign: 'center' }}>
-                <p style={{ fontSize: 14, color: '#94A3B8', margin: 0 }}>
+                <p style={{ fontSize: 14, color: 'var(--color-text-muted)', margin: 0 }}>
                   No graded work yet.
                 </p>
               </div>
@@ -562,7 +562,7 @@ export default async function StudentDashboard() {
                           style={{
                             fontSize: 13,
                             fontWeight: 500,
-                            color: '#0F172A',
+                            color: 'var(--color-text-primary)',
                             margin: '0 0 2px 0',
                             whiteSpace: 'nowrap',
                             overflow: 'hidden',
@@ -571,7 +571,7 @@ export default async function StudentDashboard() {
                         >
                           {item.assignment.title}
                         </p>
-                        <p style={{ fontSize: 11, color: '#94A3B8', margin: 0 }}>
+                        <p style={{ fontSize: 11, color: 'var(--color-text-muted)', margin: 0 }}>
                           {item.assignment.classroom?.name ?? ''}
                         </p>
                       </div>
@@ -621,7 +621,7 @@ export default async function StudentDashboard() {
             <div>
               <h2 style={sectionHeading}>Recommended for You</h2>
               {subjects.length > 0 && (
-                <p style={{ fontSize: 13, color: '#94A3B8', margin: '3px 0 0 0' }}>
+                <p style={{ fontSize: 13, color: 'var(--color-text-muted)', margin: '3px 0 0 0' }}>
                   Based on your enrolled subjects
                 </p>
               )}
@@ -671,7 +671,7 @@ const sectionHeading: React.CSSProperties = {
   fontFamily: "'Plus Jakarta Sans', sans-serif",
   fontSize: 17,
   fontWeight: 700,
-  color: '#0F172A',
+  color: 'var(--color-text-primary)',
   margin: 0,
   letterSpacing: '-0.01em',
 }

@@ -97,7 +97,7 @@ export default function SignupPage() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', backgroundColor: '#F8F9FC' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', backgroundColor: 'var(--color-bg)' }}>
 
       {/* ── Left panel — branding ────────────────────────────── */}
       <div
@@ -156,9 +156,9 @@ export default function SignupPage() {
         <div style={{ width: '100%', maxWidth: 420 }}>
 
           {/* Card */}
-          <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 14, padding: '36px 40px', boxShadow: '0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)' }}>
+          <div style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 14, padding: '36px 40px', boxShadow: 'var(--shadow-card)' }}>
             <div style={{ marginBottom: 28 }}>
-              <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 22, fontWeight: 700, color: '#0F172A', margin: '0 0 6px 0', letterSpacing: '-0.01em' }}>
+              <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 22, fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 6px 0', letterSpacing: '-0.01em' }}>
                 Create your account
               </h2>
               <p style={{ fontSize: 14, color: '#475569', margin: 0 }}>Free to join — no credit card required</p>
@@ -210,7 +210,7 @@ export default function SignupPage() {
                     type="button"
                     onClick={() => setShowPassword(v => !v)}
                     tabIndex={-1}
-                    style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#94A3B8', display: 'flex', padding: 2 }}
+                    style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)', display: 'flex', padding: 2 }}
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
                   >
                     {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -231,19 +231,19 @@ export default function SignupPage() {
                       appearance: 'none',
                       paddingRight: 36,
                       cursor: 'pointer',
-                      backgroundColor: '#FFFFFF',
+                      backgroundColor: 'var(--color-surface)',
                     }}
                   >
                     <option value="student">Student</option>
                     <option value="teacher">Teacher</option>
                   </select>
-                  <ChevronDown size={16} style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', color: '#94A3B8', pointerEvents: 'none' }} />
+                  <ChevronDown size={16} style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)', pointerEvents: 'none' }} />
                 </div>
                 {errors.role && <span style={errorStyle}>{errors.role.message}</span>}
               </div>
 
               {/* Terms */}
-              <p style={{ fontSize: 12, color: '#94A3B8', margin: 0, lineHeight: 1.5 }}>
+              <p style={{ fontSize: 12, color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.5 }}>
                 By creating an account you agree to our{' '}
                 <Link href="/terms" style={{ color: '#4F46E5', textDecoration: 'none' }}>Terms of Service</Link>
                 {' '}and{' '}
@@ -302,7 +302,7 @@ const fieldWrap: React.CSSProperties = {
 const labelStyle: React.CSSProperties = {
   fontSize: 13,
   fontWeight: 500,
-  color: '#0F172A',
+  color: 'var(--color-text-primary)',
 }
 
 function inputStyle(hasError: boolean): React.CSSProperties {
@@ -314,8 +314,8 @@ function inputStyle(hasError: boolean): React.CSSProperties {
     padding: '0 12px',
     fontSize: 14,
     fontFamily: "'Inter', sans-serif",
-    color: '#0F172A',
-    backgroundColor: '#FFFFFF',
+    color: 'var(--color-text-primary)',
+    backgroundColor: 'var(--color-surface)',
     outline: 'none',
     transition: 'border-color 150ms ease, box-shadow 150ms ease',
     boxSizing: 'border-box',
