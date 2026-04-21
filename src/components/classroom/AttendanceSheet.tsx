@@ -697,7 +697,7 @@ export function AttendanceSheet({
               onClick={() => setShowGradebookForm(v => !v)}
               style={{ display: 'inline-flex', alignItems: 'center', gap: 6, height: 38, padding: '0 16px', borderRadius: 8, border: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface)', fontSize: 13, fontWeight: 600, color: '#4F46E5', cursor: 'pointer', transition: 'all 120ms ease' }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-primary-light)'}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface)'}}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-surface)'}
             >
               <BookmarkPlus size={14} />
               Add Attendance to Gradebook
