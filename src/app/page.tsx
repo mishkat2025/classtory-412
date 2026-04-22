@@ -12,41 +12,40 @@ import type { CourseCardCourse } from '@/components/courses/CourseCard'
 export default async function LandingPage() {
   const supabase = await createClient()
 
-  // Determine auth status without throwing
+  // Resolve auth state — never throws; user is null when logged out.
   const { data: { user } } = await supabase.auth.getUser()
 
-  // Only run DB queries when the user is authenticated — RLS blocks all tables
-  // for anonymous visitors, so we fall back to display-safe placeholder values.
+  // Public data is fetched regardless of auth state.
+  // The `anon` RLS policies on `courses` and `profiles` allow this.
+  // Fall back gracefully on any network or permission error.
   let courses: CourseCardCourse[] = []
   let totalStudents: number | null = null
   let totalCourses: number | null = null
   let totalTeachers: number | null = null
 
-  if (user) {
-    try {
-      const [
-        { data: featuredCourses },
-        { count: studentCount },
-        { count: courseCount },
-        { count: teacherCount },
-      ] = await Promise.all([
-        supabase
-          .from('courses')
-          .select('*, instructor:profiles(full_name, avatar_url)')
-          .order('student_count', { ascending: false })
-          .limit(6),
-        supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role', 'student'),
-        supabase.from('courses').select('*', { count: 'exact', head: true }),
-        supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role', 'teacher'),
-      ])
+  try {
+    const [
+      { data: featuredCourses },
+      { count: studentCount },
+      { count: courseCount },
+      { count: teacherCount },
+    ] = await Promise.all([
+      supabase
+        .from('courses')
+        .select('*, instructor:profiles(full_name, avatar_url)')
+        .order('student_count', { ascending: false })
+        .limit(6),
+      supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role', 'student'),
+      supabase.from('courses').select('*', { count: 'exact', head: true }),
+      supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role', 'teacher'),
+    ])
 
-      courses = (featuredCourses ?? []) as CourseCardCourse[]
-      totalStudents = studentCount
-      totalCourses = courseCount
-      totalTeachers = teacherCount
-    } catch {
-      // Network or unexpected error — keep safe fallback values
-    }
+    courses = (featuredCourses ?? []) as CourseCardCourse[]
+    totalStudents = studentCount
+    totalCourses = courseCount
+    totalTeachers = teacherCount
+  } catch {
+    // Network or unexpected error — safe fallback values remain in place
   }
 
   return (
