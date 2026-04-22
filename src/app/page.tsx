@@ -12,23 +12,42 @@ import type { CourseCardCourse } from '@/components/courses/CourseCard'
 export default async function LandingPage() {
   const supabase = await createClient()
 
-  const [
-    { data: featuredCourses },
-    { count: totalStudents },
-    { count: totalCourses },
-    { count: totalTeachers },
-  ] = await Promise.all([
-    supabase
-      .from('courses')
-      .select('*, instructor:profiles(full_name, avatar_url)')
-      .order('student_count', { ascending: false })
-      .limit(6),
-    supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role', 'student'),
-    supabase.from('courses').select('*', { count: 'exact', head: true }),
-    supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role', 'teacher'),
-  ])
+  // Determine auth status without throwing
+  const { data: { user } } = await supabase.auth.getUser()
 
-  const courses = (featuredCourses ?? []) as CourseCardCourse[]
+  // Only run DB queries when the user is authenticated — RLS blocks all tables
+  // for anonymous visitors, so we fall back to display-safe placeholder values.
+  let courses: CourseCardCourse[] = []
+  let totalStudents: number | null = null
+  let totalCourses: number | null = null
+  let totalTeachers: number | null = null
+
+  if (user) {
+    try {
+      const [
+        { data: featuredCourses },
+        { count: studentCount },
+        { count: courseCount },
+        { count: teacherCount },
+      ] = await Promise.all([
+        supabase
+          .from('courses')
+          .select('*, instructor:profiles(full_name, avatar_url)')
+          .order('student_count', { ascending: false })
+          .limit(6),
+        supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role', 'student'),
+        supabase.from('courses').select('*', { count: 'exact', head: true }),
+        supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role', 'teacher'),
+      ])
+
+      courses = (featuredCourses ?? []) as CourseCardCourse[]
+      totalStudents = studentCount
+      totalCourses = courseCount
+      totalTeachers = teacherCount
+    } catch {
+      // Network or unexpected error — keep safe fallback values
+    }
+  }
 
   return (
     <div style={{ backgroundColor: 'var(--color-bg)', minHeight: '100vh', fontFamily: "'Inter', sans-serif" }}>
@@ -86,10 +105,10 @@ export default async function LandingPage() {
       <section style={{ backgroundColor: 'var(--color-surface)', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '36px 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 32, textAlign: 'center' }}>
           {([
-            { label: 'Active Students',  value: totalStudents  ? `${totalStudents.toLocaleString()}+`  : '1,000+', Icon: Users,         bg: 'var(--color-primary-light)', ic: '#4F46E5' },
-            { label: 'Courses Available', value: totalCourses  ? `${totalCourses.toLocaleString()}+`   : '200+',   Icon: BookOpen,      bg: 'var(--color-success-light)', ic: '#10B981' },
-            { label: 'Expert Teachers',  value: totalTeachers  ? `${totalTeachers.toLocaleString()}+`  : '50+',    Icon: GraduationCap, bg: 'var(--color-warning-light)', ic: '#F59E0B' },
-            { label: 'Success Rate',     value: '94%',                                                              Icon: Award,         bg: 'var(--color-info-light)',    ic: '#3B82F6' },
+            { label: 'Active Students',   value: (totalStudents  != null && totalStudents  > 0) ? `${totalStudents.toLocaleString()}+`  : '1,000+', Icon: Users,         bg: 'var(--color-primary-light)', ic: '#4F46E5' },
+            { label: 'Courses Available', value: (totalCourses   != null && totalCourses   > 0) ? `${totalCourses.toLocaleString()}+`   : '200+',   Icon: BookOpen,      bg: 'var(--color-success-light)', ic: '#10B981' },
+            { label: 'Expert Teachers',   value: (totalTeachers  != null && totalTeachers  > 0) ? `${totalTeachers.toLocaleString()}+`  : '50+',    Icon: GraduationCap, bg: 'var(--color-warning-light)', ic: '#F59E0B' },
+            { label: 'Success Rate',      value: '94%',                                                                                              Icon: Award,         bg: 'var(--color-info-light)',    ic: '#3B82F6' },
           ] as const).map(({ label, value, Icon, bg, ic }) => (
             <div key={label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
               <div style={{ width: 48, height: 48, borderRadius: 12, backgroundColor: bg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -178,7 +197,8 @@ export default async function LandingPage() {
                 <CourseCard key={course.id} course={course} />
               ))}
             </div>
-          ) : (
+          ) : user ? (
+            // Authenticated but no courses exist yet
             <div style={{ textAlign: 'center', padding: '64px 24px', backgroundColor: 'var(--color-bg)', borderRadius: 14, border: '1px dashed #CBD5E1' }}>
               <div style={{ width: 56, height: 56, borderRadius: 14, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
                 <BookOpen size={26} color="#4F46E5" />
@@ -191,6 +211,29 @@ export default async function LandingPage() {
               >
                 Start Teaching
               </Link>
+            </div>
+          ) : (
+            // Guest — prompt sign-in to browse the full catalog
+            <div style={{ textAlign: 'center', padding: '64px 24px', backgroundColor: 'var(--color-bg)', borderRadius: 14, border: '1px dashed #CBD5E1' }}>
+              <div style={{ width: 56, height: 56, borderRadius: 14, backgroundColor: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                <BookOpen size={26} color="#4F46E5" />
+              </div>
+              <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 6 }}>Explore our course catalog</h3>
+              <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', marginBottom: 24 }}>Sign in to browse featured courses from expert instructors.</p>
+              <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
+                <Link
+                  href="/auth/login"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 8, backgroundColor: '#4F46E5', color: '#FFFFFF', borderRadius: 8, padding: '10px 20px', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}
+                >
+                  Sign in
+                </Link>
+                <Link
+                  href="/courses"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 8, backgroundColor: 'var(--color-surface)', color: 'var(--color-text-primary)', border: '1px solid var(--color-border)', borderRadius: 8, padding: '10px 20px', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}
+                >
+                  Browse all courses
+                </Link>
+              </div>
             </div>
           )}
         </div>
