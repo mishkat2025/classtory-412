@@ -73,8 +73,21 @@ export function EditCourseCard({ course, linkedClassroomId }: Props) {
     if (!confirm('Delete this course? This cannot be undone.')) return
     setDeleting(true)
     const supabase = createClient()
-    const { error } = await supabase.from('courses').delete().eq('id', course.id)
-    if (error) { toast.error('Delete failed: ' + error.message); setDeleting(false); return }
+    const { error, count } = await supabase
+      .from('courses')
+      .delete({ count: 'exact' })
+      .eq('id', course.id)
+    if (error) {
+      toast.error('Delete failed: ' + error.message)
+      setDeleting(false)
+      return
+    }
+    if (count === 0) {
+      // RLS silently blocked the delete (instructor_id mismatch or policy missing)
+      toast.error('Could not delete course. You may not have permission.')
+      setDeleting(false)
+      return
+    }
     toast.success('Course deleted.')
     router.push('/teacher')
   }
